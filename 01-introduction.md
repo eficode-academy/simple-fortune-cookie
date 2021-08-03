@@ -1,0 +1,94 @@
+# Welcome to the Kitchen!
+
+Congratulations, you just scored your first job. Fresh out of college.
+It pays decently and the interviewers seemed nice. There are all sorts of perks.
+It even sounded like you would work with some bleeding edge technologies.
+
+So now you're ready for whatever tasks they'll throw at you.
+You started yesterday together with a few college grads.
+You spent the day yesterday getting access to the building.
+You know now how to both obtain lunch and relieve any pressures such a feast might impose on you.
+
+You've got your state-of-the-art laptop booted and are ready to make the world a better place,
+To innovate! To use all the skills you've gathered while studying at the university.
+
+## Speak of the Devil
+
+Your project manager calls you for a meeting and let's you in on the details on the first task that you'll complete.
+
+He truly knows that you are very eager to get started and do cool stuff.
+But unfortunately they have a Go Web application that runs in production at a bunch of customers,
+and no one quite remembers how it works.
+
+_It's called Simple Fortune Cookie, everyone asks their visitors about cookies these days.
+You get it, right, don't you? Ahh never mind then...._
+
+The application is _Simple Fortune Cookie,_ fortune cookie as a service.
+It isn't perfect, but nevertheless, it brings in some cash.
+
+It is obviously important to keep this application running well and good,
+otherwise we might end up looking very bad indeed.
+
+_"Oh and.. have you heard of DevOps and Cloud Native? Do some of that,
+we've heard it makes things better."_
+
+Congratulations, on your second day you became the proud owner of a piece of **Legacy Code**.
+
+Now, where to start?
+
+## The bare necessities
+
+You've been handed a huge pile of .. Well you do not quite know of what.
+
+You know that you need two things in order for you to be a success.
+
+You need to know what is happening to the code and who is working on what.
+
+The first steps are obvious.
+
+- ~~Put your code under version control~~ easy!
+- Set up a task management system for your project.
+
+### Collaboration with GitHub Projects
+
+Soon™ you'll be presented a lot of individual tasks to complete.
+Just as with any other project, you will want some way of managing which tasks you are currently working on and what is on you backlog.
+You could do this with sticky-notes on a wall,
+but we would recommend you use an actual online task management system instead - especially if you are working as a group.
+
+An easy way to create an agile task management setup for your project
+is to use GitHub issues together with the GitHub Projects feature
+found on the `projects` tab.
+This allows you to have a full swim lane and track your tasks
+in a nice visual way that is completely integrated with GitHub.
+
+Go over to the `Projects` tab and create your project.
+(Notice the templates available.)
+
+![Create project](./images/create-project.png)
+
+_Consider every step in a task as a story,
+also created as an issue in your GH repository.
+Groom them together, breaking down the stories where it makes sense._
+
+It is good practice to always mention which issue you are working on
+in your commit messages. GitHub will actually use this information to
+link your issues and commits together in the UI,
+giving you valuable traceability information.
+
+The even cooler next step is to use GitHubs build in automation to automatically close issues when you commit the change. See [Closing issues using keywords](https://help.github.com/en/articles/closing-issues-using-keywords).
+
+> Optional reading: [Automation for project boards](https://help.github.com/en/articles/about-automation-for-project-boards).
+
+... and now on to the actual project work.
+
+In the following documents you'll find the different tasks,
+they're of course unordered ideas from management,
+but you'll probably find that it makes sense to do some before others.
+
+- [02-testing](./02-testing.md).
+- [02-containers](./02-containers.md).
+- [02-run-app](./02-run-app.md).
+- [02-cd](./02-cd.md).
+- [02-automation](./02-automation.md).
+- [02-cloud-native](./02-cloud-native.md).

@@ -1,14 +1,11 @@
 package main
 
-// adapted from: https://golang.cafe/blog/golang-rest-api-example.html
-
 import (
 	"encoding/json"
 	"fmt"
 	"math/rand"
 	"net/http"
 	"regexp"
-	"strconv"
 	"sync"
 )
 
@@ -77,21 +74,20 @@ func (h *fortuneHandler) List(w http.ResponseWriter, r *http.Request) {
 
 func (h *fortuneHandler) Random(w http.ResponseWriter, r *http.Request) {
 	h.store.RLock()
-	u, ok := h.store.m[strconv.Itoa(rand.Intn(len(h.store.m))+1)]
+	fortunes := make([]fortune, 0, len(h.store.m))
+	for _, v := range h.store.m {
+		fortunes = append(fortunes, v)
+	}
 	h.store.RUnlock()
 
-	if !ok {
-		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("fortune not found"))
-		return
+	if len(fortunes) > 0 {
+		u := fortunes[rand.Intn(len(fortunes))]
+		r.URL.Path = "/fortunes/" + u.ID
+	} else {
+		r.URL.Path = "/fortunes/zero"
 	}
-	jsonBytes, err := json.Marshal(u)
-	if err != nil {
-		internalServerError(w, r)
-		return
-	}
-	w.WriteHeader(http.StatusOK)
-	w.Write(jsonBytes)
+
+	h.Get(w, r)
 }
 
 func (h *fortuneHandler) Get(w http.ResponseWriter, r *http.Request) {
@@ -100,6 +96,22 @@ func (h *fortuneHandler) Get(w http.ResponseWriter, r *http.Request) {
 		notFound(w, r)
 		return
 	}
+
+	if usingRedis {
+		key := matches[1]
+		val, err := dbLink.Do("hget", "fortunes", key)
+		if err != nil {
+			fmt.Println("redis hget failed", err.Error())
+		} else {
+			if val != nil {
+				msg := fmt.Sprintf("%s", val.([]byte))
+				h.store.Lock()
+				h.store.m[key] = fortune{ID: key, Message: msg}
+				h.store.Unlock()
+			}
+		}
+	}
+
 	h.store.RLock()
 	u, ok := h.store.m[matches[1]]
 	h.store.RUnlock()
@@ -162,5 +174,6 @@ func main() {
 	mux.Handle("/fortunes", fortuneH)
 	mux.Handle("/fortunes/", fortuneH)
 
-	http.ListenAndServe("localhost:8080", mux)
+	http.ListenAndServe(":9000", mux)
+
 }

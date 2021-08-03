@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Simple Fortune Cookie</title>
+
+    <script src="script.js"></script>
+</head>
+<body>
+
+    <div id="buttons">
+        <button type="button" onclick="getRandom()">Get Random Fortune Cookie</button>
+        <button type="button" onclick="getAll()">Get All Fortune Cookies</button>
+    </div>
+
+    <hr/>
+
+    <div id="output"></div>
+
+    <hr/>
+
+    <div id="fortune">
+        <h1>Add Fortune Cookie</h1>
+        <form onsubmit="return addCookie(event)">
+            <label>Text:</label><br />
+            <input id="message" type="text" name="fortune"><br />
+            <input type="submit" value="Send!">
+        </form>
+    </div>
+
+</body>
+</html>
