@@ -1,18 +1,21 @@
 ## A means to an end
 
-> FIXME: TASK
+Automated funtional testing, probably not the first place to start.
 
-You realise that your process is actually quite mature now, but you don't exactly feel you're quite done.
+But if your process feels quite mature now,
+    you might not exactly feel you're done.
 
-Even though you are testing the internal quality of your code - you do not have any means of functional testing.
+You just want the bare minimum test.
+    So you add a test in your pipeline that will deploy your
+    Dockerized application temporarily and test its availability.
 
-You just want the bare minimum test. So you add a test in your pipeline that will deploy your Dockerized application temporarily and test its availability.
-
-Even a very simple thing as being able to reach your server with `curl` or `wget` would be much better than what you have now. Nothing.
+Even a very simple thing as being able to reach your server
+    with `curl` or `wget` would be much better than what you have now; nothing.
 
 ### Task
 
-- Use your automated deploy to deploy in testing
-- Do functional testing (You know your servers IP)
-- Display result in Jenkins
-- This might not be a tollgate criteria, but it is important information for you to gain.
+- Create a script that can test your running application.
+- Use your automated deploy to deploy a test-version
+    and run your script againt it.
+- Consider if the test you've chosen should be a tollgate criteria,
+    it might just be important information for you to gain.

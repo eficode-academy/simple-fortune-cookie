@@ -1,10 +1,10 @@
 ## I'll pack my bags and go
 
-You've got your dependencies handled and all is good. Or sort of good.
+Managing dependencies is annoying, what's installed where and in which version?
 
-It is tedious to set up dependencies on each system that you want to run on.
+It is tedious to set up each system that you want to run on.
 
-Luckily you know how to use Docker.
+Luckily you know how to use Docker!
 
 ### Task
 

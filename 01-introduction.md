@@ -86,9 +86,20 @@ In the following documents you'll find the different tasks,
 they're of course unordered ideas from management,
 but you'll probably find that it makes sense to do some before others.
 
+_"First of all, the datacenter we used crashed last night,
+    so we'll need you to deploy the application again,
+    but that shouldn't be a problem, you've found the code, right?"_
+
 - [02-testing](./02-testing.md).
 - [02-containers](./02-containers.md).
 - [02-run-app](./02-run-app.md).
 - [02-cd](./02-cd.md).
+- [02-container-orchestration](./02-container-orchestration.md).
 - [02-automation](./02-automation.md).
-- [02-cloud-native](./02-cloud-native.md).
+- [02-database](./02-database.md).
+
+Of course, things take time,
+    but if you could try to focus on everything,
+    and then afterwards start on this, that would be _so_ great.
+
+- [03-bon-appetit](./03-bon-appetit.md).
