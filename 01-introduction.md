@@ -92,6 +92,7 @@ _"First of all, the datacenter we used crashed last night,
 
 - [02-testing](./02-testing.md).
 - [02-containers](./02-containers.md).
+- [02-container-registry](./02-container-registry.md).
 - [02-run-app](./02-run-app.md).
 - [02-cd](./02-cd.md).
 - [02-container-orchestration](./02-container-orchestration.md).
