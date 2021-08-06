@@ -33,6 +33,9 @@ The following are suggestions to explorations that you can take.
     but the database becomes unavailable.
     Investigate how to handle this gracefully.
 - Add something to do your buildtasks for you. Gradle, Rake, Grunt, Make, etc.
+- Test Driven Development:
+  - Frontend crashes if the backend isn't running, this isn't very nice.
+    Implement a solution that makes it "handle it."
 
 ### The extra: "I've Completely run out of Tasks"-Task
 
