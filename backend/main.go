@@ -27,7 +27,10 @@ type datastore struct {
 }
 
 var datastoreDefault = datastore{m: map[string]fortune{
-	"1": {ID: "1", Message: "It ain't over till it's EOF."},
+	"1": {ID: "1", Message: "A new voyage will fill your life with untold memories."},
+	"2": {ID: "2", Message: "The measure of time to your next goal is the measure of your discipline."},
+	"3": {ID: "3", Message: "The only way to do well is to do better each day."},
+	"4": {ID: "4", Message: "It ain't over till it's EOF."},
 }, RWMutex: &sync.RWMutex{}}
 
 type fortuneHandler struct {

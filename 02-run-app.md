@@ -16,8 +16,9 @@ spend a few minutes familiarizing yourself with it.
 
 ### Task
 
+- Install go on your cloud instance
 - Investigate dependencies
 - Put dependencies in `go.mod`
 - Build with `go build`
-- Run with `go run ..`
-- Familiarize yourself with the application
+- Run both the frontend and backend with `go run ..`
+- Familiarize yourself with the application (frontend and backend, try to add a cookie and re-run the backend)
