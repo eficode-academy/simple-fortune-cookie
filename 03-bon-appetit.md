@@ -28,14 +28,21 @@ The following are suggestions to explorations that you can take.
 - Configure persistent storage for your database.
 - Investigate rollbacks to a previous version.
 - Deploy to "production" if functional tests pass
-- There's a couple of unfortunate scenarios e.g.
-    when the backend has found the database,
-    but the database becomes unavailable.
+- There's a couple of unfortunate scenarios e.g. when
+    1. you start the database and frontend,
+    1. you start the backend,
+    1. the backend has found the database,
+    1. the database becomes unavailable,
+    1. the frontend makes a request to the backend.
     Investigate how to handle this gracefully.
 - Add something to do your buildtasks for you. Gradle, Rake, Grunt, Make, etc.
-- Test Driven Development:
-  - Frontend crashes if the backend isn't running, this isn't very nice.
-    Implement a solution that makes it "handle it."
+- Test Driven Development: (remember, test first!)
+  - Frontend crashes if you press a button and the backend isn't running,
+    this isn't very nice. Implement a solution that makes it "handle it."
+  - Add a `/healthz` endpoint to the Backend
+- Frontend only has a single test for the `/healthz`-endpoint,
+    add more tests. (This might require a bit of refactoring,
+    as the handlers are currently just inlined)
 
 ### The extra: "I've Completely run out of Tasks"-Task
 

@@ -2,8 +2,8 @@
 
 Automated funtional testing, probably not the first place to start.
 
-But if your process feels quite mature now,
-    you might not exactly feel you're done.
+Even if you can deploy to different environments,
+    you might still feel like somethings missing..
 
 You just want the bare minimum test.
     So you add a test in your pipeline that will deploy your
