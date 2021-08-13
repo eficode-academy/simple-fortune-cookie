@@ -1,6 +1,7 @@
 package main
 
 import (
+    "io"
     "fmt"
     "encoding/json"
     "html/template"
@@ -26,7 +27,15 @@ type newFortune struct {
 // use a custom client, because we don't do blocking operations wihout timeouts
 var myClient = &http.Client{Timeout: 10 * time.Second}
 
+func HealthzHandler(w http.ResponseWriter, r *http.Request) {
+    w.WriteHeader(http.StatusOK)
+    io.WriteString(w, "healthy")
+}
+
 func main() {
+
+    http.HandleFunc("/healthz", HealthzHandler)
+
     http.HandleFunc("/api/random", func (w http.ResponseWriter, r *http.Request) {
         resp, err := myClient.Get(fmt.Sprintf("http://%s:%s/fortunes/random", BACKEND_DNS, BACKEND_PORT))
         if err != nil {
