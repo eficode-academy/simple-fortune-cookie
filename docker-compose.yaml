@@ -17,7 +17,7 @@ services:
         
     backend:
         container_name: backendcontainer
-        image: "backend"
+        image: "schachster/fortune_cookie:backend"
         restart: always
         depends_on:
            - redis
@@ -33,7 +33,7 @@ services:
         
     frontend:
         container_name: frontendcontainer
-        image: "frontend"
+        image: "schachster/fortune_cookie:frontend"
         restart: always
         depends_on:
            - backend
