@@ -4,9 +4,31 @@ env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
 jobs:
+  clone-down:
+    name: clone down repo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Upload Repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
+
+  frontend-tests:
+    needs: [clone-down]
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: Test GO
+        run: go test ./frontend/main_test.go
+
   frontend-docker-image:
     runs-on: ubuntu-latest
-    needs: []
+    needs: [clone-down, frontend-tests]
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
@@ -33,7 +55,7 @@ jobs:
 
   backend-docker-image:
     runs-on: ubuntu-latest
-    needs: []
+    needs: [clone-down, frontend-tests]
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
