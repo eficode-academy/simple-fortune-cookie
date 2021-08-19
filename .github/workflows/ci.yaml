@@ -7,7 +7,6 @@ jobs:
   Clone-down:
     name: Clone down repository
     runs-on: [self-hosted]
-    container: ubuntu:latest
     steps:
       - uses: actions/checkout@v2
       - name: Upload Repo
@@ -18,7 +17,6 @@ jobs:
   Test:
     runs-on: [self-hosted]
     needs: Clone-down
-    container: ubuntu:latest
     steps:
       - name: Download code
         uses: actions/download-artifact@v2
@@ -30,7 +28,6 @@ jobs:
   Build:
     runs-on: [self-hosted]
     needs: Clone-down
-    container: ubuntu:latest
     steps:
       - name: Download code
         uses: actions/download-artifact@v2
