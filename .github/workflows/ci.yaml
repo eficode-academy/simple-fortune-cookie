@@ -17,6 +17,7 @@ jobs:
           path: .
   Docker-image:
     runs-on: [self-hosted]
+    needs: [Build, Test, Clone-down]
     steps:
       - name: Download code
         uses: actions/download-artifact@v1
