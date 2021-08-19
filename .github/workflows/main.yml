@@ -33,8 +33,8 @@ jobs:
       with:
         username: ${{ env.DOCKER_USERNAME }}
         password: ${{ env.DOCKER_PASSWORD }}
-    - run: cd frontend
     - name: Build and Push
+      working-directory: ./frontend
       uses: docker/build-push-action@v2
       with:
         push: true
@@ -49,8 +49,8 @@ jobs:
       with:
         username: ${{ env.DOCKER_USERNAME }}
         password: ${{ env.DOCKER_PASSWORD }}
-    - run: cd backend
     - name: Build and Push
+      working-directory: ./backend
       uses: docker/build-push-action@v2
       with:
         push: true
