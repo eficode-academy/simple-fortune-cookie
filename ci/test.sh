@@ -1,3 +1,3 @@
 #!/usr/bin/env bash 
-cd /home/ubuntu/simple-fortune-cookie/frontend/
+cd ../frontend/
 go test
