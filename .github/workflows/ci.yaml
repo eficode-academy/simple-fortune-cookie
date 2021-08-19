@@ -5,7 +5,7 @@ env:
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
 jobs:
   Docker-image:
-    runs-on: ubuntu:latest
+    runs-on: [self-hosted]
     needs: []
     steps:
       - name: Check out the repo
