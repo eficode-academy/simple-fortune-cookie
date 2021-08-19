@@ -1,9 +1,13 @@
 name: Java CI
 
-on: push
+on: [push, pull_request]
 
 jobs:
   Test:
+    name: Test
+    runs-on: ubuntu-latest
     steps:
     - name: checkout
       uses: actions/checkout@v2
+    - name: test
+      run: go test
