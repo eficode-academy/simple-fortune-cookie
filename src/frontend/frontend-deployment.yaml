@@ -14,7 +14,7 @@ spec:
         app: deployment-frontend
     spec:
       containers:
-      - name: golang
-        image: library/golang
+      - name: simple-fortune-cookie-frontend
+        image: diblo/simple-fortune-cookie-frontend:latest
         ports: 
-        - containerPort: 9000
+        - containerPort: 8888
