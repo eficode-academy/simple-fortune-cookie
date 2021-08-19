@@ -3,17 +3,23 @@ version: '3'
 services:
   frontend:
     build: ./frontend/
+    container_name: frontend
     ports:
     - "8080:8080"
     depends_on:
-        - backend
+    - backend
+    environment:
+        BACKEND_DNS: backend
   backend:
-      build: ./backend/
-      ports:
-      - "5000:5000"
-      depends_on:
+    build: ./backend/
+    ports:
+        - "5000:5000"
+    depends_on:
         - db
+    environment:
+        REDIS_DNS: db
   db:
-      image: redis
-      ports:
-      - "6379:6379"
+    image: redis
+    container_name: db
+    ports:
+    - "6379:6379"
