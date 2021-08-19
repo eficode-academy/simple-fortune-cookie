@@ -6,11 +6,24 @@ services:
     depends_on:
       - backend
 
+    environment:
+      - BACKEND_DNS=backend
+
     ports:
       - "8080:8080"
 
   backend:
     build: ../backend
+    depends_on:
+      - "redis"
+
+    environment:
+      - REDIS_DNS=redis
 
     ports:
       - "9000:9000"
+
+  redis:
+    image: "redis"
+    ports:
+      - "6379:6379"
