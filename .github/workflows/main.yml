@@ -1,8 +1,8 @@
 name: CI
 
 env:
-  DOCKER_USERNAME: ${{ secret.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ secret.DOCKER_PASSWORD }}
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
@@ -24,7 +24,7 @@ jobs:
       run: apk add --no-cache gcc libc-dev
     - name: Test Frontend
       run: cd frontend && go test
-  Build-Frontend:
+  Build-Push-Frontend:
     runs-on: ubuntu-latest
     needs: [Test]
     steps:
@@ -40,7 +40,7 @@ jobs:
         push: true
         tags: ahmadhamid/cookie-frontend:latest
 
-  Build-Backend:
+  Build-Push-Backend:
     runs-on: ubuntu-latest
     needs: [Test]
     steps:
