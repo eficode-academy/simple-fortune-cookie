@@ -1,15 +1,18 @@
-version: '3.3'
+version: '3'
 
 services:
-  bakend:
-      build: ./backend
-      working_dir: /go/src/backend
+  frontend:
+    build: ./frontend/
+    ports:
+    - "8080:8080"
+    depends_on:
+        - backend
+  backend:
+      build: ./backend/
       ports:
       - "5000:5000"
-      volumes:
-      - .:/go/src/backend
-      links:
-      - db
+      depends_on:
+        - db
   db:
       image: redis
       ports:
