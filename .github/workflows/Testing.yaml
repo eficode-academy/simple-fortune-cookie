@@ -32,6 +32,6 @@ jobs:
     needs: Docker-run
     steps:
     - name: Reach Server
-      run: curl -s --retry 10 http://localhost:8080/
+      run: curl -s --retry 10 http://frontend:8080/
 
     
