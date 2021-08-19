@@ -19,7 +19,7 @@ jobs:
         go-version: 1.17
 
     - name: Build
-      run: cd frontend && go build frontend && cd ../backend && build backend
+      run: go build -v simple-fortune-cookie/frontend
 
     - name: Test
-      run: go test 
+      run: go test -v ./...
