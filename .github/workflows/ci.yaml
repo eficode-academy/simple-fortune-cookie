@@ -18,8 +18,9 @@ jobs:
   Docker-image:
     runs-on: [self-hosted]
     needs: [Clone down repository]
-    container: ubuntu:latest
+    container: ubuntu:latest1
     steps:
+      - uses: actions/checkout@v2
       - name: build docker frontend
         with:
           name: code
