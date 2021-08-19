@@ -12,6 +12,7 @@ jobs:
   Clone-down:
     name: Clone-down repo
     runs-on: self-hosted
+    needs: Start-server
     container: golang:latest
     steps:
     - uses: actions/checkout@v2
