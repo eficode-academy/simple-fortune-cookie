@@ -27,3 +27,7 @@
         with:
           name: code
           path: .
+
+
+
+    needs: [Build, Test]
