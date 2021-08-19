@@ -1,0 +1,19 @@
+name: Java CI
+on: push
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+jobs:
+  Build-images:
+    name: Build-images
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build frontend
+        run: chmod +x ./ci/build-docker-frontend.sh && ./ci/build-docker-frontend.sh
+      - name: push frontend
+        run: chmod +x ./ci/push-docker-frontend.sh && ./ci/push-docker-frontend.sh && export GIT_COMMIT="GA-$GITHUB_SHA"
+      - name: Build backend
+        run: chmod +x ./ci/build-docker-backend.sh && ./ci/build-docker-backend.sh
+      - name: push backend
+        run: chmod +x ./ci/push-docker-backend.sh && ./ci/push-docker-backend.sh && export GIT_COMMIT="GA-$GITHUB_SHA"
