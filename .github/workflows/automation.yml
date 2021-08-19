@@ -37,14 +37,6 @@ jobs:
     steps:
       - name: setup
         uses: actions/checkout@v2
-      - uses: actions/upload-artifact@v2
-        with:
-          name: code
-          path: .
-      - uses: actions/download-artifact@v2
-        with:
-          name: code
-          path: .
       - name: builder backend
         run: cd backend/ && go build .
       - name: builder frontend
