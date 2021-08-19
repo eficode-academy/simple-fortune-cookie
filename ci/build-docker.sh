@@ -3,4 +3,4 @@
 [[ -z "${docker_username}" ]] && DockerRepo='' || DockerRepo="${docker_username}/"
 
 
-docker build -t simplefortunecookielmao/sfc ./frontend
+#docker build -t simplefortunecookielmao/sfc ./frontend
