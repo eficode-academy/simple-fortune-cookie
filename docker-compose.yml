@@ -1,0 +1,41 @@
+version: '3.5'
+services:
+  redis:
+    container_name: redis
+    image: redis:alpine
+    ports:
+        - "6379:6379"
+    restart: always
+    networks:
+        - "backend"            
+  backend:
+    container_name: backend
+    build: ./backend
+    restart: always
+    ports:
+        - "9000:9000"
+    depends_on:
+        - redis   
+    environment:
+        REDIS_DNS: redis  
+    networks:
+      - "backend"
+      - "frontend"
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    restart: always
+    ports:
+        - "8080:8080"
+    depends_on:
+        - backend
+    environment:
+        BACKEND_DNS: backend    
+    networks:
+        - "frontend"
+          
+networks:
+  frontend:
+      driver: bridge
+  backend:
+      driver: bridge
