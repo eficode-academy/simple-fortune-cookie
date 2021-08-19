@@ -13,10 +13,11 @@ var usingRedis = false
 func init() {
 	conn, err := redis.Dial("tcp", fmt.Sprintf("%s:6379", getEnv("REDIS_DNS", "localhost")))
 	if err != nil {
-		log.Println("redis", err)
+		log.Println("redis", err, "test")
 	} else {
 		dbLink = conn
 		usingRedis = true
+		log.Println("Connected to DB!")
 
 		resKeys, err := redis.Values(dbLink.Do("hkeys", "fortunes"))
 		if err != nil {
