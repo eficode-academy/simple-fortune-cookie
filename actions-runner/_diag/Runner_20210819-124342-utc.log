@@ -1,0 +1,123 @@
+[2021-08-19 12:43:42Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2021-08-19 12:43:42Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 12:43:42Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/simple-fortune-cookie/actions-runner'
+[2021-08-19 12:43:42Z INFO HostContext] Well known config file 'Credentials': '/home/ubuntu/simple-fortune-cookie/actions-runner/.credentials'
+[2021-08-19 12:43:43Z INFO Listener] Runner is built for Linux (X64) - linux-x64.
+[2021-08-19 12:43:43Z INFO Listener] RuntimeInformation: Linux 5.8.0-1038-gcp #40~20.04.1-Ubuntu SMP Thu Jul 15 11:55:03 UTC 2021.
+[2021-08-19 12:43:43Z INFO Listener] Version: 2.280.2
+[2021-08-19 12:43:43Z INFO Listener] Commit: ccafb91bfbcee5bed530aa82a1a0381b2c8f260c
+[2021-08-19 12:43:43Z INFO Listener] Culture: 
+[2021-08-19 12:43:43Z INFO Listener] UI Culture: 
+[2021-08-19 12:43:43Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 12:43:43Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/simple-fortune-cookie/actions-runner'
+[2021-08-19 12:43:43Z INFO Listener] Validating directory permissions for: '/home/ubuntu/simple-fortune-cookie/actions-runner'
+[2021-08-19 12:43:43Z INFO CommandLineParser] Parse
+[2021-08-19 12:43:43Z INFO CommandLineParser] Parsing 1 args
+[2021-08-19 12:43:43Z INFO CommandLineParser] parsing argument
+[2021-08-19 12:43:43Z INFO CommandLineParser] HasArgs: False
+[2021-08-19 12:43:43Z INFO CommandLineParser] Adding Command: run
+[2021-08-19 12:43:43Z INFO Listener] Arguments parsed
+[2021-08-19 12:43:43Z INFO Runner] ExecuteCommand
+[2021-08-19 12:43:43Z INFO ConfigurationStore] currentAssemblyLocation: /home/ubuntu/simple-fortune-cookie/actions-runner/bin/Runner.Listener.dll
+[2021-08-19 12:43:43Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 12:43:43Z INFO ConfigurationStore] binPath: /home/ubuntu/simple-fortune-cookie/actions-runner/bin
+[2021-08-19 12:43:43Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 12:43:43Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/simple-fortune-cookie/actions-runner'
+[2021-08-19 12:43:43Z INFO ConfigurationStore] RootFolder: /home/ubuntu/simple-fortune-cookie/actions-runner
+[2021-08-19 12:43:43Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 12:43:43Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/simple-fortune-cookie/actions-runner'
+[2021-08-19 12:43:43Z INFO HostContext] Well known config file 'Runner': '/home/ubuntu/simple-fortune-cookie/actions-runner/.runner'
+[2021-08-19 12:43:43Z INFO ConfigurationStore] ConfigFilePath: /home/ubuntu/simple-fortune-cookie/actions-runner/.runner
+[2021-08-19 12:43:43Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 12:43:43Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/simple-fortune-cookie/actions-runner'
+[2021-08-19 12:43:43Z INFO HostContext] Well known config file 'Credentials': '/home/ubuntu/simple-fortune-cookie/actions-runner/.credentials'
+[2021-08-19 12:43:43Z INFO ConfigurationStore] CredFilePath: /home/ubuntu/simple-fortune-cookie/actions-runner/.credentials
+[2021-08-19 12:43:43Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 12:43:43Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/simple-fortune-cookie/actions-runner'
+[2021-08-19 12:43:43Z INFO HostContext] Well known config file 'MigratedCredentials': '/home/ubuntu/simple-fortune-cookie/actions-runner/.credentials_migrated'
+[2021-08-19 12:43:43Z INFO ConfigurationStore] MigratedCredFilePath: /home/ubuntu/simple-fortune-cookie/actions-runner/.credentials_migrated
+[2021-08-19 12:43:43Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 12:43:43Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/simple-fortune-cookie/actions-runner'
+[2021-08-19 12:43:43Z INFO HostContext] Well known config file 'Service': '/home/ubuntu/simple-fortune-cookie/actions-runner/.service'
+[2021-08-19 12:43:43Z INFO ConfigurationStore] ServiceConfigFilePath: /home/ubuntu/simple-fortune-cookie/actions-runner/.service
+[2021-08-19 12:43:43Z INFO CommandSettings] Flag 'help': 'False'
+[2021-08-19 12:43:43Z INFO CommandSettings] Flag 'version': 'False'
+[2021-08-19 12:43:43Z INFO CommandSettings] Flag 'commit': 'False'
+[2021-08-19 12:43:43Z INFO CommandSettings] Flag 'check': 'False'
+[2021-08-19 12:43:43Z INFO CommandSettings] Command 'configure': 'False'
+[2021-08-19 12:43:43Z INFO CommandSettings] Command 'remove': 'False'
+[2021-08-19 12:43:43Z INFO CommandSettings] Command 'warmup': 'False'
+[2021-08-19 12:43:43Z INFO ConfigurationManager] LoadSettings
+[2021-08-19 12:43:43Z INFO ConfigurationStore] IsConfigured()
+[2021-08-19 12:43:43Z INFO ConfigurationStore] IsConfigured: True
+[2021-08-19 12:43:43Z INFO ConfigurationManager] Is configured: True
+[2021-08-19 12:43:43Z INFO ConfigurationStore] Read setting file: 310 chars
+[2021-08-19 12:43:43Z INFO ConfigurationManager] Settings Loaded
+[2021-08-19 12:43:43Z INFO ConfigurationStore] IsServiceConfigured()
+[2021-08-19 12:43:43Z INFO ConfigurationStore] IsServiceConfigured: False
+[2021-08-19 12:43:43Z INFO CommandSettings] Command 'run': 'True'
+[2021-08-19 12:43:43Z INFO ConfigurationStore] IsConfigured()
+[2021-08-19 12:43:43Z INFO ConfigurationStore] IsConfigured: True
+[2021-08-19 12:43:43Z INFO ConfigurationManager] Is configured: True
+[2021-08-19 12:43:43Z INFO Runner] Could not parse the argument value '' for StartupType. Defaulting to Manual
+[2021-08-19 12:43:43Z INFO Runner] Set runner startup type - Manual
+[2021-08-19 12:43:43Z INFO CommandSettings] Flag 'once': 'False'
+[2021-08-19 12:43:43Z INFO Runner] RunAsync
+[2021-08-19 12:43:43Z INFO ConfigurationManager] LoadSettings
+[2021-08-19 12:43:43Z INFO ConfigurationStore] IsConfigured()
+[2021-08-19 12:43:43Z INFO ConfigurationStore] IsConfigured: True
+[2021-08-19 12:43:43Z INFO ConfigurationManager] Is configured: True
+[2021-08-19 12:43:43Z INFO ConfigurationManager] Settings Loaded
+[2021-08-19 12:43:43Z INFO MessageListener] {
+  "AgentId": 2,
+  "AgentName": "devopsacademy-instance49",
+  "PoolId": 1,
+  "PoolName": "Default",
+  "ServerUrl": "https://pipelines.actions.githubusercontent.com/a3l79OUBlaphmc7TmKkvHaT0qpLgoluJuwhlMIk7gzRBF8rxVW",
+  "GitHubUrl": "https://github.com/mara816/simple-fortune-cookie",
+  "WorkFolder": "_work"
+}
+[2021-08-19 12:43:43Z INFO MessageListener] Loading Credentials
+[2021-08-19 12:43:43Z INFO ConfigurationStore] HasCredentials()
+[2021-08-19 12:43:43Z INFO ConfigurationStore] stored True
+[2021-08-19 12:43:43Z INFO CredentialManager] GetCredentialProvider
+[2021-08-19 12:43:43Z INFO CredentialManager] Creating type OAuth
+[2021-08-19 12:43:43Z INFO CredentialManager] Creating credential type: OAuth
+[2021-08-19 12:43:43Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 12:43:43Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/simple-fortune-cookie/actions-runner'
+[2021-08-19 12:43:43Z INFO HostContext] Well known config file 'RSACredentials': '/home/ubuntu/simple-fortune-cookie/actions-runner/.credentials_rsaparams'
+[2021-08-19 12:43:43Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/ubuntu/simple-fortune-cookie/actions-runner/.credentials_rsaparams
+[2021-08-19 12:43:43Z INFO MessageListener] Attempt to create session.
+[2021-08-19 12:43:43Z INFO MessageListener] Connecting to the Runner Server...
+[2021-08-19 12:43:43Z INFO RunnerServer] Establish connection with 100 seconds timeout.
+[2021-08-19 12:43:43Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2021-08-19 12:43:43Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2021-08-19 12:43:43Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2021-08-19 12:43:43Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2021-08-19 12:43:43Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2021-08-19 12:43:43Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2021-08-19 12:43:44Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2021-08-19 12:43:44Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2021-08-19 12:43:44Z INFO MessageListener] VssConnection created
+[2021-08-19 12:43:44Z INFO Terminal] WRITE LINE: 
+[2021-08-19 12:43:44Z INFO Terminal] WRITE LINE: 
+[2021-08-19 12:43:44Z WARN GitHubActionsService] Authentication failed with status code 401.
+WWW-Authenticate: Bearer
+Strict-Transport-Security: max-age=2592000
+X-TFS-ProcessId: 1185d680-7a06-4219-9de2-b427fa3f15d7
+ActivityId: 1dc20f75-c807-4f3f-95a3-892fae1f715e
+X-TFS-Session: e5add4cb-75e6-4f66-b5d0-9571c9ae7274
+X-VSS-E2EID: 588fc33e-c973-4e68-9685-42e4482eac95
+X-VSS-SenderDeploymentId: 1139089e-89fd-ce7a-6851-1ac6328a300e
+X-TFS-ServiceError: The+user+%27System%3aPublicAccess%3baaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa%27+is+not+authorized+to+access+this+resource.
+X-VSS-S2STargetService: 0000005A-0000-8888-8000-000000000000/visualstudio.com
+X-Cache: CONFIG_NOCACHE
+X-MSEdge-Ref: Ref A: E154BF6C3DB945AAB097C3CA99D23D38 Ref B: LTSEDGE1009 Ref C: 2021-08-19T12:43:44Z
+Date: Thu, 19 Aug 2021 12:43:43 GMT
+
+[2021-08-19 12:43:44Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/ubuntu/simple-fortune-cookie/actions-runner/.credentials_rsaparams
+[2021-08-19 12:43:44Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/ubuntu/simple-fortune-cookie/actions-runner/.credentials_rsaparams
+[2021-08-19 12:43:44Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2021-08-19 12:43:44Z INFO MessageListener] Session created.
+[2021-08-19 12:43:44Z INFO Terminal] WRITE LINE: 2021-08-19 12:43:44Z: Listening for Jobs
+[2021-08-19 12:43:44Z INFO JobDispatcher] Set runner/worker IPC timeout to 30 seconds.

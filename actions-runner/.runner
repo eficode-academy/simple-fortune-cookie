@@ -1,0 +1,9 @@
+﻿{
+  "agentId": 2,
+  "agentName": "devopsacademy-instance49",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelines.actions.githubusercontent.com/a3l79OUBlaphmc7TmKkvHaT0qpLgoluJuwhlMIk7gzRBF8rxVW",
+  "gitHubUrl": "https://github.com/mara816/simple-fortune-cookie",
+  "workFolder": "_work"
+}
