@@ -27,10 +27,6 @@ jobs:
       with:
         name: appcode
         path: .
-    - name: build docker
-      run: chmod +x ci/build-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/build-docker.sh
-    - name: push docker
-      run: chmod +x ci/push-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/push-docker.sh
     - name: Run docker compose
       run: docker-compose up -d
   Test-Server:
