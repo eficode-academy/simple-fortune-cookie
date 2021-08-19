@@ -1,14 +1,23 @@
 version: "3.5"
 services:
+    db-server:
+        image: redis
+
     backend:
         build: ./backend/
         restart: always
+        environment:
+            - REDIS_DNS=db-server
         container_name: backend
+        depends_on: 
+            - db-server
 
     frontend:
         build: ./frontend/
         restart: always
         container_name: frontend
+        environment:
+            - BACKEND_DNS=backend
         ports:
             - "8080:8080"
         depends_on: 
