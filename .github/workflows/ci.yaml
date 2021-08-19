@@ -20,8 +20,8 @@ jobs:
     needs: [Clone down repository]
     container: ubuntu:latest1
     steps:
+      - uses: actions/checkout@v2
       - name: build docker frontend
-        uses: actions/checkout@v2
         with:
           name: code
           path: .
