@@ -2,8 +2,9 @@ env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
 name: Go CD
-on: push
-branches:
+on: 
+  push:
+    branches:
       - main
 jobs:
   Backend:
