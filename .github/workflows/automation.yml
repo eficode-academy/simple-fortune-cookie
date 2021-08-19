@@ -1,3 +1,6 @@
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
 
 name: Go CI
 on: push
@@ -16,3 +19,33 @@ jobs:
         run: cd backend/ && go test
       - name: test frontend
         run: cd frontend/ && go test
+  Backend:
+    needs: Build-and-Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ env.docker_username }}
+          password: ${{ env.docker_password }}
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: agesome2/backend:latest
+          target: backend
+  Frontend:
+    needs: Build-and-Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ env.docker_username }}
+          password: ${{ env.docker_password }}
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: agesome2/frontend:latest
+          target: frontend
