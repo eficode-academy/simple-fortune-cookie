@@ -11,13 +11,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  Test:
     runs-on: ubuntu-latest
     container: golang:1.17.0-alpine
     steps:
     - uses: actions/checkout@v2
     - name: Set Environment
-      run: export CGO_ENABLED=0
+      run: apk add --no-cache gcc libc-dev
     - name: Test Frontend
       run: cd frontend && go test
     - name: Test Backend
