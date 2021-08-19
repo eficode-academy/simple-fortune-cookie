@@ -4,17 +4,13 @@ services:
     redisDB:
         image: redis
         restart: always
-        ports:
-            - 6379:6379
-        networks: 
-            - backend
     backend:
         build: backend/
         depends_on: 
             - redisDB
         restart: always
-        networks: 
-            - backend
+        environment:
+            -   REDIS_DNS=redisDB
     frontend:
         build: frontend/
         ports:
@@ -22,5 +18,5 @@ services:
         restart: always
         depends_on: 
             - backend
-networks:
-    backend:
+        environment:
+            -   BACKEND_DNS=backend
