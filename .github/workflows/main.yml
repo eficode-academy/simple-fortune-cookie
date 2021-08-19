@@ -34,9 +34,9 @@ jobs:
         username: ${{ env.DOCKER_USERNAME }}
         password: ${{ env.DOCKER_PASSWORD }}
     - name: Build and Push
-      working-directory: ./frontend
       uses: docker/build-push-action@v2
       with:
+        context: ./frontend
         push: true
         tags: ahmadhamid/cookie-frontend:latest
 
@@ -50,8 +50,8 @@ jobs:
         username: ${{ env.DOCKER_USERNAME }}
         password: ${{ env.DOCKER_PASSWORD }}
     - name: Build and Push
-      working-directory: ./backend
       uses: docker/build-push-action@v2
       with:
+      context: ./backend
         push: true
         tags: ahmadhamid/cookie-backend:latest
