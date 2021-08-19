@@ -5,9 +5,8 @@ env:
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
 jobs:
   Docker-image:
-    runs-on: [self-hosted]
+    runs-on: [ubuntu:latest]
     needs: []
-    container: ubuntu:latest
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
