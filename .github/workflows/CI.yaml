@@ -6,17 +6,17 @@ on:
    # - main
 
 jobs:
-Clone-down:
-   name: golang clone down
-   runs-on: ubuntu-latest
-   steps:
-     - name: checkout-step
-       uses: actions/checkout@v2
-     - name: upload code
-       uses: actions/upload-artifact@v2
-       with:
-         name: code
-         path: .  
+  Clone-down:
+    name: golang clone down
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout-step
+        uses: actions/checkout@v2
+      - name: upload code
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .  
   Build:
     name: golang build
     runs-on: ubuntu-latest
