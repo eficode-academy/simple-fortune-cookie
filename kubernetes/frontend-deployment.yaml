@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sfc-frontend-deployment
+  labels:
+    app: sfc-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sfc-frontend
+  template:
+    metadata:
+      labels:
+        app: sfc-frontend
+    spec:
+      containers:
+      - name: sfc-frontend
+        image: miki2670/sfc-frontend:latest
+        ports:
+        - containerPort: 8080

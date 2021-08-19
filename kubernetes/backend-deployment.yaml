@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sfc-backend-deployment
+  labels:
+    app: sfc-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sfc-backend
+  template:
+    metadata:
+      labels:
+        app: sfc-backend
+    spec:
+      containers:
+      - name: sfc-backend
+        image: miki2670/sfc-backend:latest
+        ports:
+        - containerPort: 9000
