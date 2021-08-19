@@ -1,0 +1,21 @@
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+
+name: Go CI
+on: pull_request
+jobs:
+  Build-and-Test:
+    runs-on: ubuntu-latest
+    container: golang:1.16.7
+    steps:
+      - name: setup
+        uses: actions/checkout@v2
+      - name: builder backend
+        run: cd backend/ && go build .
+      - name: builder frontend
+        run: cd frontend/ && go build .
+      - name: test backend
+        run: cd backend/ && go test
+      - name: test frontend
+        run: cd frontend/ && go test
