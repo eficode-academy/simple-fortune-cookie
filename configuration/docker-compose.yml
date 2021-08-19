@@ -1,0 +1,16 @@
+version: "3.5"
+
+services:
+  frontend:
+    build: ../frontend
+    depends_on:
+      - backend
+
+    ports:
+      - "8080:8080"
+
+  backend:
+    build: ../backend
+
+    ports:
+      - "9000:9000"
