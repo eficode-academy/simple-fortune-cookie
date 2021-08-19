@@ -42,8 +42,10 @@ jobs:
       with:
         name: Code
         path: .
-#    - name: Install Go
-#      uses: actions/setup-go@v2   
+    - name: Install Go
+      uses: actions/setup-go@v2
+    - name: Build Go  
+      run: go build -v ./...     
     - name: Run test
       run: chmod +x ci/test.sh && ci/test.sh
   Docker-image:
