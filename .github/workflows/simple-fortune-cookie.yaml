@@ -4,15 +4,9 @@ env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
 jobs:
-  Start-server:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Spin-up server
-      run: cd ci && chmod +x runner.sh && ./runner.sh
   Clone-down:
     name: Clone-down repo
-    runs-on: self-hosted
-    needs: Start-server
+    runs-on: ubuntu-latest
     container: golang:latest
     steps:
     - uses: actions/checkout@v2
@@ -21,6 +15,11 @@ jobs:
       with:
         name: Code
         path: .
+  Start-server:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Spin-up server
+      run: cd ci && chmod +x runner.sh && ./runner.sh        
   Build:
     runs-on: self-hosted
     needs: Clone-down
