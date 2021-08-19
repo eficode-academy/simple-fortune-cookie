@@ -4,8 +4,34 @@ on:
     branches:
       - main
 jobs:
-  my-job:
+  Build:
     runs-on: ubuntu-latest
     steps:
-      - name: my-step
-        run: echo "Hello World!"
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.17
+
+    - name: Build backend
+      run: go build -v ./backend
+
+    - name: Build frontend
+      run: go build -v ./backend
+
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.17
+
+    - name: Test backend
+      run: go test -v ./backend
+
+    - name: Test frontend
+      run: go test -v ./frontend
