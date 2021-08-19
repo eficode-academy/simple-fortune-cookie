@@ -1,7 +1,7 @@
 name: Java CI
 on: push
 jobs:
-  Clone-down:
+  Clone:
     name: Clone down repo
     runs-on: ubuntu-latest
     container: gradle:6-jdk11
@@ -16,6 +16,7 @@ jobs:
     name: Build App
     runs-on: ubuntu-latest
     container: gradle:6-jdk11
+    needs: Clone
     steps:
     - name: Download App
       uses: actions/download-artifact@v1
