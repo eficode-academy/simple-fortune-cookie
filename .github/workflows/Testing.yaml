@@ -7,7 +7,7 @@ jobs:
     container: gradle:6-jdk11
     steps:
     - name: Download App
-    - uses: actions/download-artifact@v1
+      uses: actions/download-artifact@v1
       with:
         name: appcode
         path: .
