@@ -12,28 +12,10 @@ jobs:
       with:
         name: appcode
         path: .
-  Build:
-    name: Build App
-    runs-on: ubuntu-latest
-    container: gradle:6-jdk11
-    needs: Clone
-    steps:
-    - name: Download App
-      uses: actions/download-artifact@v1
-      with:
-        name: appcode
-        path: .
-    - name: Build with Gradle
-      run: chmod +x ci/build-app.sh && ci/build-app.sh
-    - name: Upload Repo
-      uses: actions/upload-artifact@v2
-      with:
-        name: code
-        path: .
   Docker-run:
     runs-on: ubuntu-latest
     needs: Build
-    name: Deploy Test App
+    name: Docker run
     steps:
     - name: Download code
       uses: actions/download-artifact@v1
