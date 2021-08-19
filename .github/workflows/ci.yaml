@@ -7,7 +7,6 @@ jobs:
   Clone-down:
     name: Clone down repository
     runs-on: [self-hosted]
-    container: gradle:6-jdk11
     steps:
       - uses: actions/checkout@v2
       - name: Upload Repo
