@@ -7,7 +7,7 @@ jobs:
   Clone-down:
     name: Clone down repository
     runs-on: [self-hosted]
-    container: gradle:6-jdk11
+    container: ubuntu:latest
     steps:
       - uses: actions/checkout@v2
       - name: Upload Repo
@@ -18,7 +18,7 @@ jobs:
   Test:
     runs-on: [self-hosted]
     needs: Clone-down
-    container: gradle:6-jdk11
+    container: ubuntu:latest
     steps:
       - name: Download code
         uses: actions/download-artifact@v2
@@ -26,11 +26,11 @@ jobs:
           name: code
           path: .
       - name: Test with Gradle
-        run: sudo chmod +x ci/unit-test-app.sh && sudo ci/unit-test-app.sh
+        run: chmod +x ci/unit-test-app.sh && ci/unit-test-app.sh
   Build:
     runs-on: [self-hosted]
     needs: Clone-down
-    container: gradle:6-jdk11
+    container: ubuntu:latest
     steps:
       - name: Download code
         uses: actions/download-artifact@v2
@@ -38,7 +38,7 @@ jobs:
           name: code
           path: .
       - name: Build with Gradle
-        run: sudo chmod +x ci/build-app.sh && sudo ci/build-app.sh
+        run: chmod +x ci/build-app.sh && ci/build-app.sh
       - name: Upload Repo
         uses: actions/upload-artifact@v2
         with:
@@ -47,6 +47,7 @@ jobs:
   Docker-image:
     runs-on: [self-hosted]
     needs: [Build, Test]
+    container: ubuntu:latest
     steps:
       - name: Download code
         uses: actions/download-artifact@v1
@@ -54,6 +55,6 @@ jobs:
           name: code
           path: .
       - name: build docker
-        run: sudo chmod +x ci/build-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && sudo ci/build-docker.sh
+        run: chmod +x ci/build-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/build-docker.sh
       - name: push docker
-        run: sudo chmod +x ci/push-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && sudo ci/push-docker.sh
+        run: chmod +x ci/push-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/push-docker.sh
