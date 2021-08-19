@@ -35,7 +35,7 @@ jobs:
         password: ${{ env.DOCKER_PASSWORD }}
     - run: cd frontend
     - name: Build and Push
-      uses: docker/build.push-action@v2
+      uses: docker/build-push-action@v2
       with:
         push: true
         tags: ahmadhamid/cookie-frontend:latest
@@ -51,7 +51,7 @@ jobs:
         password: ${{ env.DOCKER_PASSWORD }}
     - run: cd backend
     - name: Build and Push
-      uses: docker/build.push-action@v2
+      uses: docker/build-push-action@v2
       with:
         push: true
         tags: ahmadhamid/cookie-backend:latest
