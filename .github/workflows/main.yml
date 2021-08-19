@@ -1,5 +1,9 @@
 name: CI
 
+env:
+  DOCKER_USERNAME: ${{ secret.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secret.DOCKER_PASSWORD }}
+
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
@@ -20,3 +24,34 @@ jobs:
       run: apk add --no-cache gcc libc-dev
     - name: Test Frontend
       run: cd frontend && go test
+  Build-Frontend:
+    runs-on: ubuntu-latest
+    needs: [Test]
+    steps:
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ env.DOCKER_USERNAME }}
+        password: ${{ env.DOCKER_PASSWORD }}
+    - run: cd frontend
+    - name: Build and Push
+      uses: docker/build.push-action@v2
+      with:
+        push: true
+        tags: ahmadhamid/cookie-frontend:latest
+
+  Build-Backend:
+    runs-on: ubuntu-latest
+    needs: [Test]
+    steps:
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ env.DOCKER_USERNAME }}
+        password: ${{ env.DOCKER_PASSWORD }}
+    - run: cd backend
+    - name: Build and Push
+      uses: docker/build.push-action@v2
+      with:
+        push: true
+        tags: ahmadhamid/cookie-backend:latest
