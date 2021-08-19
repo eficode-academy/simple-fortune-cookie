@@ -1,5 +1,6 @@
 # backend binary
 backend/backend
+backend/main
 
 # frontend binary
 frontend/frontend
