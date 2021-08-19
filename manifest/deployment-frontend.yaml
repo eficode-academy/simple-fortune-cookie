@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment-backend
+  name: deployment-frontend
   labels:
-    app: deployment-backend
+    app: deployment-frontend
 spec:
   selector:
     matchLabels:
-      app: deployment-backend
+      app: deployment-frontend
   template:
     metadata:
       labels:
-        app: deployment-backend
+        app: deployment-frontend
     spec:
       containers:
       - name: simple-fortune-cookie-frontend
         image: diblo/simple-fortune-cookie-frontend:latest
         ports: 
-        - containerPort: 9000
+        - containerPort: 8888
