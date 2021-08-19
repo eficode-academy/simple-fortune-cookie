@@ -2,29 +2,21 @@ version: "3"
 services: 
     database: 
         image: turtlepriest/fortune-app-database
-        networks:
-            - network-1
+        network_mode: "host"
+
     frontend: 
         image: turtlepriest/fortune-app-frontend
         ports: 
         - 8080:8080
         depends_on:
         - backend
-        networks:
-            - network-2
+        network_mode: "host"
+        
     backend: 
         image: turtlepriest/fortune-app-backend
-        command: ["./wait-for-it.sh", "database:6379", "--", "sh", "run.sh"]
+        network_mode: "host"
         depends_on:
         - database
-        networks:
-            - network-1
-            - network-2
-networks:
-    network-1: 
-        driver: bridge
-    network-2: 
-        driver: bridge
 
 
     
