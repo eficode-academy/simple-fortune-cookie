@@ -1,5 +1,7 @@
 name: Java CI
 on: push
+# runs-on: self-hosted - if we want to self host runner
+# run runner with actions-runner/run.sh
 jobs:
   Clone:
     name: Clone down repo
