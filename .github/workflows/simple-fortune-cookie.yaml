@@ -34,7 +34,6 @@ jobs:
         path: .
   Test:
     runs-on: ubuntu-latest
-    uses: actions/setup-go@v2
     needs: Clone-down
     #container: golang:latest
     steps:
