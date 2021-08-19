@@ -18,6 +18,8 @@ jobs:
           go-version: 1.17
       - name: build backend  
         run: cd backend && go build
+      - name: build frontend  
+        run: cd frontend && go build
   Test:
     name: golang test
     runs-on: ubuntu-latest
