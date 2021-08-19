@@ -17,6 +17,7 @@ jobs:
         path: .
   Start-server:
     runs-on: ubuntu-latest
+    needs: Clone-down
     steps:
     - name: Spin-up server
       run: cd ci && chmod +x runner.sh && ./runner.sh        
