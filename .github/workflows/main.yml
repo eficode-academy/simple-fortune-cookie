@@ -20,5 +20,3 @@ jobs:
       run: apk add --no-cache gcc libc-dev
     - name: Test Frontend
       run: cd frontend && go test
-    - name: Test Backend
-      run: cd ../backend && go test
