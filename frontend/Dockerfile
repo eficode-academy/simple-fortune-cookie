@@ -2,14 +2,10 @@ FROM golang:alpine
 
 WORKDIR /app
 
-COPY go.mod ./
+COPY . .
 
 RUN go mod download
 
-COPY *.go ./
+RUN go build 
 
-RUN go build -o /frontend
-
-EXPOSE 8080
-
-CMD [ "/frontend" ]
+CMD ["go", "run", "frontend" ]

@@ -1,13 +1,20 @@
 ---
 version: '3'
-services:
 
+networks: 
+    frontend:
+    backend:
+
+services:
     redis:
         container_name: rediscontainer
         image: "redis:alpine"
-        restart: always
+        networks: 
+            - backend
+        ports: 
+            - "6379:6379"
+
         
-    
     backend:
         container_name: backendcontainer
         image: "backend"
@@ -16,19 +23,22 @@ services:
            - redis
         environment:
             - REDIS_DNS=redis
+        networks: 
+            - frontend
+            - backend  
+        ports: 
+            - "9000:9000"
         
+
         
     frontend:
         container_name: frontendcontainer
         image: "frontend"
         restart: always
         depends_on:
-           - redis
+           - backend
         environment:
             - BACKEND_DNS=backend
-                 
-            
+        networks: 
+            - frontend
         
-
-        
-
