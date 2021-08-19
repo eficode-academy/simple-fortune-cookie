@@ -30,7 +30,8 @@ services:
     depends_on:
         - backend
     environment:
-        BACKEND_DNS: backend    
+        BACKEND_DNS: backend  
+        BACKEND_PORT: 9000  
     networks:
         - "frontend"
           
