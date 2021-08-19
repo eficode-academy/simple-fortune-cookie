@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: build docker frontend
+        run: docker build ./frontend --file Dockerfile --tag sfc-frontend
         with:
           name: code
           path: .
-        run: docker build ./frontend --file Dockerfile --tag sfc-frontend
