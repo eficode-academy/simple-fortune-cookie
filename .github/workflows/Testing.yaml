@@ -1,0 +1,19 @@
+name: Java CI
+on: push
+# runs-on: self-hosted - if we want to self host runner
+# run runner with actions-runner/run.sh
+env: # Set the secret as an input
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+jobs:
+  Docker-build-push-run:
+    runs-on: ubuntu-latest
+    name: Docker run
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run docker compose
+      run: docker-compose up -d
+    - name: Reach Server
+      run: curl -s http://localhost:8080/
+
+    
