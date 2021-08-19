@@ -1,17 +1,10 @@
-FROM golang:latest
-RUN apt-get update   
-RUN apt-get install -y git
+FROM golang:1.16 AS builder
+WORKDIR /go/src/app/backend/
+RUN go get -d -v golang.org/x/net/html  
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o backend .
 
-WORKDIR /app
-        
-RUN git clone https://github.com/LHTNGUYEN/simple-fortune-cookie.git
-
-WORKDIR /app/simple-fortune-cookie/backend
-
-EXPOSE 8080
-
-RUN go mod init backend \ 
-&& go mod tidy \
-&& go build 
-CMD ./backend
-
+FROM alpine:latest  
+WORKDIR /root/
+COPY --from=builder /go/src/app/backend/ ./
+CMD ["./backend"] 
