@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Spin-up server
-      run: ci/runner.sh
+      run: cd ci && ci/runner.sh
   Clone-down:
     name: Clone-down repo
     runs-on: self-hosted
