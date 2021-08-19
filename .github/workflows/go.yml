@@ -21,4 +21,5 @@ jobs:
         working-directory: ./frontend
 
       - name: Test
-        run: go test -v ./...
+        run: go test
+        working-directory: ./frontend
