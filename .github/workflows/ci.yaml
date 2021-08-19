@@ -1,0 +1,17 @@
+name: GO CI
+on: push
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+jobs:
+  Clone-down:
+    name: Clone down repo
+    runs-on: [self-hosted]
+    container: gradle:6-jdk11
+    steps:
+      - uses: actions/checkout@v2
+      - name: Upload Repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
