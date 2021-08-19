@@ -26,7 +26,7 @@ jobs:
           name: code
           path: .
       - name: Test with Gradle
-        run: chmod +x ci/unit-test-app.sh && ci/unit-test-app.sh
+        run: sudo chmod +x ci/unit-test-app.sh && sudo ci/unit-test-app.sh
   Build:
     runs-on: [self-hosted]
     needs: Clone-down
@@ -38,7 +38,7 @@ jobs:
           name: code
           path: .
       - name: Build with Gradle
-        run: chmod +x ci/build-app.sh && ci/build-app.sh
+        run: sudo chmod +x ci/build-app.sh && sudo ci/build-app.sh
       - name: Upload Repo
         uses: actions/upload-artifact@v2
         with:
