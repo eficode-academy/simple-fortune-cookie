@@ -1,29 +1,16 @@
-version: '1'
-  
+version: "3.5"
+
 services:
-
-  backend:
-    container_name: frontend
-    image: idk
-
-    ports:
-      - "80:8080"  
-
-  backend:
-    container_name: backend
-    image: idk
+  frontend:
+    build: ../frontend
+    depends_on:
+      - backend
 
     ports:
-      - "80:9000"
+      - "8080:8080"
 
-    environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: exampleuser
-      WORDPRESS_DB_PASSWORD: examplepass
-      WORDPRESS_DB_NAME: exampledb
+  backend:
+    build: ../backend
 
-    volumes:
-      - wordpress:/var/www/html
-
-    volumes: 
-      - db:/var/lib/mysql
+    ports:
+      - "9000:9000"
