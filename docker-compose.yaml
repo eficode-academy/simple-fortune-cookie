@@ -1,0 +1,34 @@
+---
+version: '3'
+services:
+
+    redis:
+        container_name: rediscontainer
+        image: "redis:alpine"
+        restart: always
+        
+    
+    backend:
+        container_name: backendcontainer
+        image: "backend"
+        restart: always
+        depends_on:
+           - redis
+        environment:
+            - REDIS_DNS=redis
+        
+        
+    frontend:
+        container_name: frontendcontainer
+        image: "frontend"
+        restart: always
+        depends_on:
+           - redis
+        environment:
+            - BACKEND_DNS=backend
+                 
+            
+        
+
+        
+
