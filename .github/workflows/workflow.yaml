@@ -1,0 +1,9 @@
+name: Java CI
+
+on: push
+
+jobs:
+  Test:
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
