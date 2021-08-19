@@ -36,7 +36,7 @@ jobs:
   Test-Server:
     name: Test Server Connection
     runs-on: ubuntu-latest
-    needs: Docker-run
+    needs: Docker-build-push-run
     steps:
     - name: Reach Server
       run: curl -s http://frontend:8080/
