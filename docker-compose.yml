@@ -1,16 +1,25 @@
-version: '3.3'
+version: '3'
 
 services:
-  bakend:
-      build: ./backend
-      working_dir: /go/src/backend
-      ports:
-      - "5000:5000"
-      volumes:
-      - .:/go/src/backend
-      links:
-      - db
+  frontend:
+    build: ./frontend/
+    container_name: frontend
+    ports:
+    - "8080:8080"
+    depends_on:
+    - backend
+    environment:
+        BACKEND_DNS: backend
+  backend:
+    build: ./backend/
+    ports:
+        - "5000:5000"
+    depends_on:
+        - db
+    environment:
+        REDIS_DNS: db
   db:
-      image: redis
-      ports:
-      - "6379:6379"
+    image: redis
+    container_name: db
+    ports:
+    - "6379:6379"
