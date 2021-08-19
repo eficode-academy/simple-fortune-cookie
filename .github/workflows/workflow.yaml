@@ -10,4 +10,4 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
     - name: test
-      run: go test
+      run: go test ./frontend/
