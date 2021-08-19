@@ -28,6 +28,7 @@ jobs:
     - name: Run application
       run: chmod +x docker-compose up -d
     - name: Upload code
+      uses: actions/upload-artifact@v2
       with:
         name: Code
         path: .
