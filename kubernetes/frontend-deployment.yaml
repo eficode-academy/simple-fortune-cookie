@@ -17,5 +17,8 @@ spec:
       containers:
       - name: sfc-frontend
         image: miki2670/sfc-frontend:latest
+        env:
+        - name: BACKEND_DNS
+          value: sfc-backend-service
         ports:
         - containerPort: 8080

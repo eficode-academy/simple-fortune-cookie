@@ -17,5 +17,8 @@ spec:
       containers:
       - name: sfc-backend
         image: miki2670/sfc-backend:latest
+        env:
+        - name: REDIS_DNS
+          value: sfc-redis-service
         ports:
         - containerPort: 9000
