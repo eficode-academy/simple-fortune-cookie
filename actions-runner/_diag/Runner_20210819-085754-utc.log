@@ -1,0 +1,230 @@
+[2021-08-19 08:57:54Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2021-08-19 08:57:54Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 08:57:54Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner'
+[2021-08-19 08:57:54Z INFO HostContext] Well known config file 'Credentials': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.credentials'
+[2021-08-19 08:57:54Z INFO Listener] Runner is built for Linux (X64) - linux-x64.
+[2021-08-19 08:57:54Z INFO Listener] RuntimeInformation: Linux 5.8.0-1038-gcp #40~20.04.1-Ubuntu SMP Thu Jul 15 11:55:03 UTC 2021.
+[2021-08-19 08:57:54Z INFO Listener] Version: 2.280.2
+[2021-08-19 08:57:54Z INFO Listener] Commit: ccafb91bfbcee5bed530aa82a1a0381b2c8f260c
+[2021-08-19 08:57:54Z INFO Listener] Culture: 
+[2021-08-19 08:57:54Z INFO Listener] UI Culture: 
+[2021-08-19 08:57:54Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 08:57:54Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner'
+[2021-08-19 08:57:54Z INFO Listener] Validating directory permissions for: '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner'
+[2021-08-19 08:57:54Z INFO CommandLineParser] Parse
+[2021-08-19 08:57:54Z INFO CommandLineParser] Parsing 5 args
+[2021-08-19 08:57:54Z INFO CommandLineParser] parsing argument
+[2021-08-19 08:57:54Z INFO CommandLineParser] HasArgs: False
+[2021-08-19 08:57:54Z INFO CommandLineParser] Adding Command: configure
+[2021-08-19 08:57:54Z INFO CommandLineParser] parsing argument
+[2021-08-19 08:57:54Z INFO CommandLineParser] HasArgs: True
+[2021-08-19 08:57:54Z INFO CommandLineParser] arg: url
+[2021-08-19 08:57:54Z INFO CommandLineParser] parsing argument
+[2021-08-19 08:57:54Z INFO CommandLineParser] HasArgs: True
+[2021-08-19 08:57:54Z INFO CommandLineParser] Adding option 'url': 'https://github.com/miki2670/simple-fortune-cookie'
+[2021-08-19 08:57:54Z INFO CommandLineParser] parsing argument
+[2021-08-19 08:57:54Z INFO CommandLineParser] HasArgs: True
+[2021-08-19 08:57:54Z INFO CommandLineParser] arg: token
+[2021-08-19 08:57:54Z INFO CommandLineParser] parsing argument
+[2021-08-19 08:57:54Z INFO CommandLineParser] HasArgs: True
+[2021-08-19 08:57:54Z INFO CommandLineParser] Adding option 'token': '***'
+[2021-08-19 08:57:54Z INFO Listener] Arguments parsed
+[2021-08-19 08:57:54Z INFO Runner] ExecuteCommand
+[2021-08-19 08:57:54Z INFO ConfigurationStore] currentAssemblyLocation: /home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/bin/Runner.Listener.dll
+[2021-08-19 08:57:54Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 08:57:54Z INFO ConfigurationStore] binPath: /home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/bin
+[2021-08-19 08:57:54Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 08:57:54Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner'
+[2021-08-19 08:57:54Z INFO ConfigurationStore] RootFolder: /home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner
+[2021-08-19 08:57:54Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 08:57:54Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner'
+[2021-08-19 08:57:54Z INFO HostContext] Well known config file 'Runner': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.runner'
+[2021-08-19 08:57:54Z INFO ConfigurationStore] ConfigFilePath: /home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.runner
+[2021-08-19 08:57:54Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 08:57:54Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner'
+[2021-08-19 08:57:54Z INFO HostContext] Well known config file 'Credentials': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.credentials'
+[2021-08-19 08:57:54Z INFO ConfigurationStore] CredFilePath: /home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.credentials
+[2021-08-19 08:57:54Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 08:57:54Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner'
+[2021-08-19 08:57:54Z INFO HostContext] Well known config file 'MigratedCredentials': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.credentials_migrated'
+[2021-08-19 08:57:54Z INFO ConfigurationStore] MigratedCredFilePath: /home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.credentials_migrated
+[2021-08-19 08:57:54Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 08:57:54Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner'
+[2021-08-19 08:57:54Z INFO HostContext] Well known config file 'Service': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.service'
+[2021-08-19 08:57:54Z INFO ConfigurationStore] ServiceConfigFilePath: /home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.service
+[2021-08-19 08:57:54Z INFO CommandSettings] Flag 'help': 'False'
+[2021-08-19 08:57:54Z INFO CommandSettings] Flag 'version': 'False'
+[2021-08-19 08:57:54Z INFO CommandSettings] Flag 'commit': 'False'
+[2021-08-19 08:57:54Z INFO CommandSettings] Flag 'check': 'False'
+[2021-08-19 08:57:54Z INFO CommandSettings] Command 'configure': 'True'
+[2021-08-19 08:57:54Z INFO Terminal] WRITE LINE: 
+[2021-08-19 08:57:54Z INFO Terminal] WRITE LINE: --------------------------------------------------------------------------------
+[2021-08-19 08:57:54Z INFO Terminal] WRITE LINE: |        ____ _ _   _   _       _          _        _   _                      |
+[2021-08-19 08:57:54Z INFO Terminal] WRITE LINE: |       / ___(_) |_| | | |_   _| |__      / \   ___| |_(_) ___  _ __  ___      |
+[2021-08-19 08:57:54Z INFO Terminal] WRITE LINE: |      | |  _| | __| |_| | | | | '_ \    / _ \ / __| __| |/ _ \| '_ \/ __|     |
+[2021-08-19 08:57:54Z INFO Terminal] WRITE LINE: |      | |_| | | |_|  _  | |_| | |_) |  / ___ \ (__| |_| | (_) | | | \__ \     |
+[2021-08-19 08:57:54Z INFO Terminal] WRITE LINE: |       \____|_|\__|_| |_|\__,_|_.__/  /_/   \_\___|\__|_|\___/|_| |_|___/     |
+[2021-08-19 08:57:54Z INFO Terminal] WRITE LINE: |                                                                              |
+[2021-08-19 08:57:54Z INFO Terminal] WRITE: |                       
+[2021-08-19 08:57:54Z INFO Terminal] WRITE: Self-hosted runner registration
+[2021-08-19 08:57:54Z INFO Terminal] WRITE LINE:                         |
+[2021-08-19 08:57:54Z INFO Terminal] WRITE LINE: |                                                                              |
+[2021-08-19 08:57:54Z INFO Terminal] WRITE LINE: --------------------------------------------------------------------------------
+[2021-08-19 08:57:54Z INFO ConfigurationManager] ConfigureAsync
+[2021-08-19 08:57:54Z INFO ConfigurationStore] IsConfigured()
+[2021-08-19 08:57:54Z INFO ConfigurationStore] IsConfigured: False
+[2021-08-19 08:57:54Z INFO ConfigurationManager] Is configured: False
+[2021-08-19 08:57:54Z INFO CommandSettings] Arg 'url': 'https://github.com/miki2670/simple-fortune-cookie'
+[2021-08-19 08:57:54Z INFO CommandSettings] Remove url from Arg dictionary.
+[2021-08-19 08:57:54Z INFO CommandSettings] Arg 'token': '***'
+[2021-08-19 08:57:54Z INFO CommandSettings] Remove token from Arg dictionary.
+[2021-08-19 08:57:54Z INFO ConfigurationManager] Http response code: OK from 'POST https://api.github.com/actions/runner-registration'
+[2021-08-19 08:57:54Z INFO ConfigurationManager] cred retrieved via GitHub auth
+[2021-08-19 08:57:54Z INFO RunnerServer] Establish connection with 100 seconds timeout.
+[2021-08-19 08:57:55Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2021-08-19 08:57:55Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2021-08-19 08:57:55Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2021-08-19 08:57:55Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2021-08-19 08:57:55Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2021-08-19 08:57:55Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2021-08-19 08:57:55Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2021-08-19 08:57:55Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2021-08-19 08:57:55Z INFO Terminal] WRITE LINE: 
+[2021-08-19 08:57:55Z INFO ConfigurationManager] Test Connection complete.
+[2021-08-19 08:57:55Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 08:57:55Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner'
+[2021-08-19 08:57:55Z INFO HostContext] Well known config file 'RSACredentials': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.credentials_rsaparams'
+[2021-08-19 08:57:55Z INFO RSAFileKeyManager] Creating new RSA key using 2048-bit key length
+[2021-08-19 08:57:55Z INFO RSAFileKeyManager] Successfully saved RSA key parameters to file /home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.credentials_rsaparams
+[2021-08-19 08:57:55Z INFO RSAFileKeyManager] Which: 'chmod'
+[2021-08-19 08:57:55Z INFO RSAFileKeyManager] Location: '/usr/bin/chmod'
+[2021-08-19 08:57:55Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 08:57:55Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner'
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper] Starting process:
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper]   File name: '/usr/bin/chmod'
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper]   Arguments: '600 /home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.credentials_rsaparams'
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper]   Working directory: '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner'
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper] Failed to update oom_score_adj for PID: 138976.
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper] System.UnauthorizedAccessException: Access to the path '/proc/138976/oom_score_adj' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirectory, Func`2 errorRewriter)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode)
+   at System.IO.FileStream.OpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.StreamWriter.ValidateArgsAndOpenPath(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   at System.IO.StreamWriter..ctor(String path)
+   at System.IO.File.WriteAllText(String path, String contents)
+   at GitHub.Runner.Sdk.ProcessInvoker.WriteProcessOomScoreAdj(Int32 processId, Int32 oomScoreAdj)
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper] Process started with process id 138976, waiting for process exit.
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-08-19 08:57:55Z INFO ProcessInvokerWrapper] Finished process 138976 with exit code 0, and elapsed time 00:00:00.0203593.
+[2021-08-19 08:57:55Z INFO RSAFileKeyManager] Successfully set permissions for RSA key parameters file /home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.credentials_rsaparams
+[2021-08-19 08:57:55Z INFO CommandSettings] Arg 'runnergroup': ''
+[2021-08-19 08:57:55Z INFO CommandSettings] Flag 'unattended': 'False'
+[2021-08-19 08:57:55Z INFO PromptManager] ReadValue
+[2021-08-19 08:57:55Z INFO Terminal] WRITE: Enter the name of the runner group to add this runner to: 
+[2021-08-19 08:57:55Z INFO Terminal] WRITE: [press Enter for Default] 
+[2021-08-19 08:57:55Z INFO Terminal] READ LINE
+[2021-08-19 08:57:59Z INFO Terminal] Read value: ''
+[2021-08-19 08:57:59Z INFO PromptManager] Falling back to the default: 'Default'
+[2021-08-19 08:57:59Z INFO Terminal] WRITE LINE: 
+[2021-08-19 08:57:59Z INFO ConfigurationManager] Found a self-hosted runner group with id 1 and name Default
+[2021-08-19 08:57:59Z INFO CommandSettings] Arg 'name': ''
+[2021-08-19 08:57:59Z INFO CommandSettings] Flag 'unattended': 'False'
+[2021-08-19 08:57:59Z INFO PromptManager] ReadValue
+[2021-08-19 08:57:59Z INFO Terminal] WRITE: Enter the name of runner: 
+[2021-08-19 08:57:59Z INFO Terminal] WRITE: [press Enter for devopsacademy-instance43] 
+[2021-08-19 08:57:59Z INFO Terminal] READ LINE
+[2021-08-19 08:58:01Z INFO Terminal] Read value: ''
+[2021-08-19 08:58:01Z INFO PromptManager] Falling back to the default: 'devopsacademy-instance43'
+[2021-08-19 08:58:01Z INFO Terminal] WRITE LINE: 
+[2021-08-19 08:58:01Z INFO CommandSettings] Arg 'labels': ''
+[2021-08-19 08:58:01Z INFO CommandSettings] Flag 'unattended': 'False'
+[2021-08-19 08:58:01Z INFO PromptManager] ReadValue
+[2021-08-19 08:58:01Z INFO Terminal] WRITE: This runner will have the following labels: 'self-hosted', 'Linux', 'X64' 
+Enter any additional labels (ex. label-1,label-2): 
+[2021-08-19 08:58:01Z INFO Terminal] WRITE: [press Enter to skip] 
+[2021-08-19 08:58:01Z INFO Terminal] READ LINE
+[2021-08-19 08:58:03Z INFO Terminal] Read value: ''
+[2021-08-19 08:58:03Z INFO Terminal] WRITE LINE: 
+[2021-08-19 08:58:03Z INFO ConfigurationStore] Saving OAuth credential @ /home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.credentials
+[2021-08-19 08:58:03Z INFO ConfigurationStore] Credentials Saved.
+[2021-08-19 08:58:03Z INFO ConfigurationStore] HasCredentials()
+[2021-08-19 08:58:03Z INFO ConfigurationStore] stored True
+[2021-08-19 08:58:03Z INFO CredentialManager] GetCredentialProvider
+[2021-08-19 08:58:03Z INFO CredentialManager] Creating type OAuth
+[2021-08-19 08:58:03Z INFO CredentialManager] Creating credential type: OAuth
+[2021-08-19 08:58:03Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.credentials_rsaparams
+[2021-08-19 08:58:03Z INFO RunnerServer] Establish connection with 100 seconds timeout.
+[2021-08-19 08:58:03Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2021-08-19 08:58:03Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2021-08-19 08:58:03Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2021-08-19 08:58:03Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2021-08-19 08:58:03Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2021-08-19 08:58:03Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2021-08-19 08:58:03Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2021-08-19 08:58:03Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2021-08-19 08:58:04Z WARN GitHubActionsService] Authentication failed with status code 401.
+WWW-Authenticate: Bearer
+Strict-Transport-Security: max-age=2592000
+X-TFS-ProcessId: 08c2217c-d7f6-44db-88df-b3a2e3ff39db
+ActivityId: 23d2786c-53e2-469e-a4c7-1dfdd2312687
+X-TFS-Session: 836fa35c-cc63-4ccc-9377-d268f346acdc
+X-VSS-E2EID: 9b8b701b-e4ff-48e2-90f8-0d892d995462
+X-VSS-SenderDeploymentId: 6074703f-c195-632a-bd61-21691fc86fa5
+X-TFS-ServiceError: The+user+%27System%3aPublicAccess%3baaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa%27+is+not+authorized+to+access+this+resource.
+X-VSS-S2STargetService: 0000005A-0000-8888-8000-000000000000/visualstudio.com
+X-Cache: CONFIG_NOCACHE
+X-MSEdge-Ref: Ref A: 56EA3A916BCE40B48764CD80A3784C5C Ref B: LTSEDGE0811 Ref C: 2021-08-19T08:58:03Z
+Date: Thu, 19 Aug 2021 08:58:03 GMT
+
+[2021-08-19 08:58:04Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.credentials_rsaparams
+[2021-08-19 08:58:04Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/.credentials_rsaparams
+[2021-08-19 08:58:04Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2021-08-19 08:58:04Z INFO CommandSettings] Arg 'work': ''
+[2021-08-19 08:58:04Z INFO CommandSettings] Flag 'unattended': 'False'
+[2021-08-19 08:58:04Z INFO PromptManager] ReadValue
+[2021-08-19 08:58:04Z INFO Terminal] WRITE: Enter name of work folder: 
+[2021-08-19 08:58:04Z INFO Terminal] WRITE: [press Enter for _work] 
+[2021-08-19 08:58:04Z INFO Terminal] READ LINE
+[2021-08-19 08:58:06Z INFO Terminal] Read value: ''
+[2021-08-19 08:58:06Z INFO PromptManager] Falling back to the default: '_work'
+[2021-08-19 08:58:06Z INFO ConfigurationStore] Saving runner settings.
+[2021-08-19 08:58:06Z INFO ConfigurationStore] Settings Saved.
+[2021-08-19 08:58:06Z INFO Terminal] WRITE LINE: 
+[2021-08-19 08:58:06Z INFO Terminal] WRITE LINE: 
+[2021-08-19 08:58:06Z INFO SystemDControlManager] Service name 'actions.runner.miki2670-simple-fortune-cookie.devopsacademy-instance43.service' display name 'GitHub Actions Runner (miki2670-simple-fortune-cookie.devopsacademy-instance43)' will be used for service configuration.
+[2021-08-19 08:58:06Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 08:58:06Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner'
+[2021-08-19 08:58:06Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 08:58:06Z INFO HostContext] Well known directory 'Bin': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/bin'
+[2021-08-19 08:58:06Z INFO HostContext] Well known directory 'Root': '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner'
+[2021-08-19 08:58:06Z INFO UnixUtil] Which: 'chmod'
+[2021-08-19 08:58:06Z INFO UnixUtil] Location: '/usr/bin/chmod'
+[2021-08-19 08:58:06Z INFO UnixUtil] Running /usr/bin/chmod 755 "/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/svc.sh"
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper] Starting process:
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper]   File name: '/usr/bin/chmod'
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper]   Arguments: '755 "/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner/svc.sh"'
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper]   Working directory: '/home/ubuntu/devops-academy-handins-public/simple-fortune-cookie/actions-runner'
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper]   Require exit code zero: 'True'
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper] Updated oom_score_adj to 500 for PID: 138993.
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper] Process started with process id 138993, waiting for process exit.
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-08-19 08:58:06Z INFO ProcessInvokerWrapper] Finished process 138993 with exit code 0, and elapsed time 00:00:00.0038564.
+[2021-08-19 08:58:06Z INFO Listener] Runner execution has finished with return code 0
