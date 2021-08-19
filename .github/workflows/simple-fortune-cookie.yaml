@@ -43,6 +43,7 @@ jobs:
         name: Code
         path: .
     - name: Run test
+        path: .
       run: chmod +x ci/test.sh && ci/test.sh
   Docker-image:
     runs-on: ubuntu-latest
