@@ -41,4 +41,6 @@ services:
             - BACKEND_DNS=backend
         networks: 
             - frontend
+        ports: 
+            - "8080:8080"
         
