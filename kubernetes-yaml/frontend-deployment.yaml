@@ -3,26 +3,26 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: fortune
-  name: fortune
+    app: frontend
+  name: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fortune
+      app: frontend
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: fortune
+        app: frontend
     spec:
       containers:
-      - name: redisDB
-        image: redis
-        resources: {}
-      - name: backend
-        depends-on: redisDB 
       - name: frontend
-        depends-on: backend
+        image: nicolajskov/fortune-frontend
+        ports:
+          - containerPort: 8080
+        env:
+          - name: BACKEND_DNS
+            value: backend-svc
 status: {}
