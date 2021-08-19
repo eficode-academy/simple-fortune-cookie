@@ -16,6 +16,8 @@ jobs:
     container: golang:1.17.0-alpine
     steps:
     - uses: actions/checkout@v2
+    - name: Set Environment
+      run: export CGO_ENABLED=0
     - name: Test Frontend
       run: cd frontend && go test
     - name: Test Backend
