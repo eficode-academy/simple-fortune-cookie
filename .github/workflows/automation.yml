@@ -35,7 +35,7 @@ jobs:
   Test:
     needs: [Clone-down, Build]
     runs-on: ubuntu-latest
-    container: gradle:6-jdk11
+    container: golang:1.16.7
     steps:
       - uses: actions/download-artifact@v2
         with:
