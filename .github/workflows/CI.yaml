@@ -5,11 +5,12 @@ jobs:
   frontend-test:
     name: golang test
     runs-on: ubuntu-latest
-    container: golang:latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Run test
-        run: |
-          cd frontend
-          go test
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17
+      - name: test
+        run: cd frontend && go test
