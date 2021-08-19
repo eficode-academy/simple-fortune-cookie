@@ -1,10 +1,12 @@
 version: '3.4'
 services:
   backend:
+    image: agesome2/backend:latest
     build:
       context: .
       target: backend
   frontend:
+    image: agesome2/frontend:latest
     ports:
       - 8080:8080
     build:
