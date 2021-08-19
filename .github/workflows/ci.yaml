@@ -17,7 +17,7 @@ jobs:
           path: .
   Docker-image:
     runs-on: [self-hosted]
-    needs: [Clone down repository]
+    needs: []
     container: ubuntu:latest1
     steps:
       - name: Check out the repo
