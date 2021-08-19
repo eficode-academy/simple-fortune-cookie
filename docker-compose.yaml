@@ -1,0 +1,46 @@
+---
+version: '3'
+
+networks: 
+    frontend:
+    backend:
+
+services:
+    redis:
+        container_name: rediscontainer
+        image: "redis:alpine"
+        networks: 
+            - backend
+        ports: 
+            - "6379:6379"
+
+        
+    backend:
+        container_name: backendcontainer
+        image: "backend"
+        restart: always
+        depends_on:
+           - redis
+        environment:
+            - REDIS_DNS=redis
+        networks: 
+            - frontend
+            - backend  
+        ports: 
+            - "9000:9000"
+        
+
+        
+    frontend:
+        container_name: frontendcontainer
+        image: "frontend"
+        restart: always
+        depends_on:
+           - backend
+        environment:
+            - BACKEND_DNS=backend
+        networks: 
+            - frontend
+        ports: 
+            - "8080:8080"
+        
