@@ -1,16 +1,26 @@
 version: '3.1'
 
 services:
-    frontend:
-        build: frontend/
+    redisDB:
+        image: redis
+        restart: always
         ports:
-            - 8080:8080
-        depends_on: 
+            - 6379:6379
+        networks: 
             - backend
     backend:
         build: backend/
         depends_on: 
             - redisDB
-    redisDB:
-        image: redis
         restart: always
+        networks: 
+            - backend
+    frontend:
+        build: frontend/
+        ports:
+            - 8080:8080
+        restart: always
+        depends_on: 
+            - backend
+networks:
+    backend:

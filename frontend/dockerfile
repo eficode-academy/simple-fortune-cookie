@@ -1,9 +1,14 @@
+FROM golang:latest AS compiler
+
+WORKDIR /go/src/app
+
+COPY . .
+
+RUN go build
+
+CMD ["./frontend"]
+
 #frontend dockerfile
-FROM ubuntu:latest
+#FROM alpine:latest
 
-COPY . /home/frontend
-
-RUN sudo apt update && sudo apt install golang-go \
-&& rm -rf /var/lib/apt/lists/*
-
-CMD go run /home/frontend
+#COPY --from=compiler /go/src/app/frontend .
