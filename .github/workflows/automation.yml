@@ -2,35 +2,6 @@
 name: Go CI
 on: push
 jobs:
-  Clone-down:
-    runs-on: ubuntu-latest
-    container: gradle:6-jdk11
-    steps:
-      - name: setup
-        uses: actions/checkout@v2
-      - uses: actions/upload-artifact@v2
-        with:
-          name: code
-          path: .
-  
-  Build:
-    runs-on: ubuntu-latest
-    container: golang:1.16.7
-    steps:
-    - uses: actions/download-artifact@v2
-      with:
-        name: code
-        path: .
-    - name: builder
-      run: cd backend/ && go build .
-    - name: frontend
-      run: cd frontend/ && go build .
-    - name: uploader 
-      uses: actions/upload-artifact@v2
-      with:
-        name: code
-        path: .
-
   Test:
     runs-on: ubuntu-latest
     container: golang:1.16.7
