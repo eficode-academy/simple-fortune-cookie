@@ -1,6 +1,6 @@
 set -eux
 
-declare -r HOST="http://localhost:8080"
+declare -r HOST="localhost:8080"
 
 wait-for-url() {
     echo "Testing $1"
@@ -12,4 +12,4 @@ wait-for-url() {
     curl -I $1
 }
 
-cd configuration && docker-compose up & cd .. && wait-for-url http://${HOST} && go test ./frontend/main_test.go
+cd configuration && docker-compose up & cd .. && wait-for-url http://${HOST} && sleep 5 && go test ./frontend/main_test.go
