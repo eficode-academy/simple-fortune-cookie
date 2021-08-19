@@ -1,0 +1,29 @@
+version: '3'
+services:
+    database:
+        image: redis
+        ports:
+            - 6379:6379
+        networks:
+            - backend
+    backend:
+        build: backend/.
+        depends_on: 
+            - database
+        ports:
+            - 9000:9000
+        networks:
+            - backend
+            - frontend
+    frontend:
+        build: frontend/.
+        depends_on:
+            - backend
+        ports:
+            - 8080:8080
+        networks:
+            - frontend
+
+networks:
+    frontend:
+    backend:
