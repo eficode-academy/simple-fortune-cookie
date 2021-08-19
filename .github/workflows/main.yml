@@ -24,7 +24,7 @@ jobs:
       run: apk add --no-cache gcc libc-dev
     - name: Test Frontend
       run: cd frontend && go test
-  Build-Push-Frontend:
+  Build-Push:
     runs-on: ubuntu-latest
     needs: [Test]
     steps:
@@ -34,25 +34,15 @@ jobs:
       with:
         username: ${{ env.DOCKER_USERNAME }}
         password: ${{ env.DOCKER_PASSWORD }}
-    - name: Build and Push
+    - name: Build and Push Frontend
       uses: docker/build-push-action@v2
       with:
         context: ./frontend
         push: true
         tags: ahmadhamid/cookie-frontend:latest
-
-  # Build-Push-Backend:
-  #   runs-on: ubuntu-latest
-  #   needs: [Test]
-  #   steps:
-  #   - name: Login to DockerHub
-  #     uses: docker/login-action@v1
-  #     with:
-  #       username: ${{ env.DOCKER_USERNAME }}
-  #       password: ${{ env.DOCKER_PASSWORD }}
-  #   - name: Build and Push
-  #     uses: docker/build-push-action@v2
-  #     with:
-  #       context: ./backend
-  #       push: true
-  #       tags: ahmadhamid/cookie-backend:latest
+    - name: Build and Push Backend
+      uses: docker/build-push-action@v2
+      with:
+        context: ./backend
+        push: true
+        tags: ahmadhamid/cookie-backend:latest
