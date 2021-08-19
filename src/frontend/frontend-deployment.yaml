@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-frontend
+  labels:
+    app: deployment-frontend
+spec:
+  selector:
+    matchLabels:
+      app: deployment-frontend
+  template:
+    metadata:
+      labels:
+        app: deployment-frontend
+    spec:
+      containers:
+      - name: golang
+        image: library/golang
+        ports: 
+        - containerPort: 9000
