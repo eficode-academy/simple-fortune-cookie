@@ -1,4 +1,4 @@
-version: "3.5"
+version: '3.5'
 
 services:
   frontend:
@@ -10,20 +10,20 @@ services:
       - BACKEND_DNS=backend
 
     ports:
-      - "8080:8080"
+      - '8080:8080'
 
   backend:
     build: ../backend
     depends_on:
-      - "redis"
+      - 'redis'
 
     environment:
       - REDIS_DNS=redis
 
     ports:
-      - "9000:9000"
+      - '9000:9000'
 
   redis:
-    image: "redis"
+    image: 'redis'
     ports:
-      - "6379:6379"
+      - '6379:6379'

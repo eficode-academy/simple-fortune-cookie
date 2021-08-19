@@ -25,7 +25,7 @@ jobs:
           name: code
           path: .
       - name: Test GO
-        run: go test ./frontend/main_test.go
+        run: chmod +x ./ci/main_test.sh && ./ci/main_test.sh
 
   frontend-docker-image:
     runs-on: ubuntu-latest
