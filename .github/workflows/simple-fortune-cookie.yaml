@@ -1,6 +1,6 @@
 name: Simple Fortune Cookie
 on: push
-env: #env
+env: 
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
 jobs:
@@ -14,9 +14,9 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Code
-        path: .
+        path: .       
   Build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: Clone-down
     container: docker/compose 
     steps:
@@ -28,7 +28,7 @@ jobs:
     - name: Run application
       run: docker-compose up -d --build
   Test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: Clone-down
     container: golang:latest
     steps:
@@ -52,4 +52,3 @@ jobs:
       run: chmod +x ci/build-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/build-docker.sh
     - name: Push to DockerHub
       run: chmod +x ci/push-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/push-docker.sh   
-
