@@ -1,0 +1,12 @@
+#backend dockerfile
+FROM ubuntu:latest
+
+#copy backend folder to the docker container
+COPY . /home/backend
+
+#install golang
+RUN sudo apt update && sudo apt install golang-go \
+&& rm -rf /var/lib/apt/lists/*
+
+#start the backend
+CMD go run /home/backend

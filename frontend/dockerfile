@@ -1,0 +1,9 @@
+#frontend dockerfile
+FROM ubuntu:latest
+
+COPY . /home/frontend
+
+RUN sudo apt update && sudo apt install golang-go \
+&& rm -rf /var/lib/apt/lists/*
+
+CMD go run /home/frontend
