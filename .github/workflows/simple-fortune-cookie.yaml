@@ -34,7 +34,7 @@ jobs:
         path: .
   Test:
     runs-on: ubuntu-latest
-    needs: [Clone-down, Build]
+    needs: Clone-down
     container: golang:latest
     steps:
     - name: Download code
