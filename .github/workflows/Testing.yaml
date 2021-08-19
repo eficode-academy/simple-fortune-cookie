@@ -14,7 +14,7 @@ jobs:
         path: .
   Docker-run:
     runs-on: ubuntu-latest
-    needs: Build
+    needs: Clone
     name: Docker run
     steps:
     - name: Download code
@@ -27,7 +27,7 @@ jobs:
   Test-Server:
     name: Test Server Connection
     runs-on: ubuntu-latest
-    needs: [Build,Docker-run]
+    needs: Docker-run
     steps:
     - name: Reach Server
       run: curl localhost:8080
