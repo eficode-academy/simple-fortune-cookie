@@ -6,12 +6,27 @@ on:
    # - main
 
 jobs:
+Clone-down:
+   name: golang clone down
+   runs-on: ubuntu-latest
+   steps:
+     - name: checkout-step
+       uses: actions/checkout@v2
+     - name: upload code
+       uses: actions/upload-artifact@v2
+       with:
+         name: code
+         path: .  
   Build:
     name: golang build
     runs-on: ubuntu-latest
+    needs: Clone-down
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
+      - name: download code artifact for build
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .  
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
@@ -23,9 +38,13 @@ jobs:
   Test:
     name: golang test
     runs-on: ubuntu-latest
+    needs: Clone-down
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
+      - name: download code artifact for test
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .  
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
