@@ -60,7 +60,7 @@ jobs:
     name: Release
     runs-on: self-hosted 
     #needs: Docker-image
-    #needs: Clone-down
+    needs: Clone-down
     steps:  
     - uses: actions/checkout@v2 
     - name: Download code
