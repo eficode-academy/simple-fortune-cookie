@@ -66,9 +66,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: Code
-        path: .  
+        path: . 
+    - uses: actions/checkout@v2      
     - name: Decode
-    - uses: actions/checkout@v2
       run: echo "$KUBE_CONFIG_DATA" | base64 -d > config.txt
     - name: Trigger deploy
       run: |
