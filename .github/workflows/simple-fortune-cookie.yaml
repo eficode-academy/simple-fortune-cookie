@@ -58,16 +58,16 @@ jobs:
   #     run: chmod +x ci/push-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/push-docker.sh   
   Release:
     name: Release
-    runs-on: self-hosted
+    runs-on: self-hosted 
     #needs: Docker-image
-    needs: Clone-down
-    steps:
+    #needs: Clone-down
+    steps:  
+    - uses: actions/checkout@v2 
     - name: Download code
       uses: actions/download-artifact@v2
       with:
         name: Code
-        path: . 
-    - uses: actions/checkout@v2      
+        path: .      
     - name: Decode
       run: echo "$KUBE_CONFIG_DATA" | base64 -d > config.txt
     - name: Trigger deploy
