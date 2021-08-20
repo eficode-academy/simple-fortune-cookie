@@ -2,12 +2,35 @@ name: Go
 
 on:
   push:
-    branches: [main]
+    branches: [automation]
   pull_request:
 
 jobs:
-  build:
+  Clone-down:
+    name: Clone down repo
     runs-on: ubuntu-latest
+    container: gradle:6-jdk11
+    steps:
+      - uses: actions/checkout@v2
+      - name: Upload Repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: ./frontend
+  Test:
+    runs-on: ubuntu-latest
+    needs: Clone-down
+    container: gradle:6-jdk11
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: ./frontend && ./backend
+
+  Build:
+    runs-on: ubuntu-latest
+    needs: Clone-down
     steps:
       - uses: actions/checkout@v2
 
@@ -18,8 +41,8 @@ jobs:
 
       - name: Build
         run: go build
-        working-directory: ./frontend
+        working-directory: ./frontend 
 
       - name: Test
         run: go test
-        working-directory: ./frontend
+        working-directory: ./frontend 
