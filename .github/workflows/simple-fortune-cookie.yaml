@@ -10,7 +10,7 @@ env:
 jobs:
   Clone-down:
     name: Clone-down repo
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     container: golang:latest
     steps:
     - uses: actions/checkout@v2
@@ -58,7 +58,7 @@ jobs:
   #     run: chmod +x ci/push-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/push-docker.sh   
   Release:
     name: Release
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     #needs: Docker-image
     needs: Clone-down
     steps:
@@ -78,4 +78,4 @@ jobs:
         kubectl --kubeconfig=config.txt apply -f deployment-db-server.yml
         kubectl --kubeconfig=config.txt apply -f deployment-frontend.yml 
     - name: Functional testing of the URL
-      run: curl -s http://localhost:8080
+      run: curl -s http://34.78.70.151:8080
