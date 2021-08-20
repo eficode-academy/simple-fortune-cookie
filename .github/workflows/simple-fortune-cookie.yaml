@@ -62,12 +62,12 @@ jobs:
     #needs: Docker-image
     #needs: Clone-down
     steps:
-    - uses: actions/checkout@v2
     - name: Upload repository
       uses: actions/upload-artifact@v2
       with:
         name: Code
-        path: .        
+        path: .  
+    - uses: actions/checkout@v2            
     - name: Download code
       uses: actions/download-artifact@v2
       with:
