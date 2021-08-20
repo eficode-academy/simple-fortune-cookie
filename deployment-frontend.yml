@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-fortune-cookie-frontend
+  labels:
+    app: simple-fortune-cookie-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-fortune-cookie-frontend
+  template:
+    metadata:
+      labels:
+        app: simple-fortune-cookie-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: mara816docker/simple-fortune-cookie-frontend:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: BACKEND_DNS
+          value: backend-svc

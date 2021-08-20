@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-fortune-cookie-backend
+  labels:
+    app: simple-fortune-cookie-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-fortune-cookie-backend
+  template:
+    metadata:
+      labels:
+        app: simple-fortune-cookie-backend
+    spec:
+      containers:
+      - name: backend
+        image: mara816docker/simple-fortune-cookie-backend:latest
+        env:
+        - name: REDIS_DNS
+          value: simple-fortune-cookie-db-server-svc
