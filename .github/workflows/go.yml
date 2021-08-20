@@ -41,8 +41,8 @@ jobs:
 
       - name: Build
         run: go build
-        working-directory: ./frontend && ./backend
+        working-directory: ./frontend 
 
       - name: Test
         run: go test
-        working-directory: ./frontend && ./backend
+        working-directory: ./frontend 
