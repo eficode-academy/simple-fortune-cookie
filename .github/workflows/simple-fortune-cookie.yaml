@@ -76,7 +76,7 @@ jobs:
         kubectl --kubeconfig=config.txt apply -f deployment-backend.yml
         kubectl --kubeconfig=config.txt apply -f deployment-db-server.yml
         kubectl --kubeconfig=config.txt apply -f deployment-frontend.yml
-        kubectl set image deployment/simple-fortune-cookie-backend backend-svc=mara816docker/simple-fortune-cookie-backend:latest --record
-        kubectl set image deployment/simple-fortune-cookie-frontend frontend-svc=mara816docker/simple-fortune-cookie-frontend:latest --record
+        kubectl set image deployment/simple-fortune-cookie-backend backend=mara816docker/simple-fortune-cookie-backend:latest --record
+        kubectl set image deployment/simple-fortune-cookie-frontend frontend=mara816docker/simple-fortune-cookie-frontend:latest --record
     - name: Functional testing of the URL
       run: curl -s http://34.79.254.215:31244/
