@@ -6,7 +6,7 @@ on: push
 env: 
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
-  KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }} | base64 --decode
+  KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
   #RELEASE_REVISION: "pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}"
 jobs:
   Clone-down:
@@ -68,18 +68,16 @@ jobs:
       with:
         name: Code
         path: .  
+    - name: Decode
+      run: echo $KUBE_CONFIG_DATA | base64 -d > config.txt 
     - uses: actions/checkout@v2
     - name: Trigger deploy
-      uses: Consensys/kubernetes-action@master
-      #env:
-      #  KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-      with:
-        args: |
-          apply -f backend-svc.yml
-          apply -f frontend-svc.yml
-          apply -f deployment-backend.yml
-          apply -f deployment-db-server.yml
-          apply -f deployment-frontend.yml 
+      run: |
+        kubectl --kubeconfig=config.txt apply -f backend-svc.yml
+        kubectl --kubeconfig=config.txt apply -f frontend-svc.yml
+        kubectl --kubeconfig=config.txt apply -f deployment-backend.yml
+        kubectl --kubeconfig=config.txt apply -f deployment-db-server.yml
+        kubectl --kubeconfig=config.txt apply -f deployment-frontend.yml 
     - name: Functional testing of the URL
       run: curl -s http://localhost:8080
 #    - name: Cancel Previous Runs               
