@@ -68,8 +68,8 @@ jobs:
         name: Code
         path: .  
     - name: Decode
-      run: echo "$KUBE_CONFIG_DATA" | base64 -d > config.txt && pwd && ls && cat config.txt 
     - uses: actions/checkout@v2
+      run: echo "$KUBE_CONFIG_DATA" | base64 -d > config.txt
     - name: Trigger deploy
       run: |
         kubectl --kubeconfig=config.txt apply -f backend-svc.yml
