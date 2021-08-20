@@ -72,7 +72,7 @@ jobs:
     - name: deploy to cluster
       uses: steebchen/kubectl@v2.0.0
       with: # defaults to latest kubectl binary version
-        config: ./config.txt
+        config: ${{ secrets.KUBE_CONFIG_DATA }}
         command: |
           set image --record deployment/simple-fortune-cookie-backend=${{ github.repository }}:${{ github.sha }}
           set image --record deployment/simple-fortune-cookie-frontend=${{ github.repository }}:${{ github.sha }}
