@@ -71,4 +71,4 @@ jobs:
         kubectl --kubeconfig=config.txt apply -f deployment-db-server.yml
         kubectl --kubeconfig=config.txt apply -f deployment-frontend.yml 
     - name: Functional testing of the URL
-      run: curl -s http://35.233.34.108:30375/
+      run: curl -s http://34.79.254.215:31244/
