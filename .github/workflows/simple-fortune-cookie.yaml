@@ -6,8 +6,7 @@ on: push
 env: 
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
-  KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-  KUBE_NAMESPACE: production
+  KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }} | base64 --decode
   #RELEASE_REVISION: "pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}"
 jobs:
   Clone-down:
