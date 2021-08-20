@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-fortune-cookie-db-server
+  labels:
+    app: simple-fortune-cookie-db-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-fortune-cookie-db-server
+  template:
+    metadata:
+      labels:
+        app: simple-fortune-cookie-db-server
+    spec:
+      containers:
+      - name: simple-fortune-cookie-db-server
+        image: redis
