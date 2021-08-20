@@ -60,7 +60,6 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     needs: Docker-image
-    container: 
     steps:
     - name: Download code
       uses: actions/download-artifact@v2
@@ -68,7 +67,7 @@ jobs:
         name: Code
         path: .  
     - name: Decode
-      run: echo $KUBE_CONFIG_DATA | base64 -d > config.txt 
+      run: echo "$KUBE_CONFIG_DATA" | base64 -d > config.txt 
     - uses: actions/checkout@v2
     - name: Trigger deploy
       run: |
