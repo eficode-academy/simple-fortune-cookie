@@ -1,13 +1,6 @@
-FROM golang:1.16-alpine
-
-WORKDIR /app
-
-COPY go.mod ./
-COPY go.sum ./
-RUN go mod download
-
-COPY *.go ./
-
-RUN go build -o /docker-backend
-
-CMD [ "/docker-backend" ]
+FROM golang:latest
+RUN mkdir db
+COPY . /db
+WORKDIR /db/
+RUN go build
+CMD ["go","run","backend"]

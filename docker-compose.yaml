@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  backend:
+    image: backend:latest
+
+  frontend:
+    image: frontend:latest
+    ports: 
+      - 8080:8080
+    environment:
+      BACKEND_DNS: "backend"
+      BACKEND_PORT: "9000"
