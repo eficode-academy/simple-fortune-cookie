@@ -7,7 +7,6 @@ env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
   KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-  #RELEASE_REVISION: "pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}"
 jobs:
   Clone-down:
     name: Clone-down repo
@@ -80,29 +79,3 @@ jobs:
         kubectl --kubeconfig=config.txt apply -f deployment-frontend.yml 
     - name: Functional testing of the URL
       run: curl -s http://localhost:8080
-#    - name: Cancel Previous Runs               
-#      uses: styfle/cancel-workflow-action@0.4.1
-#      with:                                    
-#        access_token: ${{ github.token }} 
-#    - name: Checkout                                  
-#      uses: actions/checkout@v2                       
-#      with:                                           
-#        ref: ${{ github.event.pull_request.head.sha }}
-#    - name: Deploy to Kubernetes cluster
-#      run: |
-#        kubectl apply -f backend-svc.yml
-#        kubectl apply -f frontend-svc.yml
-#        kubectl apply -f deployment-backend.yml
-#        kubectl apply -f deployment-db-server.yml
-#        kubectl apply -f deployment-frontend.yml 
-#      with:
-#        namespace: ${{env.KUBE_NAMESPACE}}
-#        manifest: |
-
-#        images: |
-#          mara816docker/simple-fortune-cookie-backend:latest
-#          mara816docker/simple-fortune-cookie-frontend:latest
-#        kubectl-version: 'latest'
-
-
-
