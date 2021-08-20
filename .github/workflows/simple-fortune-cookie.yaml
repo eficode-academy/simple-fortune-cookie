@@ -72,10 +72,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: Trigger deploy
       run: |
-        kubectl --kubeconfig=config.txt apply -f backend-svc.yml
-        kubectl --kubeconfig=config.txt apply -f frontend-svc.yml
-        kubectl --kubeconfig=config.txt apply -f deployment-backend.yml
-        kubectl --kubeconfig=config.txt apply -f deployment-db-server.yml
-        kubectl --kubeconfig=config.txt apply -f deployment-frontend.yml 
+        kubectl --kubeconfig=/config.txt apply -f backend-svc.yml
+        kubectl --kubeconfig=/config.txt apply -f frontend-svc.yml
+        kubectl --kubeconfig=/config.txt apply -f deployment-backend.yml
+        kubectl --kubeconfig=/config.txt apply -f deployment-db-server.yml
+        kubectl --kubeconfig=/config.txt apply -f deployment-frontend.yml 
     - name: Functional testing of the URL
       run: curl -s http://localhost:8080
