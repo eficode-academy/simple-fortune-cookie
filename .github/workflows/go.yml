@@ -26,9 +26,11 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: code
-          path: ./frontend
-  build:
+          path: ./frontend && ./backend
+
+  Build:
     runs-on: ubuntu-latest
+    needs: Clone-down
     steps:
       - uses: actions/checkout@v2
 
