@@ -60,11 +60,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: Docker-image
     steps:       
-    - name: Download code
-      uses: actions/download-artifact@v2
-      with:
-        name: Code
-        path: .     
+    # - name: Download code
+    #   uses: actions/download-artifact@v2
+    #   with:
+    #     name: Code
+    #     path: .     
     - uses: actions/checkout@v2     
     - name: Decode
       run: echo "$KUBE_CONFIG_DATA" | base64 -d > config.txt
@@ -76,4 +76,4 @@ jobs:
         kubectl --kubeconfig=config.txt apply -f deployment-db-server.yml
         kubectl --kubeconfig=config.txt apply -f deployment-frontend.yml 
     - name: Functional testing of the URL
-      run: curl -s http://34.78.70.151:8080
+      run: curl -s http://35.205.7.128:30375/
