@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: backend-svc
+  name: backend-svc
+spec:
+  ports:
+      - port: 9000
+        protocol: TCP
+        targetPort: 9000
+  selector:
+    app: simple-fortune-cookie-backend
+  type: ClusterIP
+status:
+  loadBalancer: {}

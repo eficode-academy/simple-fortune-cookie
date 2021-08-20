@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: simple-fortune-cookie-db-server-svc
+  name: simple-fortune-cookie-db-server-svc
+spec:
+  ports:
+  - port: 6379
+    protocol: TCP
+    targetPort: 6379
+  selector:
+    app: simple-fortune-cookie-db-server-svc
+  type: ClusterIP
+status:
+  loadBalancer: {}
