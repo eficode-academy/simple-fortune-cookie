@@ -74,9 +74,9 @@ jobs:
       with: # defaults to latest kubectl binary version
         config: ${{ secrets.KUBE_CONFIG_DATA }}
         command: |
-          set image --record deployment/simple-fortune-cookie-backend backend=mara816docker/simple-fortune-cookie-backend:latest 
+          set image --record deployment/simple-fortune-cookie-backend backend-svc=mara816docker/simple-fortune-cookie-backend:latest 
         # ${{ github.repository }}:${{ github.sha }}
-          set image --record deployment/simple-fortune-cookie-frontend frontend=mara816docker/simple-fortune-cookie-frontend:latest
+          set image --record deployment/simple-fortune-cookie-frontend frontend-svc=mara816docker/simple-fortune-cookie-frontend:latest
         # ${{ github.repository }}:${{ github.sha }}
     - name: Trigger deploy
       run: |
