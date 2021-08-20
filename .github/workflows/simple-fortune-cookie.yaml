@@ -73,6 +73,7 @@ jobs:
     - name: Update images
       uses: andrioid/gh-action-k8s-set-image  
       with:
+        namespace: "default"
         images: |
           backend=mara816docker/simple-fortune-cookie-backend:latest  
           frontend=mara816docker/simple-fortune-cookie-frontend:latest  
