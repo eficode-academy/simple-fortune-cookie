@@ -70,9 +70,9 @@ jobs:
         kubectl --kubeconfig=config.txt apply -f deployment-backend.yml
         kubectl --kubeconfig=config.txt apply -f deployment-db-server.yml
         kubectl --kubeconfig=config.txt apply -f deployment-frontend.yml 
-    - name: Functional testing of the URL
-      run: curl -s http://35.205.7.128:30375/
-    - name: Printing ip and port
-      run: |
-        kubectl get nodes -o wide
-        kubectl get services
+    # - name: Functional testing of the URL
+    #   run: curl -s http://35.205.7.128:30375/
+    # - name: Printing ip and port
+    #   run: |
+    #     kubectl get nodes -o wide
+    #     kubectl get services
