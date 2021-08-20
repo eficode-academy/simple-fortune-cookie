@@ -71,11 +71,9 @@ jobs:
         kubectl --kubeconfig=config.txt apply -f deployment-db-server.yml
         kubectl --kubeconfig=config.txt apply -f deployment-frontend.yml
     - name: Update images
-      uses: andrioid/gh-action-k8s-set-image  
-      with:
-        namespace: "default"
-        images: |
-          backend=mara816docker/simple-fortune-cookie-backend:latest  
-          frontend=mara816docker/simple-fortune-cookie-frontend:latest  
+      uses: jtalk/k8s-deploy@v2 
+      images: |
+        mara816docker/simple-fortune-cookie-backend:latest  
+        mara816docker/simple-fortune-cookie-frontend:latest  
     - name: Functional testing of the URL
       run: curl -s http://34.79.254.215:31244/
