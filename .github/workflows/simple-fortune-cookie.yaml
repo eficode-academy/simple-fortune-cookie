@@ -74,8 +74,8 @@ jobs:
       with: # defaults to latest kubectl binary version
         config: ${{ secrets.KUBE_CONFIG_DATA }}
         command: |
-          set image --record deployment/simple-fortune-cookie-backend backend-svc=${{ github.repository }}:${{ github.sha }}
-          set image --record deployment/simple-fortune-cookie-frontend frontend-svc=${{ github.repository }}:${{ github.sha }}
+          set image --record deployment/simple-fortune-cookie-backend backend=${{ github.repository }}:${{ github.sha }}
+          set image --record deployment/simple-fortune-cookie-frontend frontend=${{ github.repository }}:${{ github.sha }}
     - name: Trigger deploy
       run: |
         kubectl --kubeconfig=config.txt apply -f backend-svc.yml
