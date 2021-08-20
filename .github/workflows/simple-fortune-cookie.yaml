@@ -61,8 +61,14 @@ jobs:
   Release:
     name: Release
     runs-on: self-hosted
+    needs: Docker-image
     container: 
     steps:
+    - name: Download code
+      uses: actions/download-artifact@v2
+      with:
+        name: Code
+        path: .  
     - uses: actions/checkout@v2
     - name: Trigger deploy
       uses: Consensys/kubernetes-action@master
