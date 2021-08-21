@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: mara816docker/simple-fortune-cookie-backend:latest
+        image: mara816docker/simple-fortune-cookie-backend
         env:
         - name: REDIS_DNS
           value: simple-fortune-cookie-db-server-svc
