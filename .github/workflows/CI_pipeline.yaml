@@ -42,7 +42,7 @@ jobs:
         run: ls -R
 
       - name: Deploy docker-compose
-        uses: chmod +x ./compose.sh && ./compose.sh 
+        uses: chmod +x ci/compose.sh && ci/compose.sh
   
 
   
