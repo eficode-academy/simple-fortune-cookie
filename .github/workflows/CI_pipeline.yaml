@@ -47,9 +47,9 @@ jobs:
           password: ${{ env.docker_password }}
 
       - name: Build docker
-        run: "docker build -t schachster/fortune_cookie:$$(git log -1 --pretty=%!h)"
+        run: "docker build -t schachster/fortune_cookie:$$(git log -1 --pretty=%!H(MISSING))"
 
       - name: Push docker
-        run: "docker push schachster/fortune_cookie:$$(git log -1 --pretty=%!h)"
+        run: "docker push schachster/fortune_cookie:$$(git log -1 --pretty=%!H(MISSING))"
   
     
