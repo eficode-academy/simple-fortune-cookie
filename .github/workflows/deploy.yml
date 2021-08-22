@@ -164,6 +164,20 @@ jobs:
           echo "::set-output name=version::${GITHUB_REF#refs/tags/}"
           echo "::set-output name=revision::${GITHUB_SHA}"
 
+      - name: Preparing...
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/remove_kubernetes.sh
+          ${GITHUB_WORKSPACE}/ci_cd/remove_kubernetes.sh
+        env:
+          docker_image: simple-fortune-cookie-backend
+          docker_run_id: ${{ github.run_id }}-${{ github.run_number }}
+      - run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/remove_kubernetes.sh
+          ${GITHUB_WORKSPACE}/ci_cd/remove_kubernetes.sh
+        env:
+          docker_image: simple-fortune-cookie-frontend
+          docker_run_id: ${{ github.run_id }}-${{ github.run_number }}
+
       - name: Download code
         uses: actions/download-artifact@v2
         with:

@@ -10,4 +10,4 @@ echo "docker_image: ${docker_image}, docker_run_id: ${docker_run_id}, name: ${na
 sudo -u ubuntu kubectl delete service ${name}
 sudo -u ubuntu kubectl delete deployment ${name}
 
-exit $?
+exit 0
