@@ -41,7 +41,7 @@ jobs:
       - name: test frontend
         run: chmod +x ./ci/test-frontend.sh && ./ci/test-frontend.sh
   
-  Build and test:
+  Build_and_test:
     runs-on: ubuntu-latest
     container: golang:alpine
     needs: Clone-down
