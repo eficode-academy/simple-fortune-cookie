@@ -26,10 +26,24 @@ jobs:
         with:
           name: code
           path: .
+
+  Test:
+    needs: Clone-down
+    runs-on: ubuntu-latest
+    container: golang:alpine
+    steps:
+      - name: download
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: . 
+
+      - name: Test
+        run: 
   
   Build:
     runs-on: ubuntu-latest
-    container: gradle:6-jdk11
+    container: golang:alpine
     needs: Clone-down
     steps:
       - name: download
@@ -41,12 +55,11 @@ jobs:
       - name: Display structure of downloaded files
         run: ls -R
       
-      - name: Deploy docker-compose
-        uses: hasnat/deploy-docker-compose@v0.1-alpha
-
-
-      - name: Deploy docker-compose
-        run: docker-compose -f docker-compose.yaml up -d
+      - name: Build backend
+        run: ci/build-backend.sh
+      
+      - name: Build frontend
+        run: ci/build-frontend.sh
   
 
   
