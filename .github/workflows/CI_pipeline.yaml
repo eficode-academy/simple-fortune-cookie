@@ -28,9 +28,9 @@ jobs:
           path: .
 
   Test:
-    needs: Clone-down
     runs-on: ubuntu-latest
     container: golang:alpine
+    needs: Clone-down
     steps:
       - name: download
         uses: actions/download-artifact@v2
@@ -41,7 +41,7 @@ jobs:
       - name: test frontend
         run: chmod +x ./ci/test-frontend.sh && ./ci/test-frontend.sh
   
-  Build:
+  Build and test:
     runs-on: ubuntu-latest
     container: golang:alpine
     needs: Clone-down
@@ -60,6 +60,9 @@ jobs:
       
       - name: Build frontend
         run: chmod +x ./ci/build-frontend.sh && ./ci/build-frontend.sh
+      
+      - name: test frontend
+        run: chmod +x ./ci/test-frontend.sh && ./ci/test-frontend.sh
   
 
   
