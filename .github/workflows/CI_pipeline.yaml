@@ -40,6 +40,10 @@ jobs:
 
       - name: Display structure of downloaded files
         run: ls -R
+      
+      - name: Deploy docker-compose
+        uses: hasnat/deploy-docker-compose@v0.1-alpha
+
 
       - name: Deploy docker-compose
         run: docker-compose -f docker-compose.yaml up -d
