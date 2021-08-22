@@ -44,7 +44,7 @@ jobs:
       - name: Docker-compose up
         uses: isbang/compose-action@v1.0.0
         with:
-          compose-file: '/__w/simple-fortune-cookie/simple-fortune-cookie/docker-compose.yaml'
+          compose-file: './docker-compose.yaml'
           down-flags: '--volumes'
       
   
