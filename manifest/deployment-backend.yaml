@@ -16,5 +16,5 @@ spec:
       containers:
       - name: simple-fortune-cookie-frontend
         image: diblo/simple-fortune-cookie-frontend:latest
-        ports: 
+        ports:
         - containerPort: 9000

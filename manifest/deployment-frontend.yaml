@@ -17,4 +17,4 @@ spec:
       - name: simple-fortune-cookie-frontend
         image: diblo/simple-fortune-cookie-frontend:latest
         ports: 
-        - containerPort: 8888
+        - containerPort: 8080

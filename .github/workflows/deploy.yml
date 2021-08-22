@@ -1,0 +1,230 @@
+name: Images (CD)
+
+on:
+  create:
+    branches:
+      - 'main'
+    tags:
+      - '**'
+
+jobs:
+  Test-Code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.16.4'
+
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Run unit test
+        run: |
+          cd ${GITHUB_WORKSPACE}/src/frontend
+          go test util.go main.go main_test.go
+
+      - name: Build backend
+        run: |
+          cd ${GITHUB_WORKSPACE}/src/backend
+          go build .
+
+      - name: Build frontend
+        run: |
+          cd ${GITHUB_WORKSPACE}/src/frontend
+          go build .
+
+      - name: Run backend
+        run: |
+          cd ${GITHUB_WORKSPACE}/src/backend
+          go run backend &
+
+      - name: Run frontend
+        run: |
+          cd ${GITHUB_WORKSPACE}/src/frontend
+          go run frontend &
+
+      - name: Test Backend Response
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/test_backend_response.sh
+          ${GITHUB_WORKSPACE}/ci_cd/test_backend_response.sh
+
+      - name: Test Frontend Response
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/test_frontend_response.sh
+          ${GITHUB_WORKSPACE}/ci_cd/test_frontend_response.sh
+
+      - name: Upload code
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
+
+  Docker-Image:
+    runs-on: ubuntu-latest
+    needs: Test-Code
+    steps:
+      - name: Set Vars
+        id: vars
+        run: |
+          echo "::set-output name=version::${GITHUB_REF#refs/tags/}"
+          echo "::set-output name=url::${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
+          echo "::set-output name=revision::${GITHUB_SHA}"
+          echo "::set-output name=current_datetime::$(date --rfc-3339=seconds | sed 's/ /T/')"
+
+      - name: Download code
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: . 
+
+      - name: Build Backend Image
+        run: |
+          cd ${GITHUB_WORKSPACE}/src/backend
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/build_docker.sh
+          ${GITHUB_WORKSPACE}/ci_cd/build_docker.sh
+        env:
+          docker_id: ${{secrets.DOCKER_HUB_ID}}
+          docker_image: simple-fortune-cookie-backend
+          docker_title: Simple Fortune Cookie Backend
+          docker_url: ${{ steps.vars.outputs.url }}
+          docker_version: ${{ steps.vars.outputs.version }}
+          docker_revision: ${{ steps.vars.outputs.revision }}
+
+      - name: Build Frontend Image
+        run: |
+          cd ${GITHUB_WORKSPACE}/src/frontend
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/build_docker.sh
+          ${GITHUB_WORKSPACE}/ci_cd/build_docker.sh
+        env:
+          docker_id: ${{secrets.DOCKER_HUB_ID}}
+          docker_image: simple-fortune-cookie-frontend
+          docker_title: Simple Fortune Cookie Frontend
+          docker_url: ${{ steps.vars.outputs.url }}
+          docker_version: ${{ steps.vars.outputs.version }}
+          docker_revision: ${{ steps.vars.outputs.revision }}
+
+      - name: Run Backend Image
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/run_docker.sh
+          ${GITHUB_WORKSPACE}/ci_cd/run_docker.sh
+        env:
+          docker_id: ${{secrets.DOCKER_HUB_ID}}
+          docker_image: simple-fortune-cookie-backend
+          docker_version: ${{ steps.vars.outputs.version }}
+          docker_port: 9000
+
+      - name: Run Frontend Image
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/run_docker.sh
+          ${GITHUB_WORKSPACE}/ci_cd/run_docker.sh
+        env:
+          docker_id: ${{secrets.DOCKER_HUB_ID}}
+          docker_image: simple-fortune-cookie-frontend
+          docker_version: ${{ steps.vars.outputs.version }}
+          docker_port: 8080
+
+      - name: Test Backend Response
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/test_backend_response.sh
+          ${GITHUB_WORKSPACE}/ci_cd/test_backend_response.sh
+
+      - name: Test Frontend Response
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/test_frontend_response.sh
+          ${GITHUB_WORKSPACE}/ci_cd/test_frontend_response.sh
+
+      - name: Push Backend Image
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/push_docker.sh
+          ${GITHUB_WORKSPACE}/ci_cd/push_docker.sh
+        env:
+          docker_id: ${{secrets.DOCKER_HUB_ID}}
+          docker_token: ${{secrets.DOCKER_HUB_TOKEN}}
+          docker_image: simple-fortune-cookie-backend
+          docker_tag: ${{ steps.vars.outputs.version }}
+
+      - name: Push Frontend Image
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/push_docker.sh
+          ${GITHUB_WORKSPACE}/ci_cd/push_docker.sh
+        env:
+          docker_id: ${{secrets.DOCKER_HUB_ID}}
+          docker_token: ${{secrets.DOCKER_HUB_TOKEN}}
+          docker_image: simple-fortune-cookie-frontend
+          docker_tag: ${{ steps.vars.outputs.version }}
+
+  Test-Kubernetes:
+    runs-on: self-hosted
+    needs: Docker-Image
+    steps:
+      - name: Set Vars
+        id: vars
+        run: |
+          echo "::set-output name=version::${GITHUB_REF#refs/tags/}"
+          echo "::set-output name=revision::${GITHUB_SHA}"
+
+      - name: Download code
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: . 
+
+      - name: Runing Backend
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/run_kubernetes.sh
+          ${GITHUB_WORKSPACE}/ci_cd/run_kubernetes.sh
+        env:
+          docker_id: ${{secrets.DOCKER_HUB_ID}}
+          docker_image: simple-fortune-cookie-backend
+          docker_tag: ${{ steps.vars.outputs.version }}
+          docker_run_id: ${{ github.run_id }}-${{ github.run_number }}
+          docker_port: 9000
+
+      - name: Runing Frontend
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/run_kubernetes.sh
+          ${GITHUB_WORKSPACE}/ci_cd/run_kubernetes.sh
+        env:
+          docker_id: ${{secrets.DOCKER_HUB_ID}}
+          docker_image: simple-fortune-cookie-frontend
+          docker_tag: ${{ steps.vars.outputs.version }}
+          docker_run_id: ${{ github.run_id }}-${{ github.run_number }}
+          docker_port: 8080
+
+      - name: Test Backend Response
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/test_backend_response.sh
+          ${GITHUB_WORKSPACE}/ci_cd/test_backend_response.sh
+        env:
+          docker_image: simple-fortune-cookie-backend
+          docker_run_id: ${{ github.run_id }}-${{ github.run_number }}
+
+      - name: Test Frontend Response
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/test_frontend_response.sh
+          ${GITHUB_WORKSPACE}/ci_cd/test_frontend_response.sh
+        env:
+          docker_image: simple-fortune-cookie-frontend
+          docker_run_id: ${{ github.run_id }}-${{ github.run_number }}
+
+      - name: Remove Backend Test
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/remove_kubernetes.sh
+          ${GITHUB_WORKSPACE}/ci_cd/remove_kubernetes.sh
+        env:
+          docker_image: simple-fortune-cookie-backend
+          docker_run_id: ${{ github.run_id }}-${{ github.run_number }}
+
+      - name: Remove Frontend Test
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/remove_kubernetes.sh
+          ${GITHUB_WORKSPACE}/ci_cd/remove_kubernetes.sh
+        env:
+          docker_image: simple-fortune-cookie-frontend
+          docker_run_id: ${{ github.run_id }}-${{ github.run_number }}
+
+      - name: Deploy
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/deploy.sh
+          ${GITHUB_WORKSPACE}/ci_cd/deploy.sh

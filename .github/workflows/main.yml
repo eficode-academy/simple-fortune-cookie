@@ -1,0 +1,61 @@
+name: Source (CI)
+
+on: 
+  push:
+    branches:
+    - '**'
+    tags-ignore:
+      - '**'
+
+jobs:
+  Test-Code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.16.4'
+
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Run unit test
+        run: |
+          cd ${GITHUB_WORKSPACE}/src/frontend
+          go test util.go main.go main_test.go
+
+      - name: Build backend
+        run: |
+          cd ${GITHUB_WORKSPACE}/src/backend
+          go build .
+
+      - name: Build frontend
+        run: |
+          cd ${GITHUB_WORKSPACE}/src/frontend
+          go build .
+
+      - name: Run backend
+        run: |
+          cd ${GITHUB_WORKSPACE}/src/backend
+          go run backend &
+
+      - name: Run frontend
+        run: |
+          cd ${GITHUB_WORKSPACE}/src/frontend
+          go run frontend &
+
+      - name: Test Backend Response
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/test_backend_response.sh
+          ${GITHUB_WORKSPACE}/ci_cd/test_backend_response.sh
+
+      - name: Test Frontend Response
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/ci_cd/test_frontend_response.sh
+          ${GITHUB_WORKSPACE}/ci_cd/test_frontend_response.sh
+
+      - name: Upload code
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
