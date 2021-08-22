@@ -242,4 +242,5 @@ jobs:
         run: |
           chmod +x ${GITHUB_WORKSPACE}/ci_cd/deploy.sh
           ${GITHUB_WORKSPACE}/ci_cd/deploy.sh
-        docker_tag: ${{ steps.vars.outputs.version }}
+        env:
+          docker_tag: ${{ steps.vars.outputs.version }}
