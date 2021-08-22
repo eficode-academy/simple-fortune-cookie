@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ ! -z "$(kubectl get deployment | grep deployment-backend)" ]; then
+if [ -z "$(kubectl get deployment | grep deployment-backend)" ]; then
     sudo -u ubuntu kubectl create -f manifest/deployment-backend.yaml
 else
     echo "docker_tag: ${docker_tag}"
@@ -14,7 +14,7 @@ sudo -u ubuntu kubectl apply -f manifest/service-backend.yaml
 
 # =======================
 
-if [ ! -z "$(kubectl get deployment | grep deployment-frontend)" ]; then
+if [ -z "$(kubectl get deployment | grep deployment-frontend)" ]; then
     sudo -u ubuntu kubectl create -f manifest/deployment-frontend.yaml
 else
     echo "docker_tag: ${docker_tag}"
