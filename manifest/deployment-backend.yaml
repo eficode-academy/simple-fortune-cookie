@@ -14,7 +14,7 @@ spec:
         app: deployment-backend
     spec:
       containers:
-      - name: simple-fortune-cookie-frontend
-        image: diblo/simple-fortune-cookie-frontend:latest
+      - name: simple-fortune-cookie-backend
+        image: diblo/simple-fortune-cookie-backend:latest
         ports:
         - containerPort: 9000
