@@ -1,1 +1,1 @@
-cd frontend && go test
+cd frontend && go test frontend
