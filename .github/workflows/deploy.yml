@@ -164,6 +164,12 @@ jobs:
           echo "::set-output name=version::${GITHUB_REF#refs/tags/}"
           echo "::set-output name=revision::${GITHUB_SHA}"
 
+      - name: Download code
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: . 
+
       - name: Preparing...
         run: |
           chmod +x ${GITHUB_WORKSPACE}/ci_cd/remove_kubernetes.sh
@@ -177,12 +183,6 @@ jobs:
         env:
           docker_image: simple-fortune-cookie-frontend
           docker_run_id: ${{ github.run_id }}-${{ github.run_number }}
-
-      - name: Download code
-        uses: actions/download-artifact@v2
-        with:
-          name: code
-          path: . 
 
       - name: Runing Backend
         run: |
