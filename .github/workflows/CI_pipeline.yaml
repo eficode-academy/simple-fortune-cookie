@@ -12,10 +12,6 @@ on:
 env:
   docker_username: ${{ secrets.DOCKER_HUB_USERNAME }}
   docker_password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-  NAME: schachster/fortune_cookie
-  TAG: $$(git log -1 --pretty=%!H(MISSING))
-  IMG: ${NAME}:${TAG}
-  LATEST: ${NAME}:latest
 
 jobs:
   Clone-down:  
@@ -30,6 +26,30 @@ jobs:
         with:
           name: code
           path: .
+  
+  Build:
+    runs-on: ubuntu-latest
+    container: gradle:6-jdk11
+    needs: Clone-down
+    steps:
+      - name: download
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+
+      - name: Deploy docker-compose
+        uses: hasnat/deploy-docker-compose@v0.1-alpha
+        
+      - name: build
+        run: docker-compose up
+      
+      - name: upload Repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
+
   
   Docker:
     runs-on: ubuntu-latest
@@ -50,13 +70,5 @@ jobs:
           username: ${{ env.docker_username }}
           password: ${{ env.docker_password }}
 
-      - name: Build docker
-        run: docker build -t ${env.IMG} .
-
-      - name: Tag docker
-        run: docker tag ${env.IMG} ${env.LATEST}
-
-      - name: Push docker
-        run: docker push ${env.NAME}
   
     
