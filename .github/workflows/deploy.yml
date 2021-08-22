@@ -174,14 +174,11 @@ jobs:
         run: |
           chmod +x ${GITHUB_WORKSPACE}/ci_cd/remove_kubernetes.sh
           ${GITHUB_WORKSPACE}/ci_cd/remove_kubernetes.sh
-        env:
-          docker_image: simple-fortune-cookie-backend
-          docker_run_id: ${{ github.run_id }}-${{ github.run_number }}
-      - run: |
-          chmod +x ${GITHUB_WORKSPACE}/ci_cd/remove_kubernetes.sh
+          export docker_image=${docker_image2}
           ${GITHUB_WORKSPACE}/ci_cd/remove_kubernetes.sh
         env:
-          docker_image: simple-fortune-cookie-frontend
+          docker_image: simple-fortune-cookie-backend
+          docker_image2: simple-fortune-cookie-frontend
           docker_run_id: ${{ github.run_id }}-${{ github.run_number }}
 
       - name: Runing Backend
