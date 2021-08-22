@@ -38,8 +38,7 @@ jobs:
           name: code
           path: . 
 
-      - name: Test
-        run: 
+    
   
   Build:
     runs-on: ubuntu-latest
