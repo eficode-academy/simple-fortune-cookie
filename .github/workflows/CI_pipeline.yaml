@@ -42,7 +42,7 @@ jobs:
         run: ls -R
 
       - name: Deploy docker-compose
-        uses: hasnat/deploy-docker-compose@v0.1-alpha      
+        uses: chmod +x .compose.sh && ./compose.sh 
   
 
   
