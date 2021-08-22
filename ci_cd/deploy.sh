@@ -5,7 +5,7 @@ else
     echo "docker_tag: ${docker_tag}"
     [[ -z "${docker_tag}" ]] && exit 1
 
-    kubectl set image deployments/deployment-backend simple-fortune-cookie-backend=diblo/simple-fortune-cookie-backend:${docker_tag}
+    sudo -u ubuntu kubectl set image deployments/deployment-backend simple-fortune-cookie-backend=diblo/simple-fortune-cookie-backend:${docker_tag}
 fi
 [[ "$?" != "0" ]] && exit 1
 
@@ -20,7 +20,7 @@ else
     echo "docker_tag: ${docker_tag}"
     [[ -z "${docker_tag}" ]] && exit 1
 
-    kubectl set image deployments/deployment-frontend simple-fortune-cookie-frontend=diblo/simple-fortune-cookie-frontend:${docker_tag}
+    sudo -u ubuntu kubectl set image deployments/deployment-frontend simple-fortune-cookie-frontend=diblo/simple-fortune-cookie-frontend:${docker_tag}
 fi
 [[ "$?" != "0" ]] && exit 1
 
