@@ -39,7 +39,7 @@ jobs:
           path: . 
 
       - name: test frontend
-        run: ./ci/test-frontend.sh
+        run: chmod +x ./ci/test-frontend.sh && ./ci/test-frontend.sh
   
   Build:
     runs-on: ubuntu-latest
@@ -56,10 +56,10 @@ jobs:
         run: ls -R
       
       - name: Build backend
-        run: ./ci/build-backend.sh
+        run: chmod +x ./ci/build-backend.sh && ./ci/build-backend.sh
       
       - name: Build frontend
-        run: ./ci/build-frontend.sh
+        run: chmod +x ./ci/build-frontend.sh && ./ci/build-frontend.sh
   
 
   
