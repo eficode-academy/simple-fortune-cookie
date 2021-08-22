@@ -38,10 +38,11 @@ jobs:
           name: code
           path: . 
 
-      - name: test frontend
+      - name: Test frontend
         run: chmod +x ./ci/test-frontend.sh && ./ci/test-frontend.sh
+
   
-  Build_and_test:
+  Build:
     runs-on: ubuntu-latest
     container: golang:latest
     needs: Clone-down
@@ -59,11 +60,7 @@ jobs:
         run: chmod +x ./ci/build-backend.sh && ./ci/build-backend.sh
       
       - name: Build frontend
-        run: chmod +x ./ci/build-frontend.sh && ./ci/build-frontend.sh
-      
-      - name: test frontend
-        run: chmod +x ./ci/test-frontend.sh && ./ci/test-frontend.sh
-  
+        run: chmod +x ./ci/build-frontend.sh && ./ci/build-frontend.sh  
 
   
   Docker:
