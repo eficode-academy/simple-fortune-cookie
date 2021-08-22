@@ -38,6 +38,9 @@ jobs:
           name: code
           path: .
 
+      - name: Display structure of downloaded files
+        run: ls -R
+
       - name: Docker-compose up
         uses: isbang/compose-action@v1.0.0
         with:
