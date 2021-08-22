@@ -7,7 +7,12 @@ echo "docker_image: ${docker_image}, docker_run_id: ${docker_run_id}, name: ${na
 [[ -z "${docker_image}" ]] && exit 1
 [[ -z "${docker_run_id}" ]] && exit 1
 
-sudo -u ubuntu kubectl delete service ${name}
-sudo -u ubuntu kubectl delete deployment ${name}
-
+if [ -z $(kubectl get service | grep ${name}) ]; then
+    sudo -u ubuntu kubectl delete service ${name}
+    [[ "$?" != "0" ]] && exit 1
+fi
+if [ -z $(kubectl get deployment | grep ${name}) ]; then
+    sudo -u ubuntu kubectl delete deployment ${name}
+    exit $?
+fi
 exit 0
