@@ -14,8 +14,15 @@ spec:
       labels:
         app: redis
     spec:
+      volumes:
+      - name: redis-data-volume
+        persistentVolumeClaim:
+          claimName: pvc-redis
       containers:
       - name: redis
         image: redis:alpine
         ports:
         - containerPort: 6379   
+        volumeMounts:
+        - mountPath: "/redis-master-data"
+          name: redis-data-volume
