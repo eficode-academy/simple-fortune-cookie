@@ -1,5 +1,9 @@
-name: Java CI
-on: push
+name: GO CI
+on: 
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 # runs-on: self-hosted - if we want to self host runner
 # run runner with actions-runner/run.sh
 jobs:

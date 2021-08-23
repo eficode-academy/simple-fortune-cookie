@@ -13,6 +13,8 @@ COPY *.go ./
 ADD ./static ./static
 ADD ./templates ./templates
 
+RUN go test 
+
 RUN go build -o /frontend
 
 ##
