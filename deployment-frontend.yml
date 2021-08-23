@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: mara816docker/simple-fortune-cookie-frontend
+        image: mara816docker/simple-fortune-cookie-frontend:latest  
         ports:
         - containerPort: 8080
         env:
