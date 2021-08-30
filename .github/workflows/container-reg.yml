@@ -1,0 +1,24 @@
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+
+name: Container Reg
+on: [push, pull_request]
+jobs:
+  docker-test:
+    name: build docker images
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: build-backend
+        run: docker build -t "$docker_username/simple-fortune-cookie:backend" -f backend.Dockerfile .
+      - name: build-frontend
+        run: docker build -t "$docker_username/simple-fortune-cookie:frontend" .
+      - name: docker-login
+        run: echo "$docker_password" | docker login --username "$docker_username" --password-stdin
+      - name: push backend
+        run: docker push "$docker_username/simple-fortune-cookie:backend"
+      - name: push frontend
+        run: docker push "$docker_username/simple-fortune-cookie:frontend"
+
+      
