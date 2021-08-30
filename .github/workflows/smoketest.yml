@@ -11,6 +11,8 @@ jobs:
       - name: build-frontend
         run: docker build -t frontend .
       - name: docker-run
-        run: docker-compose up
+        run: docker-compose up -d
       - name: test
         run: curl -s 172.17.0.1:8080 | grep "Fortune cookie application"
+      - name: docker-stop
+        run: docker-compose down
