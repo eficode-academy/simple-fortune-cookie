@@ -1,15 +1,17 @@
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+
 name: SmokeTests
-on: [push, pull_request]
+on:
+  workflow_run:
+    workflows: ["container-reg"]
+    types: 
+      - completed
 jobs:
   docker-test:
     name: build docker images and curl 8080
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: build-backend
-        run: docker build -t backend -f backend.Dockerfile .
-      - name: build-frontend
-        run: docker build -t frontend .
       - name: docker-run
         run: docker-compose up -d
       - name: test
