@@ -2,7 +2,8 @@ name: Tests
 on: [push, pull_request]
 jobs:
   go-tests:
-    runs-on: golang:1.17
-    steps:
-      - name: test
-        run: go test ./...
+    container:
+      image: golang:1.17
+      steps:
+        - name: test
+          run: go test ./...
