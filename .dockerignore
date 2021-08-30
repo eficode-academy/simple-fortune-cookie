@@ -1,0 +1,10 @@
+# Docs:
+*.md
+images
+
+# git:
+.git
+
+# The dockerfiles themselves
+*.Dockerfile
+
