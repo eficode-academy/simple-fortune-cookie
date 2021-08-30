@@ -11,6 +11,8 @@ RUN go build
 FROM alpine AS final
 
 COPY --from=builder /project/frontend/frontend /frontend
+COPY --from=builder /project/frontend/static /static
+COPY --from=builder /project/frontend/templates /templates
 
 EXPOSE 8080
 
