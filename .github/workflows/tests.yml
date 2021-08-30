@@ -1,0 +1,8 @@
+name: Tests
+on: push,pull-request
+jobs:
+  go-tests:
+    runs-on: golang:1.17
+    steps:
+      - name: test
+        run: go test ./...
