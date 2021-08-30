@@ -1,0 +1,16 @@
+name: SmokeTests
+on: [push, pull_request]
+jobs:
+  docker-test:
+    name: build docker images and curl 8080
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: build-backend
+        run: docker build -t backend -f backend.Dockerfile .
+      - name: build-frontend
+        run: docker build -t frontend .
+      - name: docker-run
+        run: docker-compose up
+      - name: test
+        run: curl -s 172.17.0.1:8080 | grep "Fortune cookie application"
