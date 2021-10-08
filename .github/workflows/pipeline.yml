@@ -1,5 +1,10 @@
 name: Test
-on: push
+on:
+  push:
+  pull_request:
+    types:
+    - opened
+env: # Set the secret as an input
 jobs:
   frontend_test:
     name: Test frontend
@@ -18,10 +23,29 @@ jobs:
       run: docker-compose up -d
     - name: Curl test
       run: ./curl_test.sh
-        #integration_test_cleanup:
-        #  name: Clean up
-        #  needs: integration_test
-        #  runs-on: ubuntu-latest
-        #  steps:
-        #  - name: clean up
-        #    run: docker-compose down
+  docker_build_and_push:
+    name: Build docker images and push to dockerhub
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Set outputs
+      id: vars
+      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+    - name: Build and push backend
+        uses: docker/build-push-action@v2
+        with:
+          context: ./backend
+          push: true
+          image_name: andreasga/sfc-backend
+          tags: "latest,{{ steps.vars.outputs.sha_short }}"
+    - name: Build and push frontend
+        uses: docker/build-push-action@v2
+        with:
+          context: ./frontend
+          push: true
+          image_name: andreasga/sfc-frontend
+          tags: "latest,{{ steps.vars.outputs.sha_short }}"
