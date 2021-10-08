@@ -37,6 +37,7 @@ func main() {
     http.HandleFunc("/healthz", HealthzHandler)
 
     http.HandleFunc("/api/random", func (w http.ResponseWriter, r *http.Request) {
+        log.Print("Received api/random")
         resp, err := myClient.Get(fmt.Sprintf("http://%s:%s/fortunes/random", BACKEND_DNS, BACKEND_PORT))
         if err != nil {
             log.Fatalln(err)
@@ -52,6 +53,7 @@ func main() {
     })
 
     http.HandleFunc("/api/all", func (w http.ResponseWriter, r *http.Request) {
+        log.Print("Received api/all")
         resp, err := myClient.Get(fmt.Sprintf("http://%s:%s/fortunes", BACKEND_DNS, BACKEND_PORT))
         if err != nil {
             log.Fatalln(err)
@@ -76,6 +78,7 @@ func main() {
 
     http.HandleFunc("/api/add", func (w http.ResponseWriter, r *http.Request) {
 
+        log.Print("Received api/add")
         if r.Method != "POST" {
             http.Error(w, "Use POST", http.StatusMethodNotAllowed)
             return
@@ -100,5 +103,7 @@ func main() {
     })
 
     http.Handle("/", http.FileServer(http.Dir("./static")))
+    log.Printf("BACKEND_DNS: %s", BACKEND_DNS)
+    log.Print("Successfully listening on 8080")
     http.ListenAndServe(":8080", nil)
 }
