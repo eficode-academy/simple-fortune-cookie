@@ -12,17 +12,16 @@ jobs:
   integration_test:
     name: Test full stack
     runs-on: ubuntu-latest
-    container: golang:1.17.2-bullseye
     steps:
     - uses: actions/checkout@v2
     - name: run docker-compose
       run: docker-compose up -d
     - name: Curl test
       run: ./curl_test.sh
-  integration_test_cleanup:
-    name: Clean up
-    needs: integration_test
-    runs-on: self-hosted
-    steps:
-    - name: clean up
-      run: docker-compose down
+        #integration_test_cleanup:
+        #  name: Clean up
+        #  needs: integration_test
+        #  runs-on: ubuntu-latest
+        #  steps:
+        #  - name: clean up
+        #    run: docker-compose down
