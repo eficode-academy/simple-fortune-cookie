@@ -3,7 +3,7 @@ on: push
 jobs:
   frontend_test:
     name: Test frontend
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     container: golang:1.17.2-bullseye
     steps:
     - uses: actions/checkout@v2
@@ -11,7 +11,8 @@ jobs:
       run: cd frontend && go test
   integration_test:
     name: Test full stack
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+    container: golang:1.17.2-bullseye
     steps:
     - uses: actions/checkout@v2
     - name: run docker-compose
