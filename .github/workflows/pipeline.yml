@@ -1,0 +1,11 @@
+name: Test
+on: push
+jobs:
+  build_and_test:
+    name: Test frontend
+    runs-on: self-hosted
+    container: golang:1.17.2-bullseye
+    steps:
+    - uses: actions/checkout@v2
+    - name: Go test frontend
+      run: cd frontend && go test
