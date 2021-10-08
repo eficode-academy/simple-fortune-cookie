@@ -4,7 +4,6 @@ on:
   pull_request:
     types:
     - opened
-env: # Set the secret as an input
 jobs:
   frontend_test:
     name: Test frontend
