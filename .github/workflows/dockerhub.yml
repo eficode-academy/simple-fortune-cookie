@@ -23,7 +23,7 @@ jobs:
         push: true
         tags: |
           andreasga/sfc-backend:latest
-          andreasga/sfc-backend:{{ steps.vars.outputs.sha_short }}
+          andreasga/sfc-backend:${{ steps.vars.outputs.sha_short }}
     - name: Build and push frontend
       uses: docker/build-push-action@v2
       with:
@@ -31,4 +31,4 @@ jobs:
         push: true
         tags: |
           andreasga/sfc-frontend:latest
-          andreasga/sfc-frontend:{{ steps.vars.outputs.sha_short }}
+          andreasga/sfc-frontend:${{ steps.vars.outputs.sha_short }}
