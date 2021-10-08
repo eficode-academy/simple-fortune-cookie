@@ -1,12 +1,10 @@
 name: Build and Push to DockerHub
 on:
   push:
-  pull_request:
-    types:
-    - opened
+    branches: [ main ]
+
 jobs:
   docker_build_and_push:
-    if: ${{ github.ref == 'refs/heads/main' }}
     name: Build docker images and push to dockerhub
     runs-on: ubuntu-latest
     steps:
