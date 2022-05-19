@@ -8,6 +8,8 @@ Luckily you know how to use Docker!
 
 ### Task
 
+For both front and backend:
+
 - Create a `Dockerfile` containing your application code and requirements
 - Build the Docker image
 - Run the application in Docker with a docker-compose file

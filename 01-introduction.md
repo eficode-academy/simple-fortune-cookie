@@ -90,17 +90,19 @@ _"First of all, the datacenter we used crashed last night,
     so we'll need you to deploy the application again,
     but that shouldn't be a problem, you've found the code, right?"_
 
+> :bulb: the numbers indicate a way to make a natural progression, saying "take all 03's before 04's". It is not mandatory to do it like that however so feel free to change if needed.
+
 - [02-run-app](./02-run-app.md).
-- [02-containers](./02-containers.md).
-- [02-testing](./02-testing.md).
-- [02-container-registry](./02-container-registry.md).
-- [02-cd](./02-cd.md).
-- [02-container-orchestration](./02-container-orchestration.md).
-- [02-automation](./02-automation.md).
-- [02-database](./02-database.md).
+- [03-containers](./03-containers.md).
+- [03-automation](./03-automation.md).
+- [03-cd](./03-cd.md).
+- [03-container-registry](./03-container-registry.md).
+- [04-container-orchestration](./04-container-orchestration.md).
+- [04-database](./04-database.md).
+- [04-testing](./04-testing.md).
 
 Of course, things take time,
     but if you could try to focus on everything,
     and then afterwards start on this, that would be _so_ great.
 
-- [03-bon-appetit](./03-bon-appetit.md).
+- [05-bon-appetit](./05-bon-appetit.md).
