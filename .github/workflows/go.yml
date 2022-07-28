@@ -17,6 +17,9 @@ jobs:
       uses: actions/setup-go@v3
       with:
         go-version: 1.18
+        
+    - name: Download redigo
+      run: go mod download github.com/gomodule/redigo
 
     - name: Build Backend
       run: |
