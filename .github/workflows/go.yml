@@ -18,12 +18,11 @@ jobs:
       with:
         go-version: 1.18
         
-    - name: Download dependencies 
-      run: go mod download github.com/gomodule/redigo@v1.8.5
 
     - name: Build Backend
       run: |
         cd backend
+        go mod download github.com/gomodule/redigo
         go build -v
 
     - name: Build Frontend
