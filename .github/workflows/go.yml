@@ -30,6 +30,7 @@ jobs:
     - name: Build Frontend
       run: |
         cd frontend
+        go mod init
         go build
     
     - name: Test
