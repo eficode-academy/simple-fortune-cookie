@@ -30,8 +30,9 @@ jobs:
     - name: Build Frontend
       run: |
         cd frontend
-        go mod init
         go build
     
     - name: Test
-      run: go test -v ./frontend
+      run: |
+        cd frontend
+        go test -v ./frontend
