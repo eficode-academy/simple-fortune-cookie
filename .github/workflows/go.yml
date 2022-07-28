@@ -36,6 +36,22 @@ jobs:
         cd frontend
         go test -v
 
+    - name: Upload Backend Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        name: backend
+        path: backend/backend
+        if-no-files-found: error
+        retention-days: 1
+    
+    - name: Upload Frontend Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        name: frontend
+        path: frontend/frontend
+        if-no-files-found: error
+        retention-days: 1
+    
   run:
     needs: build
 #    runs-on: ubuntu-latest
