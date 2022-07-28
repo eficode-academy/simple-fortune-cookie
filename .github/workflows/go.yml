@@ -24,13 +24,13 @@ jobs:
     - name: Build Backend
       run: |
         cd backend
-        go mod init
+ #       go mod init
         go build
 
     - name: Build Frontend
       run: |
         cd frontend
-        go mod init
+ #       go mod init
         go build
     
     - name: Test
