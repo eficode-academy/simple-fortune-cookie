@@ -19,7 +19,6 @@ jobs:
       with:
         go-version: 1.18
         
-
     - name: Build Backend
       run: |
         cd backend
@@ -58,6 +57,18 @@ jobs:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v3
+    
+    - name: Download Backend Artifact
+      uses: actions/download-artifact@v3.0.0
+      with:
+        name: backend
+        path: backend
+
+    - name: Download Frontend Artifact
+      uses: actions/download-artifact@v3.0.0
+      with:
+        name: frontend
+        path: frontend
 
     - name: run backend
       run: |
