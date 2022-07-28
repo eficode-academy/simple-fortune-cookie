@@ -1,0 +1,36 @@
+name: Go
+
+on:
+  push:
+    branches: [ "features/*" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.18
+        
+
+    - name: Build Backend
+      run: |
+        cd backend
+        go mod download github.com/gomodule/redigo
+        go build -v
+
+    - name: Build Frontend
+      run: |
+        cd frontend
+        go build -v
+    
+    - name: Test
+      run: |
+        cd frontend
+        go test -v
