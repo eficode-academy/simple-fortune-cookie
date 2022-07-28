@@ -35,3 +35,20 @@ jobs:
       run: |
         cd frontend
         go test -v
+
+  run:
+#    runs-on: ubuntu-latest
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: run backend
+      run: |
+        cd backend
+        go run backend 
+        
+    - name: run frontend
+      run: |
+        cd frontend
+        go run frontend
+        
