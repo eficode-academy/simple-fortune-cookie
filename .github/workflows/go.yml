@@ -25,14 +25,14 @@ jobs:
       run: |
         cd backend
         go mod download github.com/gomodule/redigo
-        go build
+        go build -v
 
     - name: Build Frontend
       run: |
         cd frontend
-        go build
+        go build -v
     
     - name: Test
       run: |
         cd frontend
-        go test -v ./frontend
+        go test -v
