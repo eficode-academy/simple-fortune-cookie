@@ -1,0 +1,24 @@
+name: FCookie
+on: push
+jobs:
+  Clone-down:
+    name: Clone Down Repo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Upload Repo
+
+  Build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Frontend Build
+        run: go build /frontend/.
+      - name: Backend Build
+        run: go build /backend/.
+
+  Test:
+    runs-on: ubuntu-latest
+    Tests:
+      - name: Frontend
+      run: go test /frontend
