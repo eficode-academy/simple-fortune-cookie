@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 	"regexp"
@@ -157,6 +158,7 @@ func (h *fortuneHandler) Create(w http.ResponseWriter, r *http.Request) {
 	}
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonBytes)
+	log.Println("New cookie added")
 }
 
 func internalServerError(w http.ResponseWriter, r *http.Request) {
