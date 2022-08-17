@@ -73,10 +73,10 @@ jobs:
     needs: build_frontend
     runs-on: ubuntu-22.04
     steps:
-    - name: Download code
+    - name: Download frontend
       uses: actions/download-artifact@v2
       with:
-        name: code
+        name: frontend
         path: .
     - name: Test frontend
       run: |
@@ -92,7 +92,7 @@ jobs:
     needs: build_backend
     runs-on: ubuntu-22.04
     steps:
-    - name: Download code
+    - name: Download backend
       uses: actions/download-artifact@v2
       with:
         name: backend
