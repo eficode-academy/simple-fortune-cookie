@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend          # arbitrary label on deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:        # labels the replica selector should match
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend      # label for replica selector to match
+    spec:
+      containers:
+      - name: backend
+        image: DockerImageGoesHere
+        ports:
+        - containerPort: FillMeOut
