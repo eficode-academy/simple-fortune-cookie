@@ -23,7 +23,7 @@ jobs:
       with:
         path: 'backend'
     - name: Setup Docker
-      uses: ${{ github.repository }}/.github/workflows/partial-docker.yml@main
+      uses: amatzen/SE05-CD-SimpleFortuneCookie/.github/workflows/partial-docker.yml@main
       id: setup-step
       with:
         registry_username: ${{ github.actor }}
