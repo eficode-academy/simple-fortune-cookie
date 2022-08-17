@@ -1,0 +1,107 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  clone_down:
+    name: Clone down repo
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Upload frontend
+      uses: actions/upload-artifact@v2
+      with:
+        name: frontend
+        path: ./frontend
+    - name: Upload backend
+      uses: actions/upload-artifact@v2
+      with:
+        name: backend
+        path: ./backend
+
+  build_frontend:
+    name: Build frontend
+    needs: clone_down
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Download frontend
+      uses: actions/download-artifact@v2
+      with:
+        name: frontend
+        path: .
+    - name: Build frontend
+      run: |
+        go mod tidy &&
+        go mod download &&
+        go build
+    - name: Upload frontend build
+      uses: actions/upload-artifact@v2
+      with:
+        name: frontend
+        path: .
+
+  build_backend:
+    name: Build backend
+    needs: clone_down
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Download backend
+      uses: actions/download-artifact@v2
+      with:
+        name: backend
+        path: .
+    - name: Build backend
+      run: |
+        go mod tidy &&
+        go mod download &&
+        go build
+    - name: Upload backend build
+      uses: actions/upload-artifact@v2
+      with:
+        name: backend
+        path: .
+
+  test_frontend:
+    name: Test frontend
+    needs: build_frontend
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Download frontend
+      uses: actions/download-artifact@v2
+      with:
+        name: frontend
+        path: .
+    - name: Test frontend
+      run: |
+        go test
+    - name: Upload frontend test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: frontend
+        path: .
+
+  test_backend:
+    name: Test backend
+    needs: build_backend
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Download backend
+      uses: actions/download-artifact@v2
+      with:
+        name: backend
+        path: . 
+    - name: Test backend
+      run: |
+        go test
+    - name: Upload backend test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: backend
+        path: .
