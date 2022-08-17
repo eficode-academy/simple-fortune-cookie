@@ -35,3 +35,35 @@ Changes will be overwritten by subsequent releases,
 In case of an unfortunate push,
     simply make a new release from the main repository,
     and squash the commits on this one.
+    
+## Steps taken
+
+### Setup of Repository
+
+- We forked the project
+- We added contributors
+- We renamed main to trunk to indicate we will work with trunk-based development
+- We set up branch protection rules for the trunk branch
+    - Require PR for merging by 2 others
+    - Dismiss stale PRs when new commits are pushed
+    - Require status checks to pass before merging (remember to add these)
+    - Require branches to be up to date before merging
+    - Require conversation resolution before merging
+    - Require linear history
+    - Include administrators
+- Changed settings for PRS
+    - Enabled issues on the repository
+    - Restrict merging to only allow squash merging and rebase merging
+    - Always suggest updating pull request branches
+    - Automatically delete head branches
+- Created a Project with the Team Backlog template
+    - Removed Backlog and Ready swimlane 
+    - Configured Workflows so:
+        - New issues are added to the backlog
+        - Reopened issues are moved to In Progress
+        - Closed issues are moved to Done
+        - PRs with requested changes are moved to In Progress
+        - Merged PRs are moved to done
+- Created Issues for all tasks
+
+
