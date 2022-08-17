@@ -28,11 +28,8 @@ jobs:
     runs-on: ubuntu-22.04
     #if: github.ref == 'refs/heads/main'
     steps:
-    - name: Download frontend
-      uses: actions/download-artifact@v2
-      with:
-        name: frontend
-        path: .
+    - name: Checkout repo
+      uses: actions/checkout@v2
     - name: Build and push frontend image
       uses: VaultVulp/gp-docker-action@1.2.0
       with:
