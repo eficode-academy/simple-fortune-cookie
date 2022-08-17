@@ -123,7 +123,7 @@ jobs:
       uses: VaultVulp/gp-docker-action@1.2.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        image-name: se05-cd-simplefortunatecookie-backend
+        image-name: backend
 
   containerize_frontend:
     needs:
@@ -142,4 +142,4 @@ jobs:
       uses: VaultVulp/gp-docker-action@1.2.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        image-name: se05-cd-simplefortunatecookie-frontend
+        image-name: frontend
