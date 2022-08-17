@@ -1,0 +1,18 @@
+version: '3'
+services:
+
+  frontend:
+    container_name: frontend
+    image: frontend:latest
+    ports:
+      - "80:80"
+
+  backend:
+    container_name: backend
+    image: backend:latest
+    restart: always
+    
+
+  db:
+    container_name: db
+    
