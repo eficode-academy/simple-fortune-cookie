@@ -1,4 +1,5 @@
 name: CI
+
 on:
   push:
     branches:
@@ -7,12 +8,11 @@ on:
     types: [opened, reopened]
     branches:
       - main
-env:
-  UBUNTU_VERSION: "22.04"
+
 jobs:
   clone_down:
     name: Clone down repo
-    runs-on: "ubuntu-${{ env.UBUNTU_VERSION }}"
+    runs-on: ubuntu-22.04
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
@@ -26,10 +26,11 @@ jobs:
       with:
         name: backend
         path: ./backend
+
   build_frontend:
     name: Build frontend
     needs: clone_down
-    runs-on: "ubuntu-${{ env.UBUNTU_VERSION }}"
+    runs-on: ubuntu-22.04
     steps:
     - name: Download frontend
       uses: actions/download-artifact@v2
@@ -46,10 +47,11 @@ jobs:
       with:
         name: frontend
         path: .
+
   build_backend:
     name: Build backend
     needs: clone_down
-    runs-on: "ubuntu-${{ env.UBUNTU_VERSION }}"
+    runs-on: ubuntu-22.04
     steps:
     - name: Download backend
       uses: actions/download-artifact@v2
@@ -66,10 +68,11 @@ jobs:
       with:
         name: backend
         path: .
+
   test_frontend:
     name: Test frontend
     needs: build_frontend
-    runs-on: "ubuntu-${{ env.UBUNTU_VERSION }}"
+    runs-on: ubuntu-22.04
     steps:
     - name: Download code
       uses: actions/download-artifact@v2
@@ -84,10 +87,11 @@ jobs:
       with:
         name: frontend
         path: .
+
   test_backend:
     name: Test backend
     needs: build_backend
-    runs-on: "ubuntu-${{ env.UBUNTU_VERSION }}"
+    runs-on: ubuntu-22.04
     steps:
     - name: Download code
       uses: actions/download-artifact@v2
