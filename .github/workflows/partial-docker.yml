@@ -1,0 +1,41 @@
+name: Docker Setup (Partial)
+
+on:
+  workflow_call:
+    inputs:
+      image_name:
+        type: string
+        required: false
+      registry:
+        type: string
+        required: true
+    secrets:
+      registry_username:
+        required: true
+      registry_password:
+        required: true
+    outputs:
+      image_name:
+        description: The name of the image to be built.
+        value: ${{ jobs.build_image_backend.outputs.image_name }}
+
+jobs:
+  setup:
+    name: Setup Docker
+    runs-on: ubuntu-22.04
+    outputs:
+      image_name: ${{ steps.image_name.outputs.lowercase }}
+    steps:
+    - name: Login to Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ inputs.registry }}
+        username: ${{ secrets.registry_username }}
+        password: ${{ secrets.registry_password }}
+    - name: Get lowercase name
+      uses: ASzc/change-string-case-action@v2
+      if: ${{ inputs.image_name }}
+      id: image_name
+      with:
+        string: ${{ env.image_name }}
+

@@ -1,0 +1,65 @@
+name: Release CD
+
+on:
+  release:
+    branches:
+      - main
+  push:
+    branches:
+      - 5-push-container-to-gh-packages
+
+env:
+  REGISTRY: ghcr.io
+  PACKAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build_image_backend:
+    name: Build backend image
+    runs-on: ubuntu-22.04
+    #if: github.ref == 'refs/heads/main'
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Login to Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Get lowercase image name
+      uses: ASzc/change-string-case-action@v2
+      id: image_name
+      with:
+        string: ${{ env.PACKAGE_NAME }}/backend
+    - name: Build and Publish
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: ${{ env.REGISTRY }}/${{ steps.image_name.outputs.lowercase }}:${{ github.ref_name }}
+        context: backend
+
+  build_image_frontend:
+    name: Build frontend image
+    runs-on: ubuntu-22.04
+    #if: github.ref == 'refs/heads/main'
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Login to Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Get lowercase image name
+      uses: ASzc/change-string-case-action@v2
+      id: image_name
+      with:
+        string: ${{ env.PACKAGE_NAME }}/frontend
+    - name: Build and Publish
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: ${{ env.REGISTRY }}/${{ steps.image_name.outputs.lowercase }}:${{ github.ref_name }}
+        context: frontend
+  
