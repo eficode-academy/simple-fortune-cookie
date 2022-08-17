@@ -17,7 +17,6 @@ on:
     outputs:
       image_name:
         description: The name of the image to be built.
-        required: true
         value: ${{ jobs.build_image_backend.outputs.image_name }}
 
 jobs:
