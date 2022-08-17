@@ -12,7 +12,7 @@ env:
 jobs:
   clone_down:
     name: Clone down repo
-    runs-on: "ubuntu-${{ UBUNTU_VERSION }}"
+    runs-on: "ubuntu-${{ env.UBUNTU_VERSION }}"
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
@@ -28,8 +28,8 @@ jobs:
         path: ./backend
   build_frontend:
     name: Build frontend
-    needs: Clone-down
-    runs-on: "ubuntu-${{ UBUNTU_VERSION }}"
+    needs: clone_down
+    runs-on: "ubuntu-${{ env.UBUNTU_VERSION }}"
     steps:
     - name: Download frontend
       uses: actions/download-artifact@v2
@@ -48,8 +48,8 @@ jobs:
         path: .
   build_backend:
     name: Build backend
-    needs: Clone-down
-    runs-on: "ubuntu-${{ UBUNTU_VERSION }}"
+    needs: clone_down
+    runs-on: "ubuntu-${{ env.UBUNTU_VERSION }}"
     steps:
     - name: Download backend
       uses: actions/download-artifact@v2
@@ -68,8 +68,8 @@ jobs:
         path: .
   test_frontend:
     name: Test frontend
-    needs: Build-frontend
-    runs-on: "ubuntu-${{ UBUNTU_VERSION }}"
+    needs: build_frontend
+    runs-on: "ubuntu-${{ env.UBUNTU_VERSION }}"
     steps:
     - name: Download code
       uses: actions/download-artifact@v2
@@ -86,8 +86,8 @@ jobs:
         path: .
   test_backend:
     name: Test backend
-    needs: Build-backend
-    runs-on: "ubuntu-${{ UBUNTU_VERSION }}"
+    needs: build_backend
+    runs-on: "ubuntu-${{ env.UBUNTU_VERSION }}"
     steps:
     - name: Download code
       uses: actions/download-artifact@v2
