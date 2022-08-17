@@ -1,5 +1,9 @@
-FROM golang:latest
+FROM golang:latest AS builder
+ADD . /src/
+RUN cd /src && go build -o goapp
 
-COPY . .
-
-CMD ["run", "."]
+# final stage
+FROM scratch
+WORKDIR /app
+COPY --from=builder /src/goapp /app/
+ENTRYPOINT ["run","./goapp"]

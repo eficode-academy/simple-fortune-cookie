@@ -5,14 +5,15 @@ services:
     container_name: frontend
     image: frontend:latest
     ports:
-      - "80:80"
+      - "8080:80"
 
   backend:
     container_name: backend
     image: backend:latest
     restart: always
+    ports:
+      - "9000:9000"
     
-
   db:
     container_name: db
     
