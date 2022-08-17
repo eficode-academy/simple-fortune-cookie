@@ -68,7 +68,7 @@ jobs:
         path: .
   test_frontend:
     name: Test frontend
-    needs: Build-frontend
+    needs: build_frontend
     runs-on: "ubuntu-${{ env.UBUNTU_VERSION }}"
     steps:
     - name: Download code
@@ -86,7 +86,7 @@ jobs:
         path: .
   test_backend:
     name: Test backend
-    needs: Build-backend
+    needs: build_backend
     runs-on: "ubuntu-${{ env.UBUNTU_VERSION }}"
     steps:
     - name: Download code
