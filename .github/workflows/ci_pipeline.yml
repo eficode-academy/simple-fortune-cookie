@@ -1,0 +1,28 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, reopened]
+    branches:
+      - main
+env:
+  UBUNTU_VERSION: "22.04"
+jobs:
+  clone_down:
+    name: Clone down repo
+    runs-on: "ubuntu-${{ UBUNTU_VERSION }}"
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Upload frontend
+      uses: actions/upload-repo@v2
+      with:
+        name: frontend
+        path: ./frontend
+    - name: Upload backend
+      uses: actions/upload-repo@v2
+      with:
+        name: backend
+        path: ./backend
