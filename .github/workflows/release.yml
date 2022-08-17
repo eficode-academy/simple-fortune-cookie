@@ -1,0 +1,42 @@
+name: Release CD
+
+on:
+  release:
+    branches:
+      - main
+  push:
+    branches:
+      - 5-push-container-to-gh-packages
+
+jobs:
+  build_image_backend:
+    name: Build backend image
+    runs-on: ubuntu-22.04
+    #if: github.ref == 'refs/heads/main'
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Build and push backend image
+      uses: VaultVulp/gp-docker-action@1.2.0
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        image-name: backend
+        build-context: ./backend
+
+  build_image_frontend:
+    name: Build frontend image
+    runs-on: ubuntu-22.04
+    #if: github.ref == 'refs/heads/main'
+    steps:
+    - name: Download frontend
+      uses: actions/download-artifact@v2
+      with:
+        name: frontend
+        path: .
+    - name: Build and push frontend image
+      uses: VaultVulp/gp-docker-action@1.2.0
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        image-name: frontend
+
+  
