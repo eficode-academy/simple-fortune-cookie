@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+
+  frontend_container:
+    image: frontend-cookie
+    ports:
+      - 8080:8080
+    depends_on:
+      - backend
+
+  backend:
+    image: backend-cookie  
