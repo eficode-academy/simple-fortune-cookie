@@ -46,3 +46,23 @@ jobs:
       with:
         name: frontend
         path: .
+  build_backend:
+    name: Build backend
+    needs: Clone-down
+    runs-on: "ubuntu-${{ UBUNTU_VERSION }}"
+    steps:
+    - name: Download backend
+      uses: actions/download-artifact@v2
+      with:
+        name: backend
+        path: .
+    - name: Build backend
+      run: |
+        git mod tidy &&
+        git mod download
+        git build
+    - name: Upload backend build
+      uses: actions/upload-artifact@v2
+      with:
+        name: backend
+        path: .
