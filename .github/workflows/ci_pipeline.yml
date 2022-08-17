@@ -28,7 +28,7 @@ jobs:
         path: ./backend
   build_frontend:
     name: Build frontend
-    needs: Clone-down
+    needs: clone_down
     runs-on: "ubuntu-${{ env.UBUNTU_VERSION }}"
     steps:
     - name: Download frontend
@@ -48,7 +48,7 @@ jobs:
         path: .
   build_backend:
     name: Build backend
-    needs: Clone-down
+    needs: clone_down
     runs-on: "ubuntu-${{ env.UBUNTU_VERSION }}"
     steps:
     - name: Download backend
