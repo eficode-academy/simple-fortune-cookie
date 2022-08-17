@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-22.04
     #if: github.ref == 'refs/heads/main'
     steps:
-    - name: Checkout Backend
+    - name: Checkout
       uses: actions/checkout@v2
       with:
         path: backend
@@ -38,15 +38,14 @@ jobs:
       with:
         push: true
         tags: ${{ env.REGISTRY }}/${{ steps.image_name.outputs.lowercase }}:${{ github.ref_name }}
+        context: backend
 
   build_image_frontend:
     name: Build frontend image
     runs-on: ubuntu-22.04
     steps:
-    - name: Checkout Frontend
+    - name: Checkout
       uses: actions/checkout@v2
-      with:
-        path: frontend
     - name: Login to Container Registry
       uses: docker/login-action@v2
       with:
@@ -63,4 +62,5 @@ jobs:
       with:
         push: true
         tags: ${{ env.REGISTRY }}/${{ steps.image_name.outputs.lowercase }}:${{ github.ref_name }}
+        context: frontend
   
