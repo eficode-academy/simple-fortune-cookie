@@ -13,7 +13,6 @@ jobs:
   build_image_backend:
     name: Build backend image
     runs-on: ubuntu-22.04
-    needs: prepare
     #if: github.ref == 'refs/heads/main'
     steps:
     - name: Checkout backend
