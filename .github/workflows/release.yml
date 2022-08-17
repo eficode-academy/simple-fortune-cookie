@@ -9,14 +9,6 @@ on:
       - 5-push-container-to-gh-packages
 
 jobs:
-  prepare:
-    uses: ./.github/workflows/partial-docker.yml
-    secrets:
-      registry_username: ${{ github.actor }}
-      registry_password: ${{ secrets.GITHUB_TOKEN }}
-    with:
-      registry: ghcr.io
-      image_name: ${{ github.repository }}/backend
 
   build_image_backend:
     name: Build backend image
@@ -28,11 +20,19 @@ jobs:
       uses: actions/checkout@v2
       with:
         path: 'backend'
+    - name: Setup Docker
+      id: setup-docker
+      uses: ./.github/workflows/partial-docker
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        image_name: ${{ github.repository }}/backend
     - name: Build and Publish
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: ${{ needs.prepare.outputs.image_name }}:${{ github.ref_name }}
+        tags: ${{ steps.setup-docker.outputs.image_name }}:${{ github.ref_name }}
 
   build_image_frontend:
     name: Build frontend image
