@@ -16,9 +16,6 @@ jobs:
   build_image_backend:
     name: Build backend image
     runs-on: ubuntu-22.04
-    permissions:
-      contents: read
-      packages: write
     #if: github.ref == 'refs/heads/main'
     steps:
     - name: Checkout
@@ -33,12 +30,12 @@ jobs:
       uses: ASzc/change-string-case-action@v2
       id: image_name
       with:
-        string: ${{ env.PACKAGE_NAME }}-backend
+        string: ${{ env.PACKAGE_NAME }}/backend
     - name: Build and Publish
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: ghcr.io/${{ steps.image_name.outputs.lowercase }}:latest
+        tags: ${{ env.REGISTRY }}/${{ steps.image_name.outputs.lowercase }}:${{ github.ref_name }}
         context: backend
 
   build_image_frontend:
