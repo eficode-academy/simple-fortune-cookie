@@ -8,10 +8,6 @@ on:
     branches:
       - 5-push-container-to-gh-packages
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_PREFIX: ${{ github.repository }}
-
 jobs:
   prepare:
     uses: ./.github/workflows/partial-docker.yml
@@ -19,8 +15,8 @@ jobs:
       registry_username: ${{ github.actor }}
       registry_password: ${{ secrets.GITHUB_TOKEN }}
     with:
-      registry: ${{ env.REGISTRY }}
-      image_name: ${{ env.IMAGE_PREFIX }}/backend
+      registry: ghcr.io
+      image_name: ${{ github.repository }}/backend
 
   build_image_backend:
     name: Build backend image
