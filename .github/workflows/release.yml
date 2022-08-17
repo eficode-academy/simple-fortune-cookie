@@ -33,7 +33,7 @@ jobs:
       uses: ASzc/change-string-case-action@v2
       id: image_name
       with:
-        string: ${{ env.PACKAGE_NAME }}/backend
+        string: ${{ env.PACKAGE_NAME }}-backend
     - name: Build and Publish
       uses: docker/build-push-action@v3
       with:
