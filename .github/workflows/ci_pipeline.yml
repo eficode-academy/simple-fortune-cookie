@@ -112,7 +112,7 @@ jobs:
       - test_frontend
     name: Build backend image
     runs-on: ubuntu-22.04
-    if: github.ref == 'refs/heads/main'
+    #if: github.ref == 'refs/heads/main'
     steps:
     - name: Download backend
       uses: actions/download-artifact@v2
@@ -131,7 +131,7 @@ jobs:
       - test_frontend
     name: Build frontend image
     runs-on: ubuntu-22.04
-    if: github.ref == 'refs/heads/main'
+    #if: github.ref == 'refs/heads/main'
     steps:
     - name: Download frontend
       uses: actions/download-artifact@v2
