@@ -14,10 +14,11 @@ env:
 
 jobs:
   prepare:
-    uses: amatzen/SE05-CD-SimpleFortuneCookie/.github/workflows/partial-docker.yml@5-push-container-to-gh-packages
-    with:
+    uses: ./.github/workflows/partial-docker.yml
+    secrets:
       registry_username: ${{ github.actor }}
       registry_password: ${{ secrets.GITHUB_TOKEN }}
+    with:
       registry: ${{ env.REGISTRY }}
       image_name: ${{ env.IMAGE_PREFIX }}/backend
 
