@@ -3,3 +3,6 @@ backend/backend
 
 # frontend binary
 frontend/frontend
+
+# auto generated file
+go.sum
