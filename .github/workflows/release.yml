@@ -13,32 +13,29 @@ env:
   IMAGE_PREFIX: ${{ github.repository }}
 
 jobs:
+  prepare:
+    uses: amatzen/SE05-CD-SimpleFortuneCookie/.github/workflows/partial-docker.yml@main
+    with:
+      registry_username: ${{ github.actor }}
+      registry_password: ${{ secrets.GITHUB_TOKEN }}
+      registry: ${{ env.REGISTRY }}
+      image_name: ${{ env.IMAGE_PREFIX }}/backend
+
   build_image_backend:
     name: Build backend image
     runs-on: ubuntu-22.04
+    needs: prepare
     #if: github.ref == 'refs/heads/main'
     steps:
     - name: Checkout backend
       uses: actions/checkout@v2
       with:
         path: 'backend'
-    - name: Setup Docker
-      uses: amatzen/SE05-CD-SimpleFortuneCookie/.github/workflows/partial-docker.yml@main
-      id: setup-step
-      with:
-        registry_username: ${{ github.actor }}
-        registry_password: ${{ secrets.GITHUB_TOKEN }}
-        registry: ${{ env.REGISTRY }}
-        image_name: ${{ env.IMAGE_PREFIX }}/backend
-    - id: string
-      uses: ASzc/change-string-case-action@v2
-      with:
-        string: XyZzY
     - name: Build and Publish
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: ${{ steps.setup-step.outputs.image_name }}:${{ github.ref_name }}
+        tags: ${{ needs.prepare.outputs.image_name }}:${{ github.ref_name }}
 
   build_image_frontend:
     name: Build frontend image
