@@ -12,6 +12,9 @@ env:
   REGISTRY: ghcr.io
   PACKAGE_NAME: ${{ github.repository }}
 
+permissions:
+  packages: write
+
 jobs:
   build_image_backend:
     name: Build backend image
