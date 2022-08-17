@@ -15,10 +15,8 @@ jobs:
     runs-on: ubuntu-22.04
     #if: github.ref == 'refs/heads/main'
     steps:
-    - name: Checkout backend
+    - name: Checkout
       uses: actions/checkout@v2
-      with:
-        path: 'backend'
     - name: Setup Docker
       id: setup-docker
       uses: ./.github/workflows/partial-docker
@@ -32,6 +30,7 @@ jobs:
       with:
         push: true
         tags: ${{ steps.setup-docker.outputs.image_name }}:${{ github.ref_name }}
+        context: backend
 
   build_image_frontend:
     name: Build frontend image
