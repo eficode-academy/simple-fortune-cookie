@@ -84,3 +84,21 @@ jobs:
       with:
         name: frontend
         path: .
+  test_backend:
+    name: Test backend
+    needs: Build-backend
+    runs-on: "ubuntu-${{ UBUNTU_VERSION }}"
+    steps:
+    - name: Download code
+      uses: actions/download-artifact@v2
+      with:
+        name: backend
+        path: . 
+    - name: Test backend
+      run: |
+        go test
+    - name: Upload backend test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: backend
+        path: .
