@@ -4,11 +4,10 @@ COPY ./ /app
 WORKDIR /app
 
 RUN go mod download
-RUN go build
+RUN go build -o app
 
 FROM golang:1.19.0-alpine
 COPY --from=build /app /app
 WORKDIR /app
 
-ENTRYPOINT ["go", "run"]
-CMD ["main.go"]
+ENTRYPOINT ["./app"]
