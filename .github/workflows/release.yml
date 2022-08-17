@@ -8,20 +8,31 @@ on:
     branches:
       - 5-push-container-to-gh-packages
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_PREFIX: ${{ github.repository }}
+
 jobs:
   build_image_backend:
     name: Build backend image
     runs-on: ubuntu-22.04
     #if: github.ref == 'refs/heads/main'
     steps:
-    - name: Checkout repo
+    - name: Checkout backend
       uses: actions/checkout@v2
-    - name: Build and push backend image
-      uses: VaultVulp/gp-docker-action@1.2.0
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        image-name: backend
-        build-context: ./backend
+        path: 'backend'
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build and Publish
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: ${{ env.IMAGE_PREFIX }}/backend:${{ github.ref }}
 
   build_image_frontend:
     name: Build frontend image
@@ -30,11 +41,16 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
-    - name: Build and push frontend image
-      uses: VaultVulp/gp-docker-action@1.2.0
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v2
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        image-name: frontend
-        build-context: ./frontend
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build and Publish
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: ${{ env.IMAGE_PREFIX }}/frontend:${{ github.ref }}
 
   
