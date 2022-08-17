@@ -38,9 +38,9 @@ jobs:
         path: .
     - name: Build frontend
       run: |
-        git mod tidy &&
-        git mod download
-        git build
+        go mod tidy &&
+        go mod download &&
+        go build
     - name: Upload frontend build
       uses: actions/upload-artifact@v2
       with:
@@ -59,9 +59,9 @@ jobs:
         path: .
     - name: Build backend
       run: |
-        git mod tidy &&
-        git mod download
-        git build
+        go mod tidy &&
+        go mod download &&
+        go build
     - name: Upload backend build
       uses: actions/upload-artifact@v2
       with:
