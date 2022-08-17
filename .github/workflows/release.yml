@@ -38,7 +38,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: ${{ steps.image_name.outputs.lowercase }}:latest
+        tags: ghcr.io/${{ steps.image_name.outputs.lowercase }}:latest
         context: backend
 
   build_image_frontend:
