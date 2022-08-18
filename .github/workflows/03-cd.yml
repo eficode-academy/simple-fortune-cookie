@@ -7,15 +7,17 @@ jobs:
     steps: 
     - name: Clone repository
       uses: actions/checkout@v2
+    - name: Upload repository
+      uses: actions/upload-artifact@v2
       with:
         name: repository
         path: .
   run-application:
-    needs: clone-repository
+    needs: [clone-repository]
     runs-on: self-hosted
     container: golang:latest
     steps:
-      - name: Download repostiry
+      - name: Download repository
         uses: actions/download-artifact@v2
         with:
           name: repository
