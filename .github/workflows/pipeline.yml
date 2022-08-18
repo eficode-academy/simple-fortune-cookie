@@ -1,12 +1,12 @@
 name: Fortune Cookie CI/CD Pipeline
 on: push
-  #push:
-  #  branches:
-  #    - main
-  #    - feature/*
-  #  pull_request:
-  #    branches:
-  #      - main
+  push:
+    branches:
+      - main
+      - feature/*
+    pull_request:
+      branches:
+        - main
 env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
