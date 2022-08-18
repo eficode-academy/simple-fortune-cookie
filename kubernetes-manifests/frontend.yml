@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sfc-frontend
+  labels:
+    app: sfc-frontend
+spec:
+  selector:
+    matchLabels:
+      app: sfc-frontend
+  template:
+    metadata:
+      labels:
+        app: sfc-frontend
+    spec:
+      containers:
+      - name: sfc-frontend
+        env:
+          - name: BACKEND_DNS
+            value: fortune-backend
+        image: ghcr.io/amatzen/se05-cd-simplefortunecookie/frontend:FRONTEND_VERSION
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+          name: sfc-frontend
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sfc-frontend
+  labels:
+    app: sfc-frontend
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: sfc-frontend

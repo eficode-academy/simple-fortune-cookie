@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fortune-backend
+  labels:
+    app: fortune-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fortune-backend
+  template:
+    metadata:
+      labels:
+        app: fortune-backend
+    spec:
+      containers:
+      - name: fortune-backend
+        env:
+          - name: REDIS_DNS
+            value: redis
+        image: ghcr.io/amatzen/se05-cd-simplefortunecookie/backend:BACKEND_VERSION
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 9000
+          name: fortune-backend
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fortune-backend
+  labels:
+    app: fortune-backend
+spec:
+  type: ClusterIP
+  ports:
+  - port: 9000
+    targetPort: 9000
+  selector:
+    app: fortune-backend
