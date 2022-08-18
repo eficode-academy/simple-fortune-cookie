@@ -12,17 +12,23 @@ services:
   go-frontend:
     container_name: go-frontend
     build:
-      context: .
-      dockerfile: ../frontend/dockerfile_go-frontend
+      context: ./frontend/
     depends_on:
       - redis-db
+      - go-backend
+
+  go-backend:
+    container_name: go-backend
+    build:
+      context: ./backend/
+    depends_on:
+      - redis-db
+    networks:
+      - dbbridge
 
   redis-db:
     container_name: redis-db
-    # TODO configure mysql
-    build:
-      context: .
-      dockerfile: ../backend/dockerfile_go-backend
+    image: redis:latest
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
