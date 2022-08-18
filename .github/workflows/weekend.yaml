@@ -24,4 +24,4 @@ jobs:
           name: code
           path: .
       - name: Execute frontend test
-        run: go test
+        run: cd frontend && go test
