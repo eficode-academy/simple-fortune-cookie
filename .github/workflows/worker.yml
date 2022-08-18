@@ -22,6 +22,8 @@ jobs:
           path: .
   BuildFrontEnd:
     runs-on: ubuntu-latest
-      needs: GetGo
-      - run: pwd
+    needs: [GetGo]
+      steps:
+      - name: get Path:
+        run: pwd
 
