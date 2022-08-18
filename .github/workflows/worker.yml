@@ -27,8 +27,8 @@ jobs:
     steps:
       - name: get Path
         run: pwd
-      - name: Check if File Exits
-        run: go build frontend/
+      #- name: Check if File Exits
+      #  run: go build ./frontend/
       - name: go run
         run: go run ..
 
