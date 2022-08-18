@@ -30,7 +30,7 @@ jobs:
       - name: get sub-Folders
         run: ls
       - name: go build
-        run: go build ../frontend/go.mod
+        run: go build -o ../frontend/go.mod
       - name: go run
         run: go run ..
 
