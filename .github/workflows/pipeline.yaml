@@ -4,8 +4,11 @@ on:
     branches:
       - "automation"
       - "cd"
+      - "main"
   pull_request:
     branches:
+      - "automation"
+      - "cd"
       - "main"
 jobs:
   my-job:
