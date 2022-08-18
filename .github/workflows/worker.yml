@@ -26,15 +26,9 @@ jobs:
     needs: GetGo
     steps:
       - uses: actions/checkout@v2
-      - name: get Path
-        working-directory: ./app
-        run: ls
-      - name: TELL ME WHYY!!
-        run: cd frontend
-      - name: AIN'T
-        run: ls
       #- name: Check if File Exits
       #  run: go build ./frontend/
       - name: go run
+        working-directory: ./app
         run: go run main.go
 
