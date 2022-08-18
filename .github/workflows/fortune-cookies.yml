@@ -15,7 +15,6 @@ jobs:
   Clone-down:
       name: Clone down repo
       runs-on: ubuntu-latest
-      container: gradle:6-jdk11
       steps:
       - uses: actions/checkout@v1
       - name: Upload Repo
