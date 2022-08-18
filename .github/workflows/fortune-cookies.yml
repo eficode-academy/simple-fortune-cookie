@@ -17,6 +17,7 @@ jobs:
 
   Frontend-test:
     runs-on: ubuntu-latest
+    container: go:latest
     needs: [Clone-down]
     steps:
     - name: Download code
