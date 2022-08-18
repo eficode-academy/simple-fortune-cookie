@@ -33,6 +33,12 @@ jobs:
         with:
           name: Build
           path: .
-      - name: Run Build
+  RunFrontEnd:
+    runs-on: ubuntu-latest
+    needs: BuildFrontEnd
+    steps:
+      - uses: actions/download-artifact@v3
+      - name: Run Go
         run: go run
+
 
