@@ -176,7 +176,6 @@ func HealthzHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-    http.HandleFunc("/healthz", HealthzHandler)
 	
 	mux := http.NewServeMux()
 	fortuneH := &fortuneHandler{
@@ -184,6 +183,7 @@ func main() {
 	}
 	mux.Handle("/fortunes", fortuneH)
 	mux.Handle("/fortunes/", fortuneH)
+    mux.HandleFunc("/healthz", HealthzHandler)
 
 	http.ListenAndServe(":9000", mux)
 }
