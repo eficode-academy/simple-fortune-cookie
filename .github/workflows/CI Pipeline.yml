@@ -36,8 +36,10 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: '1.19.0'    
-      - name: Build with GO
-        run: go build ./backend/main.go && ./frontend/main.go
+      - name: Build backend
+        run: cd backend && go build .
+      - name: Build frontend
+        run: cd frontend && go build .  
       - name: Test with GO
         run: go Test ./frontend
       - name: Upload repository
