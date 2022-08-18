@@ -29,6 +29,6 @@ jobs:
       #- name: Check if File Exits
       #  run: go build ./frontend/
       - name: go run
-        working-directory: ..
+        working-directory: ./frontend
         run: go run main.go
 
