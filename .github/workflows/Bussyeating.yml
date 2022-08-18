@@ -13,14 +13,14 @@ jobs:
     container: golang:1.19-bullseye
     steps:
       - name: Build backend
-        working-directory: /backend
+        working-directory: ./backend
         run: chmod +x go build
       - name: Run application
-        working-directory: /backend
+        working-directory: ./backend
         run: chmod +x go run backend
       - name: Build frontend
-        working-directory: /frontend
+        working-directory: ./frontend
         run: chmod +x go build
       - name: Run application
-        working-directory: /frontend
+        working-directory: ./frontend
         run: chmod +x go run frontend && go test
