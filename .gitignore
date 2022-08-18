@@ -3,3 +3,5 @@ backend/backend
 
 # frontend binary
 frontend/frontend
+
+actions-runner
