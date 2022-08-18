@@ -7,7 +7,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Go
       - name: Install dependencies
         run: apt-get update && apt-get install golang-go && go mod download github.com/gomodule/redigo
       - name: Build
