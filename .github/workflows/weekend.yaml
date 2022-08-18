@@ -5,4 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Execute frontend test
-        run: chmod +x frontend/main_test.go && frontend/main_test.go
+        run: go test
