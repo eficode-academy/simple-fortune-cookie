@@ -10,13 +10,13 @@ jobs:
   Auto_test:
     name: Run automatic test
     runs-on: ubuntu-latest
-    container: golang:latest
+    container: golang:1.19-bullseye
     steps:
       - name: Build backend
-        run: chmod +x cd /backend && go build
+        run: chmod +x cd backend && go build
       - name: Run application
-        run: chmod +x cd /backend && go run backend
+        run: chmod +x cd backend && go run backend
       - name: Build frontend
-        run: chmod +x cd /frontend && go build
+        run: chmod +x cd frontend && go build
       - name: Run application
-        run: chmod +x cd /frontend && go run frontend && go test
+        run: chmod +x cd frontend && go run frontend && go test
