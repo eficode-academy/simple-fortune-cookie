@@ -169,7 +169,14 @@ func notFound(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("not found"))
 }
 
+func HealthzHandler(w http.ResponseWriter, r *http.Request) {
+    w.WriteHeader(http.StatusOK)
+    io.WriteString(w, "healthy")
+}
+
 func main() {
+    http.HandleFunc("/healthz", HealthzHandler)
+
 	mux := http.NewServeMux()
 	fortuneH := &fortuneHandler{
 		store: &datastoreDefault,
