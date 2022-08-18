@@ -1,5 +1,6 @@
 name: Dev Build Test CI
 on: 
+  workflow_dispatch:
   pull-request:
     branches: main
 env: # Set the secret as an input
