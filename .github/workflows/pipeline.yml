@@ -1,0 +1,40 @@
+name: Fortune Cookie CI/CD Pipeline
+on:
+  push:
+    branches:
+      - main
+      - feature/*
+    pull_request:
+      branches:
+        - main
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+  GIT_COMMIT: ${{ github.sha }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: golang:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        run: chmod +x ci/build.sh && ci/build.sh
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
+  test:
+    runs-on: ubuntu-latest
+    container: golang:latest
+    needs:
+      - build
+    steps:
+       - name: Download Artifact
+         uses: actions/download-artifact@v2
+         with:
+           name: code
+           path: .
+       - name: Test
+         run: chmod +x ci/test.sh && ci/test.sh
