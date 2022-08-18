@@ -30,7 +30,7 @@ jobs:
         run: cd backend && go mod download
       - name: Build backend
         run: cd backend && go get backend && go build 
-  Build-test-backend:
+  Build-test-frontend:
     runs-on: ubuntu-20.04
     needs: Clone-down
     container: golang:1.19.0
