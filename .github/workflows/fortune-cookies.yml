@@ -25,3 +25,4 @@ jobs:
         path: .
     - name: Execute go test
       run: chmod +x frontend/main_test.go && frontend/main_test.go.sh
+      
