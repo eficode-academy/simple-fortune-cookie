@@ -14,7 +14,7 @@ jobs:
   Build:
       needs: Clone-down
       runs-on: ubuntu-latest
-      container: golang:1.19.0.alpine
+      container: golang:latest
       steps:
         - name: Download Repo
           uses: actions/download-artifact@v2
