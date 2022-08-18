@@ -10,7 +10,7 @@ jobs:
   Auto_test:
     name: Run automatic test
     runs-on: ubuntu-latest
-    container: golang:1.19-bullseye
+    #container: golang:1.19-bullseye
     steps:
       - name: Build backend
         working-directory: ./backend
