@@ -4,12 +4,17 @@ on:
     branches:
       - "automation"
       - "cd"
+  pull_request:
+    branches:
+    - "main"
 jobs:
   my-job:
     runs-on: ubuntu-latest
     steps:
       - name: my-step
         run: echo "Hello World!"
+  test:
+    runs-on: ubuntu-latest
       - name: frontend-test
         run: go build -v frontend/main_test.go
   Run-npm-on-Ubuntu:
