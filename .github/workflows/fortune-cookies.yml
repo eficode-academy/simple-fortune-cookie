@@ -16,8 +16,7 @@ jobs:
           path: .
 
   Frontend-test:
-    runs-on: ubuntu-latest
-    container: golang:latest
+    runs-on: golang:latest
     needs: [Clone-down]
     steps:
     - name: Download code
