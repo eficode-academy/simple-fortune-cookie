@@ -1,6 +1,8 @@
 name: Go
 on: [push]
-
+env:
+  docker_username: ${{ secrets.USERNAME }}
+  docker_password: ${{ secrets.PASSWORD }}
 jobs:
   build:
     runs-on: ubuntu-latest
