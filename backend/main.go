@@ -52,6 +52,8 @@ func (h *fortuneHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	case r.Method == http.MethodPost && createFortuneRe.MatchString(r.URL.Path):
 		h.Create(w, r)
 		return
+	case r.Method == http.MethodDelete && getFortuneRe.MatchString(r.URL.Path):
+		h.Delete(w, r)
 	default:
 		notFound(w, r)
 		return
