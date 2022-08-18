@@ -41,6 +41,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run Go
         working-directory: frontend
-        run: go run main_test.go
+        run: go test .
 
 
