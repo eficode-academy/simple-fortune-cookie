@@ -18,4 +18,4 @@ spec:
       - name: frontend
         image: <insert-image-here>
         ports:
-        - containerPort: 80
+        - containerPort: 8080
