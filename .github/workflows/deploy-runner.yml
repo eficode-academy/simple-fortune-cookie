@@ -4,6 +4,17 @@ on:
     branches:
       - main
 jobs:
+  Clone: 
+    name: Clone repo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v2
+      - name: Upload repo for other jobs
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
   Docker:
     name: Docker app
     runs-on: ubuntu-latest
