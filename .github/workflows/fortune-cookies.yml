@@ -8,13 +8,13 @@ on:
 jobs:
   Clone-down:
   runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Upload Repo
-        uses: actions/upload-artifact@v2
-        with:
-          name: code
-          path: .
+  steps:
+    - uses: actions/checkout@v2
+    - name: Upload Repo
+      uses: actions/upload-artifact@v2
+      with:
+        name: code
+        path: .
 
   test:
     runs-on: self-hosted
