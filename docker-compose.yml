@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    ports: 
+      - 9000:9000
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports: 
+      - 8080:8080
+    depends_on:
+     - backend
