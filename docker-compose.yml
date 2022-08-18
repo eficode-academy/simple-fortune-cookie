@@ -7,6 +7,13 @@ services:
       dockerfile: Dockerfile
     ports: 
       - 9000:9000
+    environment:
+      - REDIS_DNS=redis
+    depends_on:
+      - redis
+    networks:
+      - backend
+      - frontAndBacck
 
   frontend:
     build:
@@ -18,3 +25,22 @@ services:
       - 8080:8080
     depends_on:
      - backend
+    networks:
+      - frontAndBacck
+
+  redis:
+    image: "redis" # Use a public Redis image to build the redis service    
+    restart: unless-stopped
+    ports: 
+      - 6379:6379
+    networks:
+      - backend
+    volumes:
+      - ./redis_data:/data
+
+networks:
+  backend:
+  frontAndBacck:
+
+volumes:
+  redis_data:
