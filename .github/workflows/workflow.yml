@@ -3,7 +3,7 @@ name: ci
 on:
   push:
     branches:
-      - 'main'
+      - 'Nadia'
 
 jobs:
   docker:
@@ -42,7 +42,6 @@ jobs:
         name: test-step
         run: go test backend
 
-  
   frontend:
       runs-on: ubuntu-latest
       steps:
