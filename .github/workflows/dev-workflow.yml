@@ -1,0 +1,55 @@
+name: Dev CI
+on:
+  push:
+    branches:
+      - "dev/**"
+env:
+  GIT_COMMIT: ${{ github.sha }}
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+jobs:
+  Clone-down:
+    runs-on: ubuntu-latest
+    container: golang:latest
+    steps:
+      - name: Clone-down
+        uses: actions/checkout@v2
+      - name: Upload Repo
+        uses: actions/upload-artifact@v2
+        with: 
+          name: code
+          path: .
+  Build:
+    runs-on: ubuntu-latest
+    needs: Clone-down
+    container: golang:latest
+    steps:
+      - name: Download Repo
+        uses: actions/download-artifact@v2
+        with: 
+          name: code
+          path: .
+      #- run: chmod +x ci/build-app.sh && ci/build-app.sh
+      #  name: Build-app
+      #- name: Upload Repo
+      #  uses: actions/upload-artifact@v2
+      #  with: 
+      #    name: code
+      #    path: .
+      #- name: Upload jar
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: build
+      #    path: app/build/libs/app-0.1-all.jar
+  Test:
+    runs-on: ubuntu-latest
+    needs: Build
+    container: golang:latest
+    steps:
+      - name: Download Repo
+        uses: actions/download-artifact@v2
+        with: 
+          name: code
+          path: .
+      - run: chmod +x ci/go-test.sh && ci/go-test.sh
+        name: Go-test
