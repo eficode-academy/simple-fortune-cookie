@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/compare/v1.2.0...v1.2.1) (2022-08-18)
+
+
+### Bug Fixes
+
+* **app:** fix different answers ([f830c86](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/commit/f830c8624a09b8da56bfff933f8668fc02bd435f))
+
 ## [1.2.0](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/compare/v1.1.2...v1.2.0) (2022-08-18)
 
 
