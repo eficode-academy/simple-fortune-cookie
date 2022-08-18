@@ -32,6 +32,6 @@ jobs:
       run: cd frontend/ && go build  
       
     - name: Run testing
-      run: cd frontend/ && go test 
+      run: cd frontend/ && go test
     
     
