@@ -95,4 +95,4 @@ jobs:
         with:
           namespace: 'student9'
           manifests: |
-              ../../ci/kubernetes-setup.yaml
+              ci
