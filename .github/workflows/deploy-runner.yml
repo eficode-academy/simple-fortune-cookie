@@ -56,4 +56,4 @@ jobs:
           name: code
           path: .
       - name: Run Docker compose
-        run: docker-compose -f go-compose.yml up
+        run: docker-compose -f go-compose.yml up -d
