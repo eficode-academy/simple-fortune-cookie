@@ -16,6 +16,12 @@ spec:
     spec:
       containers:
       - name: backend
-        image: backend:latest
+        image: lomztein/fortune_cookie_be:latest
         ports:
         - containerPort: 9000
+        env:
+        - name: REDIS_DNS
+          valueFrom:
+            configMapKeyRef:
+              name: backend-configmap
+              key: REDIS_DNS

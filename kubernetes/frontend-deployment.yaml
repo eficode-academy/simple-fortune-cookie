@@ -16,6 +16,17 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: frontend:latest
+        image: lomztein/fortune_cookie_fe:latest
         ports:
         - containerPort: 8080
+        env:
+        - name: BACKEND_DNS
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-configmap
+              key: BACKEND_DNS
+        - name: BACKEND_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-configmap
+              key: BACKEND_PORT
