@@ -5,9 +5,6 @@ on:
     workflows: ["Release CD"]
     types:
       - completed
-  push:
-    branches:
-      - 29-make-a-kubernetes-manifest-file
 
 jobs:
   setup_repo:

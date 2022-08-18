@@ -6,7 +6,7 @@ on:
       - main
   push:
     branches:
-      - 5-push-container-to-gh-packages
+      - 29-make-a-kubernetes-manifest-file 
 
 env:
   REGISTRY: ghcr.io
