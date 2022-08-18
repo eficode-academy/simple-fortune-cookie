@@ -39,6 +39,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
       - name: Run Go
+        working-directory: frontend
         run: go run main.go
 
 
