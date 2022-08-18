@@ -10,7 +10,22 @@ on:
       - "automation"
       - "cd"
       - "main"
+env: # Set the secret as an input
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+  GIT_COMMIT: ${{ github.sha }}
 jobs:
+  Clone-down:
+      name: Clone down repo
+      runs-on: ubuntu-latest
+      container: gradle:6-jdk11
+      steps:
+      - uses: actions/checkout@v2
+      - name: Upload Repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
   my-job:
     runs-on: self-hosted
     steps:
@@ -19,10 +34,19 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
           go-version: 1.16
       - name: frontend-test
         run: go build -v frontend/main_test.go
+  Performance-Test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download code
+      uses: actions/download-artifact@v1
+      with:
+        name: code
+        path: .
+    - name: Execute performance test
+      run: chmod +x ci/performance-test.sh && ci/performance-test.sh
