@@ -1,0 +1,49 @@
+name: deploy_runner
+on:
+  push:
+    branches:
+      - main
+jobs:
+  Clone:
+    name: Clone-repo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone-repo
+        uses: actions/checkout
+      - name: Upload repo for other jobs
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
+  Docker:
+    name: Docker app
+    runs-on: ubuntu-latest
+    needs: Clone
+    steps:
+      - name: Download repo
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: Setup docker buildx
+        uses: docker/setup-buildx-action@v2
+      - name: login to dockerhub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          #context is path in dockerbuild action
+      - name: Build and push frontend to dockerhub
+        uses: docker/build-push-action@v3
+        with:
+          context: ./frontend/
+          push: true
+          tags: frontend:latest
+      - name: Build and push backend to dockerhub
+        uses: docker/build-push-action@v3
+        with:
+          context: ./backend/
+          push: true
+          tags: frontend:latest
+
+
