@@ -13,6 +13,43 @@ env:
   GIT_COMMIT: ${{ github.sha }}
 jobs:
   Clone-down:
+      name: Clone down repo
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v1
+      - name: Upload Repo
+        uses: actions/upload-artifact@v1
+        with:
+          name: code
+          path: .
+  docker-image-frontend:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download code
+      uses: actions/download-artifact@v1
+      with:
+        name: code
+        path: .
+    - name: build docker
+      run: chmod +x ci/build-docker-frontend.sh && ci/build-docker-frontend.sh
+    - name: push docker
+      run: chmod +x ci/push-docker.sh && ci/push-docker.sh
+  docker-image-backend:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download code
+      uses: actions/download-artifact@v1
+      with:
+        name: code
+        path: .
+    - name: build docker
+      run: chmod +x ci/build-docker-backend.sh && ci/build-docker-backend.sh
+    - name: push docker
+      run: chmod +x ci/push-docker.sh && ci/push-docker.sh
+
+  # The "build" workflow
+  test-cloud:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,7 +58,7 @@ jobs:
         with:
           name: code
           path: .
-  test:
+  test-local:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
