@@ -1,11 +1,12 @@
 # Build
 FROM golang:1.19-alpine as builder
 ADD . /src/
+ENV CGO_ENABLED=0
+ENV GOOS=linux
 RUN cd /src/frontend && go build -o frontend
 
 # Run
-FROM alpine:3.16
-COPY --from=builder /src/frontend/frontend /app/
-ADD ./frontend /app/
-WORKDIR /app
-ENTRYPOINT ["./frontend"]
+FROM scratch
+COPY --from=builder /src/frontend/frontend /
+ADD ./frontend /
+ENTRYPOINT ["/frontend"]
