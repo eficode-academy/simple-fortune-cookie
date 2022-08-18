@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - Build-Go
   pull_request:
     branches:
       - main
