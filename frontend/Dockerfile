@@ -2,7 +2,7 @@ FROM golang:1.16-alpine
 
 WORKDIR /app
 
-COPY frontend/frontend .
+COPY ./frontend .
 
 EXPOSE 8080
 
