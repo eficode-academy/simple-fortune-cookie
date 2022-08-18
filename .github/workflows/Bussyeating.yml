@@ -24,10 +24,10 @@ jobs:
           go get -u golang.org/x/lint/golint
       - name: Build backend
         working-directory: ./backend
-        run: chmod +x go build
+        run: go build
       - name: Run application
         working-directory: ./backend
-        run: chmod +x go run backend
+        run: go run backend
       - name: Install dependencies for frontend
         working-directory: ./frontend
         run: |
@@ -35,7 +35,7 @@ jobs:
           go get -u golang.org/x/lint/golint
       - name: Build frontend
         working-directory: ./frontend
-        run: chmod +x go build
+        run: go build
       - name: Run application
         working-directory: ./frontend
-        run: chmod +x go run frontend && go test
+        run: go run frontend && go test
