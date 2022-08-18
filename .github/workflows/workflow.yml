@@ -25,14 +25,14 @@ jobs:
         name: Build and push backend
         uses: docker/build-push-action@v3
         with:
-          context: simple-fortune-cookie/backend
+          context: ../simple-fortune-cookie/backend
           push: true
           tags: user/app:latest
       -
         name: Build and push frontend
         uses: docker/build-push-action@v3
         with:
-          context: simple-fortune-cookie/frontend
+          context: ../simple-fortune-cookie/frontend
           push: true
           tags: user/app:latest
   
