@@ -1,4 +1,4 @@
-name: hello-world
+name: hello-world-1
 on:
   push:
     branches:
@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: my-step
         run: echo "Hello World!"
-  test:
+  Test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
