@@ -2,7 +2,9 @@ name: Release CD
 
 on:
   release:
-    types: [published, edited]
+    types:
+      - published
+      - edited
 
 env:
   REGISTRY: ghcr.io
