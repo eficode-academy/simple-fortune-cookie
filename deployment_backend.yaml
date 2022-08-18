@@ -16,4 +16,9 @@ spec:
       creationTimestamp: null
       labels:
         app: deployment-backend
+    spec:
+      containers:
+      - image: nanies20/simple-fortune-cookie-backend:latest
+        name: backend
+        resources: {}
 status: {}

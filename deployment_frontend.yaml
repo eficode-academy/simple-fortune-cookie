@@ -20,4 +20,9 @@ spec:
       creationTimestamp: null
       labels:
         app: deployment-frontend
+    spec:
+      containers:
+      - image: nanies20/simple-fortune-cookie-frontend:latest
+        name: frontend
+        resources: {}
 status: {}
