@@ -24,7 +24,7 @@ jobs:
         - name: setup
           run:  export GOPATH=$HOME/work && export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
         - name: Build
-          run:  ls
+          run:  cd backend && go build . && cd ../frontend && go build .
         - name: Test
           run:  cd frontend && go test
         - name: Upload Repo
