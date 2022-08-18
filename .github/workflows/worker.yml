@@ -26,7 +26,7 @@ jobs:
     needs: GetGo
     steps:
       - uses: actions/checkout@v2
-      - name: go run
+      - name: Build go.mod
         working-directory: frontend
         run: go build
       - uses: actions/upload-artifact@v3
@@ -34,6 +34,5 @@ jobs:
           name: Build
           path: .
       - name: Run Build
-        working-directory: frontend
         run: go run
 
