@@ -8,6 +8,6 @@ RUN go mod download
 
 RUN go build 
 
-EXPOSE 6379
+EXPOSE 9000
 
 CMD ["go", "run", "backend"]
