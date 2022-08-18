@@ -11,12 +11,12 @@ on:
       - "cd"
       - "main"
 jobs:
-  my-job:
+  hello-world:
     runs-on: self-hosted
     steps:
       - name: my-step
         run: echo "Hello World!"
-  Test:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
