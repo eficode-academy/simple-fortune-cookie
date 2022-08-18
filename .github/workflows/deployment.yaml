@@ -1,9 +1,10 @@
 name: deployment
-on:
-  push:
-    branches:
-      - "trunk"
-
+on: workflow_dispatch
+  # push:
+  #   branches:
+  #     - "trunk"
+  #   tags:
+  #     - "v*"
 jobs:
   build-and-push-frontend-image:
     runs-on: ubuntu-latest
@@ -76,3 +77,24 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+  deploy-development-environment:
+    if: github.ref == 'refs/heads/trunk'
+    needs: [build-and-push-backend-image, build-and-push-frontend-image]
+    runs-on: [self-hosted, development]
+    steps:
+      - uses: actions/checkout@v3
+      - run: ./ci/development.sh
+  deploy-staging-environment:
+    if: github.event.release.prerelease
+    needs: [build-and-push-backend-image, build-and-push-frontend-image]
+    runs-on: [self-hosted, staging]
+    steps:
+      - uses: actions/checkout@v3
+      - run: ci/staging.sh ${{ github.ref_name }}
+  # deploy-production-environment:
+  #   if: github.event_name == 'release'
+  #   needs: [build-and-push-backend-image, build-and-push-frontend-image]
+  #   runs-on: [self-hosted, production]
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - run: ci/production.sh ${{ github.ref_name }}

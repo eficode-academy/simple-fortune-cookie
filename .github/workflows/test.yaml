@@ -1,12 +1,11 @@
 name: test
-on:
-  pull_request:
-    types: [opened, edited, reopened]
+on: push
 
 jobs:
   test-backend:
     runs-on: ubuntu-22.04
     steps:
+      - run: echo hello world $COMMIT_SHA
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup golang
