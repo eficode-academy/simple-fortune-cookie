@@ -1,4 +1,4 @@
 cd backend
-go run .
+go run . &
 cd ../frontend
-go run .
+go run . &
