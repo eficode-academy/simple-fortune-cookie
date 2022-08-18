@@ -30,3 +30,7 @@ spec:
             configMapKeyRef:
               name: frontend-configmap
               key: BACKEND_PORT
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080

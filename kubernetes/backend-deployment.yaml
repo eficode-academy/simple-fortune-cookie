@@ -25,3 +25,8 @@ spec:
             configMapKeyRef:
               name: backend-configmap
               key: REDIS_DNS
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 9000
+          initialDelaySeconds: 20
