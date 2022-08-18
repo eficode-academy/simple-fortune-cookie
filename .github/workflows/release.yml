@@ -63,3 +63,32 @@ jobs:
         tags: ${{ env.REGISTRY }}/${{ steps.image_name.outputs.lowercase }}:${{ github.ref_name }}
         context: frontend
   
+  setup_repo:
+    name: Setup repo
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Upload frontend
+      uses: actions/upload-artifact@v2
+      with:
+        name: manifests
+        path: ./kubernetes-manifests
+
+  deploy-to-kubernetes:
+    name: Deploy to kubernetes
+    runs-on: self-hosted
+    needs: setup_repo
+    steps:
+    - name: Download manifests
+      uses: actions/download-artifact@v2
+      with:
+        name: manifests
+        path: .
+    - name: Inject release versions
+      run: |
+        sed "s/BACKEND_VERSION/${{ github.ref_name }}/g" backend.yml > backend.yml && 
+        sed "s/FRONTEND_VERSION/${{ github.ref_name }}/g" frontend.yml > frontend.yml
+    - name: Apply manifests
+      run: |
+        kubectl apply -f .
