@@ -51,7 +51,7 @@ jobs:
       - name: Deploy
         run: chmod +x ci/run.sh && ci/run.sh
   upload-to-dockerhub:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs:
       - test
     steps:
@@ -60,7 +60,7 @@ jobs:
         with:
           name: code
           path: .
-      - name: build docker
+      - name: Build Docker
         run: chmod +x ci/build-docker.sh && ci/build-docker.sh
-      - name: push docker
+      - name: Push Docker
         run: chmod +x ci/push-docker.sh && ci/push-docker.sh
