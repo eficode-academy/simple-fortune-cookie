@@ -37,4 +37,4 @@ jobs:
            name: code
            path: .
        - name: Test
-           run: chmod +x ci/test.sh && ci/test.sh
+         run: chmod +x ci/test.sh && ci/test.sh
