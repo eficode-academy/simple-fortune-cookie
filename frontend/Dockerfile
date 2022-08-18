@@ -1,8 +1,10 @@
 # syntax=docker/dockerfile:1
 FROM golang:1.16-alpine
-WORKDIR /backend
+
+
+WORKDIR /frontend
 COPY . .
 
-RUN go build
+RUN go build . 
 
-CMD [ "/backend" ]
+CMD ["go", "run", "."]
