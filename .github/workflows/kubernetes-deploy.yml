@@ -34,8 +34,8 @@ jobs:
         path: .
     - name: Inject release versions
       run: |
-        sed "s/BACKEND_VERSION/${{ github.ref_name }}/g" backend.yml && 
-        sed "s/FRONTEND_VERSION/${{ github.ref_name }}/g" frontend.yml
+        sed "s/BACKEND_VERSION/${{ github.ref_name }}/g" backend.yml > backend.yml && 
+        sed "s/FRONTEND_VERSION/${{ github.ref_name }}/g" frontend.yml > frontend.yml
     - name: Apply manifests
       run: |
         kubectl apply -f .
