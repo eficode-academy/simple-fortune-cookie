@@ -80,9 +80,9 @@ jobs:
         with:
           name: build-backend
           path: app/backend
-      - name: build docker backend
+      - name: Build docker backend
         run: chmod +x ci/build-docker-backend.sh && ci/build-docker-backend.sh
-      - name: build docker frontend
+      - name: Build docker frontend
         run: chmod +x ci/build-docker-frontend.sh && ci/build-docker-frontend.sh
-      - name: push docker
+      - name: Push docker
         run: chmod +x ci/push-docker.sh && ci/push-docker.sh
