@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/compare/v1.1.0...v1.1.1) (2022-08-18)
+
+
+### Bug Fixes
+
+* **delivery:** fixed release pipeline ([cbccba9](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/commit/cbccba9e5183bc4b84a892a34845468553954e16)), closes [#34](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/issues/34)
+
 ## [1.1.0](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/compare/v1.0.0...v1.1.0) (2022-08-18)
 
 
