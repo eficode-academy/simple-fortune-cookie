@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: lomztein/fortune_cookie_be:latest
+        ports:
+        - containerPort: 9000
+        env:
+        - name: REDIS_DNS
+          valueFrom:
+            configMapKeyRef:
+              name: backend-configmap
+              key: REDIS_DNS
