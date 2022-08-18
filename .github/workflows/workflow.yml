@@ -29,30 +29,5 @@ jobs:
           push: true
           tags: user/app:latest
   
-  backend:
-      runs-on: ubuntu-latest
-      steps:
-      -
-        name: clone-down
-        uses: actions/checkout@v2
-      -
-        name: build application
-        run: go build simple-fortune-cookie/backend
-      -
-        name: test-step
-        run: go build simple-fortune-cookie/backend
-
-  frontend:
-      runs-on: ubuntu-latest
-      steps:
-      -
-        name: clone-down
-        uses: actions/checkout@v2
-      -
-        name: build application
-        run: go build simple-fortune-cookie/frontend
-      -
-        name: test-step
-        run: go test simple-fortune-cookie/frontend
 
   
