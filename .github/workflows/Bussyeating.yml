@@ -1,4 +1,4 @@
-name: Furtune_cookie
+name: Furtune_cookie_workflow
 env:
   docker_username: ${{secrets.DOCKER_USERNAME}}
   docker_password: ${{secrets.DOCKER_PASSWORD}}
