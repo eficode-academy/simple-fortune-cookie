@@ -43,12 +43,12 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: build-frontend
-          path: app/frontend
+          path: frontend/frontend
       - name: Upload backend
         uses: actions/upload-artifact@v2
         with:
           name: build-backend
-          path: app/backend
+          path: backend/backend
   Test:
     runs-on: ubuntu-latest
     needs: Build
