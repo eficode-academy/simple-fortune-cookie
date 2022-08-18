@@ -6,5 +6,6 @@ RUN cd /src/frontend && go build -o frontend
 # Run
 FROM ubuntu:22.04
 COPY --from=builder /src/frontend/frontend /app/
+ADD ./frontend /app/
 WORKDIR /app
 ENTRYPOINT ["./frontend"]
