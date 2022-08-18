@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+env:
+  GIT_COMMIT: ${{ github.sha }}
 jobs:
   Clone: 
     name: Clone repo
@@ -38,13 +40,13 @@ jobs:
         with:
           context: ./frontend/
           push: true
-          tags: olexmeister/frontend:$GIT_COMMIT
+          tags: olexmeister/frontend:${{ github.sha }}
       - name: Build and push backend to dockerhub
         uses: docker/build-push-action@v3
         with:
           context: ./backend/
           push: true
-          tags: olexmeister/backend:$GIT_COMMIT
+          tags: olexmeister/backend:${{ github.sha }}
   Compose:
     name: Serve app
     runs-on: self-hosted
