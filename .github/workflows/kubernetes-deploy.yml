@@ -9,7 +9,6 @@ on:
     branches:
       - 29-make-a-kubernetes-manifest-file
 
-
 env:
   KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
