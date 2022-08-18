@@ -11,15 +11,19 @@ services:
 
   go-frontend:
     container_name: go-frontend
-    dockerfile: dockerfile_go-frontend
+    build:
+      context: .
+      dockerfile: ../frontend/dockerfile_go-frontend
     depends_on:
       - redis-db
 
   redis-db:
     container_name: redis-db
     # TODO configure mysql
-    dockerfile: dockerfile_go-backend
-      environment:
+    build:
+      context: .
+      dockerfile: ../backend/dockerfile_go-backend
+    environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
     - "db:/bitnami/redis/data"
