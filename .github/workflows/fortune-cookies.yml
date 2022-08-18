@@ -4,6 +4,7 @@ on:
     branches:
     - "main"
     - "dev**"
+    - "self-hosted"
 jobs:
   Clone-down:
     runs-on: ubuntu-latest
