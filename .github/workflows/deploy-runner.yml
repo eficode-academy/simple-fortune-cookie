@@ -47,15 +47,29 @@ jobs:
           context: ./backend/
           push: true
           tags: olexmeister/backend:${{ github.sha }}
-  Compose:
-    name: Serve app
-    runs-on: self-hosted
+  Production:
+    name: Kubernetes-deploy
+    runs-on: [self-hosted, production]
     needs: Docker
     steps:
-      - name: Download repo
+      - name: Download code
         uses: actions/download-artifact@v2
         with:
           name: code
           path: .
-      - name: Run Docker compose
-        run: docker-compose -f go-compose.yml up -d
+      - name: Apply kubernetes manifest
+        run: kubectl apply -f kubernetes/
+
+#Legacy config  
+  #Compose:
+    #name: Serve app
+    #runs-on: self-hosted
+    #needs: Docker
+    #steps:
+      #- name: Download repo
+      #  uses: actions/download-artifact@v2
+      #  with:
+      #    name: code
+      #    path: .
+      #- name: Run Docker compose
+      #  run: docker-compose -f go-compose.yml up -d

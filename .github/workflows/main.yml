@@ -1,4 +1,4 @@
-name: Go webpage
+name: main pull request
 on:
   pull_request:
     branches:
