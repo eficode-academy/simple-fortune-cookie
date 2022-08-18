@@ -1,0 +1,29 @@
+version: "3"
+services:
+  frontend:
+    image: olexmeister/frontend:latest
+    ports:
+    - 8080:8080
+    environment:
+        BACKEND_DNS: backend
+        BACKEND_PORT: 9000
+
+  backend:
+    container_name: backend-container
+    image: olexmeister/backend:latest
+    ports:
+    - 9000:9000
+    environment:
+        REDIS_DNS: redis
+        REDIS_PORT: 6379
+
+  redis:
+    container_name: redis_container
+    image: redis
+    ports:
+    - 6397:6397
+    volumes:
+      - redisVolume:/data
+
+volumes:
+  redisVolume:

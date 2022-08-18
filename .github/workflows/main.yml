@@ -29,3 +29,15 @@ jobs:
           path: .
       - name: Run frontend test
         run: chmod +x ci/test.sh && ci/test.sh
+  Test-avail:
+      name: Availability test
+      runs-on: ubuntu-latest
+      needs: Clone
+      steps:
+        - name: Download repo
+          uses: actions/download-artifact@v2
+          with:
+            name: code
+            path: .
+        - name: Run Availability test
+          run: chmod +x ci/test-avail.sh && ci/test-avail.sh
