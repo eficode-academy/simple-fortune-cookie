@@ -29,18 +29,18 @@ jobs:
         with: 
           name: code
           path: .
-      #- run: chmod +x ci/build-app.sh && ci/build-app.sh
-      #  name: Build-app
-      #- name: Upload Repo
-      #  uses: actions/upload-artifact@v2
-      #  with: 
-      #    name: code
-      #    path: .
-      #- name: Upload jar
-      #  uses: actions/upload-artifact@v2
-      #  with:
-      #    name: build
-      #    path: app/build/libs/app-0.1-all.jar
+      - run: chmod +x ci/build-app.sh && ci/build-app.sh
+        name: Build-app
+      - name: Upload Repo
+        uses: actions/upload-artifact@v2
+        with: 
+          name: code
+          path: .
+      - name: Upload jar
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: app/build/libs/app-0.1-all.jar
   Test:
     runs-on: ubuntu-latest
     needs: Build
