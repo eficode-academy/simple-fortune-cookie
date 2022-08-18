@@ -1,0 +1,20 @@
+#Build file for dev CI pipeline
+name: Simple fortune pipeline
+on:
+  push:
+    branches:
+      - "dev/**"
+      - 'main'
+  pull_request:
+    branches:
+      - 'main'
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+  GET_COMMIT: ${{ github.sha }}
+jobs:
+
+  Docker-backend:
+  Docker-frontend:
+
+  Test:
