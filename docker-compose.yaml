@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  backend:
+    build:
+      context: backend/
+    image: "backend:latest"
+  frontend:
+    build: 
+      context: frontend/
+    image: "frontend:latest"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend
+    environment:
+      - BACKEND_DNS=backend
