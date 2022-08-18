@@ -24,6 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: GetGo
     steps:
-      - name: get Path:
+      - name: get Path
         run: pwd
 
