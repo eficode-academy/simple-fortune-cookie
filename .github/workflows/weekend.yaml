@@ -24,6 +24,7 @@ jobs:
           path: .
   Build:
     runs-on: ubuntu-latest
+    needs: [Clone-down]
     container: golang:latest
     steps:
       - name: Download repo
@@ -48,7 +49,7 @@ jobs:
   #       uses: actions
   Frontend-test:
     runs-on: ubuntu-latest
-    needs: Clone-down
+    needs: [Clone-down]
     container: golang:latest
     steps:
       - name: Download code
