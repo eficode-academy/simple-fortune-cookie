@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: frontend
+    ports:
+      - 8080:8080
+    networks:
+      - application
+    environment:
+      BACKEND_DNS: backend
+
+  backend:
+    build:
+      context: backend
+    ports:
+      - 9000:9000
+    networks:
+      - application
+      - database
+    environment:
+      REDIS_DNS: redis
+
+  redis:
+    image: redis:7.0-alpine
+    ports:
+      - 6379:6379
+    networks:
+      - database
+
+# Database should not be exposed to the frontend service as a measurement
+# for enabling separation of responsibility.
+networks:
+  application:
+  database:
