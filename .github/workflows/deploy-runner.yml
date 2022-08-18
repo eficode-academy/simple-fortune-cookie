@@ -38,13 +38,13 @@ jobs:
         with:
           context: ./frontend/
           push: true
-          tags: olexmeister/frontend:latest
+          tags: olexmeister/frontend:GIT_COMMIT
       - name: Build and push backend to dockerhub
         uses: docker/build-push-action@v3
         with:
           context: ./backend/
           push: true
-          tags: olexmeister/backend:latest
+          tags: olexmeister/backend:GIT_COMMIT
   Compose:
     name: Serve app
     runs-on: self-hosted
