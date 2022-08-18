@@ -1,4 +1,8 @@
 name: Bussy
+env:
+  docker_username: ${{secrets.DOCKER_USERNAME}}
+  docker_password: ${{secrets.DOCKER_PASSWORD}}
+  GIT_COMMIT: ${{github.sha}}
 on:
   push:
     branches:
@@ -7,38 +11,83 @@ on:
     branches:
       - 'main'
 jobs:
-  Auto_test:
-    name: Run automatic test
+  Clone_repo:
+    - name: Download and clone repo
+      uses: actions/checkout@v2
+    - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: ./artifacts
+  Build:
+    needs: Clone_repo
+    name: Install Go language and dependecies & build
     runs-on: ubuntu-latest
-    steps: 
-      - name: Dowload source code
-        uses: actions/checkout@v2
-      - name: Setup Go
+    steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: ./artifacts
+      - name: Setup Go for project
         uses: actions/setup-go@v2
         with:
           go-version: '1.19.0'
-      # - name: Install dependencies for backend
-      #   working-directory: ./backend
-      #   run: |
-      #     go version
-      #     go get -u golang.org/x/lint/golint
-      # - name: Build backend
-      #   working-directory: ./backend
-      #   run: go build
-      # - name: Run application
-      #   working-directory: ./backend
-      #   run: go run backend
+      - name: Install dependencies for backend
+        working-directory: ./backend
+        run: |
+          go version
+          go get -u golang.org/x/lint/golint
       - name: Install dependencies for frontend
         working-directory: ./frontend
         run: |
           go version
           go get -u golang.org/x/lint/golint
+      - name: Build backend
+        working-directory: ./backend
+        run: go build
       - name: Build frontend
         working-directory: ./frontend
         run: go build
-      # - name: Run application
-      #   working-directory: ./frontend
-      #   run: go run frontend && go test
+      - name: Update a Build Artifact
+        uses: actions/upload-artifact@v2
+        with: 
+          name: code
+          path: ./artifacts
+  Auto_test:
+    needs: Build
+    name: Run automatic test for frontend
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: ./artifacts
       - name: Test frontend build
         working-directory: ./frontend
         run: go test
+      - name: Update a Build Artifact
+        uses: actions/upload-artifact@v2
+        with: 
+          name: code
+          path: ./artifacts
+  Docker-image:
+    needs: [Build,Auto_test]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download repo
+      uses: actions/download-artifact@v2
+      with:
+        name: code
+        path: ./artifacts
+    - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{env.docker_username}}
+          password: ${{env.docker_password}}
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: $docker_username/fortune-cookie-app:1.0-${GIT_COMMIT::8} 
