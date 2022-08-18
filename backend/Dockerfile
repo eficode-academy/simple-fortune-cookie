@@ -1,4 +1,4 @@
 FROM golang:latest
-COPY ./frontend/frontend.exe .
-EXPOSE 8080
-RUN ["frontend.exe"]
+COPY backend.exe .
+EXPOSE 9000
+RUN ["backend.exe"]
