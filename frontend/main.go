@@ -12,7 +12,7 @@ import (
     "math/rand"
 )
 
-var BACKEND_DNS=getEnv("BACKEND_DNS", "localhost")
+var BACKEND_DNS=getEnv("BACKEND_DNS", "backend")
 var BACKEND_PORT=getEnv("BACKEND_PORT", "9000")
 
 type fortune struct {

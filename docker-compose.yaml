@@ -1,0 +1,15 @@
+version: '3'
+services:
+  redis:
+    image: redis:latest
+
+  backend:
+    depends_on:
+      - redis
+    image: nicobah/devops_backend:latest
+  frontend:
+    depends_on:
+      - backend
+    image: nicobah/devops_frontend:latest
+    ports:
+      - 9001:8080
