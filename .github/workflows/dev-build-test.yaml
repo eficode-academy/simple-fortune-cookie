@@ -1,0 +1,44 @@
+name: Dev Build Test CI
+on: 
+  push:
+    branches: dev/**
+env: # Set the secret as an input
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+jobs:
+  Clone-down: 
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Clone-down
+        uses: actions/checkout@v2
+      - name: Upload Repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
+  Build-test-backend:
+    runs-on: ubuntu-20.04
+    needs: Clone-down
+    container: golang:1.19.0
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: needed go mod
+        run: cd backend && go mod download
+      - name: Build backend
+        run: cd backend && go get backend && go build 
+  Build-test-backend:
+    runs-on: ubuntu-20.04
+    needs: Clone-down
+    container: golang:1.19.0
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: Build frontend
+        run: cd frontend && go build
