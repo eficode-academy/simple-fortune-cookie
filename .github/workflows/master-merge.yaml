@@ -55,7 +55,7 @@ jobs:
           path: frontend
   Frontend-test:
     runs-on: ubuntu-20.04
-    needs: [Clone-down && Build-test-frontend]
+    needs: [Clone-down, Build-test-frontend]
     container: golang:1.19.0
     steps:
       - name: Download frontend code
