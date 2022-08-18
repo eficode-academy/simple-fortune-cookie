@@ -2,7 +2,7 @@ name: Dev CI
 on:
   push:
     branches:
-      - "dev/**"
+      - “dev/**”
 env:
   GIT_COMMIT: ${{ github.sha }}
   docker_username: ${{ secrets.DOCKER_USERNAME }}
@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Upload Repo
         uses: actions/upload-artifact@v2
-        with: 
+        with:
           name: code
           path: .
   Build:
@@ -26,26 +26,26 @@ jobs:
     steps:
       - name: Download Repo
         uses: actions/download-artifact@v2
-        with: 
+        with:
           name: code
           path: .
       - run: chmod +x ci/build-app.sh && ci/build-app.sh
         name: Build-app
       - name: Upload Repo
         uses: actions/upload-artifact@v2
-        with: 
+        with:
           name: code
           path: .
       - name: Upload frontend
         uses: actions/upload-artifact@v2
         with:
           name: build-frontend
-          path: app/frontend
+          path: frontend/frontend
       - name: Upload backend
         uses: actions/upload-artifact@v2
         with:
           name: build-backend
-          path: app/backend
+          path: backend/backend
   Test:
     runs-on: ubuntu-latest
     needs: Build
@@ -53,7 +53,7 @@ jobs:
     steps:
       - name: Download Repo
         uses: actions/download-artifact@v2
-        with: 
+        with:
           name: code
           path: .
       - run: chmod +x ci/go-test.sh && ci/go-test.sh
@@ -64,7 +64,7 @@ jobs:
     steps:
       - name: Download Repo
         uses: actions/download-artifact@v2
-        with: 
+        with:
           name: code
           path: .
       - name: Download frontend
@@ -77,7 +77,7 @@ jobs:
         with:
           name: build-backend
           path: app/backend
-      - name: build docker backend
+      - name: Build docker backend
         run: chmod +x ci/build-docker-backend.sh && ci/build-docker-backend.sh
-      - name: build docker frontend
+      - name: Build docker frontend
         run: chmod +x ci/build-docker-frontend.sh && ci/build-docker-frontend.sh
