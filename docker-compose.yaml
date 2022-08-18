@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: /frontend
+      target: dev
+    volumes:
+      - .:/opt/app/api
+    environment:
+      API_SERVER_ADDR: ":3000"
+    ports:
+    - "3000:3000"
+  backend:
+    build:
+      dockerfile: Dockerfile
+      context: /backend
+    ports:
+    - "3000:3000"
