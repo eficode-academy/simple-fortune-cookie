@@ -1,24 +1,106 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fortune
+  name: fortune-frontend
   labels:
-    app: fortune
+    app: fortune-frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fortune
+      app: fortune-frontend
   template:
     metadata:
       labels:
-        app: fortune
+        app: fortune-frontend
     spec:
       containers:
       - name: frontend
         image: nicolajh/simple-fortune-cookie-frontend
+        env:
+          - name: BACKEND_DNS
+            value: fortune-backend
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fortune-frontend
+  labels:
+    app: fortune-frontend
+spec:
+  selector:
+    app: fortune-frontend
+  type: NodePort
+  ports:
+  - name: fortune-frontend
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fortune-backend
+  labels:
+    app: fortune-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fortune-backend
+  template:
+    metadata:
+      labels:
+        app: fortune-backend
+    spec:
+      containers:
       - name: backend
         image:  nicolajh/simple-fortune-cookie-backend
+        env:
+          - name: REDIS_DNS
+            value: fortune-redis
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fortune-backend
+  labels:
+    app: fortune-backend
+spec:
+  selector:
+    app: fortune-backend
+  type: ClusterIP
+  ports:
+  - name: fortune-backend
+    protocol: TCP
+    port: 9000
+    targetPort: 9000
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fortune-redis
+  labels:
+    app: fortune-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fortune-redis
+  template:
+    metadata:
+      labels:
+        app: fortune-redis
+    spec:
+      containers:
       - name: redis-db
         image: redis
 
@@ -27,15 +109,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: fortune-service
+  name: fortune-redis
   labels:
-    app: fortune
+    app: fortune-redis
 spec:
   selector:
-    app: fortune
-  type: NodePort
+    app: fortune-redis
+  type: ClusterIP
   ports:
-  - name: fortune-service
+  - name: fortune-redis
     protocol: TCP
-    port: 8080
-    targetPort: 8080
+    port: 6379
+    targetPort: 6379
