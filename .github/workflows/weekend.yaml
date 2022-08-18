@@ -5,6 +5,7 @@ jobs:
     name: Clone down repo
     runs-on: ubuntu-latest
     steps:
+      - name: Clone down
         uses: actions/checkout@v2
       - name: Clone down
         uses: actions/upload-artifact@v2
