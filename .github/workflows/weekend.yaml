@@ -4,7 +4,7 @@ jobs:
   Clone-down:
     name: Clone down repo
     runs-on: ubuntu-latest
-    container: golant:latest
+    container: golang:latest
     steps:
       - name: Clone down
         uses: actions/checkout@v2
