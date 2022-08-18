@@ -12,7 +12,7 @@ jobs:
         with:
           go-version: '1.18'
       - name: Install dependencies
-        run: go get .
+        run: go get ../../frontend
       - name: Build
         run: go build -v ./...
       - name: Test
