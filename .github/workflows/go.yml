@@ -1,0 +1,12 @@
+name: contiuous-integration
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone-down
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: cd backend && go get github.com/gomodule/redigo/redis
+      - name: Build backend
+        run: cd backend && go build
