@@ -1,0 +1,10 @@
+# Build
+FROM golang:1.13.2 as builder
+ADD . /src/
+RUN cd /src/backend && go build -o backend
+
+# Run
+FROM ubuntu:22.04
+COPY --from=builder /src/backend/backend /app/
+WORKDIR /app
+ENTRYPOINT ["./backend"]
