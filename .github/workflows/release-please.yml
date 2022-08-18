@@ -2,12 +2,13 @@ on:
   push:
     branches:
       - main
-name: release-please
+name: Release Manager
 jobs:
-  release-please:
-    runs-on: ubuntu-latest
+  release:
+    name: Release
+    runs-on: ubuntu-22.04
     steps:
       - uses: google-github-actions/release-please-action@v3
         with:
-          release-type: node
-          package-name: release-please-action
+          release-type: simple
+          token: ${{ secrets.BOT_PAT }}

@@ -4,6 +4,9 @@ on:
   release:
     branches:
       - main
+    types:
+      - published
+      - edited
   push:
     branches:
       - 29-make-a-kubernetes-manifest-file 
