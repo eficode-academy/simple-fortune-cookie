@@ -1,6 +1,5 @@
 version: "3"
 services:
-
   frontend:
     image: olexmeister/frontend:latest
     ports:
