@@ -5,7 +5,7 @@ on:
     workflows: ["Release CD"]
     types:
       - completed
-  pull_request:
+  push:
     branches:
       - 29-make-a-kubernetes-manifest-file
 
