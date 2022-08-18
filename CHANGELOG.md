@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/compare/v1.1.2...v1.2.0) (2022-08-18)
+
+
+### Features
+
+* **test:** sample feature ([bc04be0](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/commit/bc04be00af38e3551af27baab284deef51387431))
+* **ui:** visual changes ([a5e9861](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/commit/a5e9861d6841276c3cb067f95c05ef5346620115))
+
 ## [1.1.2](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/compare/v1.1.1...v1.1.2) (2022-08-18)
 
 
