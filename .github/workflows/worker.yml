@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: get Path
-        run: pwd
+        run: cd frontend
       #- name: Check if File Exits
       #  run: go build ./frontend/
       - name: go run
