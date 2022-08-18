@@ -8,7 +8,7 @@ on:
       - main
 env: # Set the secret as an input
   docker_username: ${{ secrets.DOCKER_USERNAME }}
-  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+  docker_password: ${{ secrets.DOCKER_TOKEN  }}
   GIT_COMMIT: ${{ github.sha }}
 jobs:
   Clone-down:
