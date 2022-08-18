@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/compare/v1.2.1...v1.2.2) (2022-08-18)
+
+
+### Performance Improvements
+
+* **infrastructure:** now more pods in both frontend and backend environments ([9812c0b](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/commit/9812c0b4893c33cf51966cf87fe78522cceefb06))
+
 ## [1.2.1](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/compare/v1.2.0...v1.2.1) (2022-08-18)
 
 
