@@ -28,8 +28,6 @@ jobs:
       - name: get Path
         run: pwd
       - name: Check if File Exits
-        run: test -f frontend/go.mod && echo "$FILE exists."
-      - name: go build
         run: go build -o frontend/go.mod
       - name: go run
         run: go run ..
