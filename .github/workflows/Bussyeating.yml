@@ -10,8 +10,17 @@ jobs:
   Auto_test:
     name: Run automatic test
     runs-on: ubuntu-latest
-    #container: golang:1.19-bullseye
-    steps:
+    steps: 
+      - name: Dowload source code
+        uses: actions/checkout@v2
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19.0'
+      - name: Install dependencies
+        run: |
+          go version
+          go get -u golang.org/x/lint/golint
       - name: Build backend
         working-directory: ./backend
         run: chmod +x go build
