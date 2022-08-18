@@ -87,9 +87,14 @@ jobs:
       - name: Push docker
         run: chmod +x ci/push-docker.sh && ci/push-docker.sh
   Deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [Docker-image]
     steps:
+      - name: Download Repo
+        uses: actions/download-artifact@v2
+        with: 
+          name: code
+          path: .
       - name: Deploy to kubernetes
         uses: Azure/k8s-deploy@v3.1
         with:
