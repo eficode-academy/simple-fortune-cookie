@@ -26,9 +26,16 @@ jobs:
     needs: GetGo
     steps:
       - uses: actions/checkout@v2
-      #- name: Check if File Exits
-      #  run: go build ./frontend/
       - name: go run
         working-directory: frontend
         run: go build
+      - name: upload Build
+        working-directory: frontend
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build
+          path: .
+      - name: Run Build
+        working-directory: frontend
+        run: go run
 
