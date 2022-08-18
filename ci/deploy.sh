@@ -1,2 +1,3 @@
 #!/bin/bash
-docker-compose up -d
+docker-compose up --force-recreate --build -d
+docker image prune -f
