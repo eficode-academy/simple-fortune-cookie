@@ -5,5 +5,5 @@ RUN cd /src/backend && go build -o backend
 
 # Run
 FROM scratch as backend
-COPY --from=builder /src/backend/backend /
+COPY --from=builder /src/backend/backend/backend /
 ENTRYPOINT ["/backend"]
