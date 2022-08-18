@@ -41,15 +41,10 @@ jobs:
   deploy:
     runs-on: self-hosted
     needs:
-      - test
+      - upload-to-dockerhub
     steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: code
-          path: .
       - name: Deploy
-        run: chmod +x ci/run.sh && ci/run.sh
+        run: chmod +x ci/deploy.sh && ci/deploy.sh
   upload-to-dockerhub:
     runs-on: self-hosted
     needs:
