@@ -86,3 +86,13 @@ jobs:
         run: chmod +x ci/build-docker-frontend.sh && ci/build-docker-frontend.sh
       - name: Push docker
         run: chmod +x ci/push-docker.sh && ci/push-docker.sh
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: [Docker-image]
+    steps:
+      - name: Deploy to kubernetes
+        uses: Azure/k8s-deploy@v3.1
+        with:
+          namespace: 'student9'
+          manifests: |
+              ci/kubernetes-setup.yaml
