@@ -17,7 +17,8 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: '1.19.0'
-      - name: Install dependencies
+      - name: Install dependencies for backend
+        working-directory: ./backend
         run: |
           go version
           go get -u golang.org/x/lint/golint
@@ -27,6 +28,11 @@ jobs:
       - name: Run application
         working-directory: ./backend
         run: chmod +x go run backend
+      - name: Install dependencies for frontend
+        working-directory: ./frontend
+        run: |
+        go version
+        go get -u golang.org/x/lint/golint
       - name: Build frontend
         working-directory: ./frontend
         run: chmod +x go build
