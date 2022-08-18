@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - "automation"
+      - "cd"
 jobs:
   my-job:
     runs-on: ubuntu-latest
