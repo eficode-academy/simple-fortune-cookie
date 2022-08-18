@@ -27,8 +27,8 @@ jobs:
     steps:
       - name: get Path
         run: pwd
-      - name: get sub-Folders
-        run: ls
+      - name: Check if File Exits
+        run: test -f /etc/resolv.conf && echo "$FILE exists."
       - name: go build
         run: go build -o ../frontend/go.mod
       - name: go run
