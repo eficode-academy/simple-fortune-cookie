@@ -95,9 +95,9 @@ jobs:
           #path: ./backend/Dockerfile
           push: true
           #tags: ${{ env.docker_username }}/fortune-cookie-app-backend:1.0-${{ env.GIT_COMMIT }}
-          tags: simple-fortune-cookie_go-frontend:latest-${{ env.GIT_COMMIT }}
+          tags: ${{ env.docker_username }}/simple-fortune-cookie_go-frontend:latest-${{ env.GIT_COMMIT }}
       - name: Build and push frontend Dockerfile
-        uses: ${{ env.docker_username }}/docker/build-push-action@v3
+        uses: docker/build-push-action@v3
         with:
           #path: ./frontend/Dockerfile
           push: true
