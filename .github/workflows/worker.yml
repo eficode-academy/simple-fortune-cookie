@@ -29,9 +29,8 @@ jobs:
       - name: go run
         working-directory: frontend
         run: go build
-      - name: upload Build
+      - uses: actions/upload-artifact@v3
         working-directory: frontend
-        uses: actions/upload-artifact@v3
         with:
           name: Build
           path: .
