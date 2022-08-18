@@ -4,7 +4,7 @@ on:
     branches:
       - "trunk"
 env:
-  COMMIT_SHA: ${{ github.event.head.sha }}
+  COMMIT_SHA: ${{ github.sha }}
 jobs:
   build-and-push-frontend-image:
     runs-on: ubuntu-latest
