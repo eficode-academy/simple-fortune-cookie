@@ -84,21 +84,21 @@ jobs:
     runs-on: [self-hosted, development]
     steps:
       - uses: actions/checkout@v3
-      - run: chmod +x ci/development.sh
-      - run: ci/development.sh
+      - run: chmod +x ci/deploy.sh
+      - run: ci/deploy.sh trunk
   deploy-staging-environment:
     if: github.event.release.prerelease
     needs: [build-and-push-backend-image, build-and-push-frontend-image]
     runs-on: [self-hosted, staging]
     steps:
       - uses: actions/checkout@v3
-      - run: chmod +x ci/staging.sh
-      - run: ci/staging.sh ${{ github.ref_name }}
-  # deploy-production-environment:
-  #   if: github.event_name == 'release'
-  #   needs: [build-and-push-backend-image, build-and-push-frontend-image]
-  #   runs-on: [self-hosted, production]
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - run: chmod +x ci/production.sh
-  #     - run: ci/production.sh ${{ github.ref_name }}
+      - run: chmod +x ci/deploy.sh
+      - run: ci/deploy.sh ${{ github.ref_name }}
+  deploy-production-environment:
+    if: github.event_name == 'release'
+    needs: [build-and-push-backend-image, build-and-push-frontend-image]
+    runs-on: [self-hosted, production]
+    steps:
+      - uses: actions/checkout@v3
+      - run: chmod +x ci/deploy.sh
+      - run: ci/deploy.sh ${{ github.ref_name }}

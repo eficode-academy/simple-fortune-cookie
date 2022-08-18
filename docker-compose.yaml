@@ -3,11 +3,11 @@ services:
   backend:
     build:
       context: backend/
-    image: "backend:latest"
+    image: "backend:${tag}"
   frontend:
     build: 
       context: frontend/
-    image: "frontend:latest"
+    image: "frontend:${tag}"
     ports:
       - "8080:8080"
     depends_on:
