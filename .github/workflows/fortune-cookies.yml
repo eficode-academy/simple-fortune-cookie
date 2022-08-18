@@ -14,7 +14,6 @@ jobs:
         with:
           name: code
           path: .
-
   Frontend-test:
     runs-on: ubuntu-latest
     needs: [Docker-image]
