@@ -39,6 +39,6 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
       - name: Run Go
-        run: go run
+        run: go run main.go
 
 
