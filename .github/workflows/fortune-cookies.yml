@@ -38,7 +38,7 @@ jobs:
       run: chmod +x ci/push-docker.sh && ci/push-docker.sh
 
   # The "build" workflow
-  test:
+  test-cloud:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
@@ -48,7 +48,7 @@ jobs:
         with:
           name: code
           path: .
-  test:
+  test-local:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
