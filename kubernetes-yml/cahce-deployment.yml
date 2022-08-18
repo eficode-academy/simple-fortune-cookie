@@ -14,8 +14,15 @@ spec:
       labels:
         app: redis      # label for replica selector to match
     spec:
+#      volumes:
+#      - name: redis-volume
+#        persistentVolumeClaim:
+#          claimName: pvc-redis
       containers:
       - name: redis
         image: redis:7.0
         ports:
         - containerPort: 6379
+#        volumeMounts:
+#        - mountPath: "PATH GOES HERE"
+#          name: redis-volume
