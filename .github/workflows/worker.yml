@@ -26,4 +26,6 @@ jobs:
     steps:
       - name: get Path
         run: pwd
+      - name: get sub-Folders
+        run: ls
 
