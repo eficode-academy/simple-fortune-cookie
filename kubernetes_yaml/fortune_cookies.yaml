@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-a
+  labels:
+    app: deployment-a
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: deployment-a
+  template:
+    metadata:
+      labels:
+        app: deployment-a
+    spec:
+      containers:
+      - name: devopsacademya
+        image: eficodeacademy/devopsacademya:latest
+        ports:
+        - containerPort: 80
