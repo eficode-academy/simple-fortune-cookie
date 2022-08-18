@@ -87,7 +87,7 @@ jobs:
       - run: chmod +x ci/deploy.sh
       - run: ci/deploy.sh trunk
   deploy-staging-environment:
-    if: github.event.release.prerelease
+    if: "!github.event.release.prerelease"
     needs: [build-and-push-backend-image, build-and-push-frontend-image]
     runs-on: [self-hosted, staging]
     steps:
