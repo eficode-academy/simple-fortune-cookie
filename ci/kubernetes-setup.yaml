@@ -19,6 +19,8 @@ spec:
         image: nicolajh/simple-fortune-cookie-frontend
       - name: backend
         image:  nicolajh/simple-fortune-cookie-backend
+      - name: redis-db
+        image: redis
 
 ---
 
