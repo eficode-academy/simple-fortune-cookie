@@ -1,8 +1,13 @@
 name: hello-world
 on: push
+push:
+    branches:
+      - "automation"
 jobs:
   my-job:
     runs-on: ubuntu-latest
     steps:
       - name: my-step
         run: echo "Hello World!"
+      - name: frontend-test
+        run: go build -v frontend/main_test.go
