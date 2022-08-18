@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install dependencies
-        run: apt-get update && apt-get install golang-go && go mod download github.com/gomodule/redigo
+        run: sudo apt-get update -y && sudo apt-get install golang-go -y && go mod download github.com/gomodule/redigo -y
       - name: Build
         run: go build /frontend
       - name: Test
