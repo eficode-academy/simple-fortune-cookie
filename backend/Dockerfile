@@ -7,4 +7,4 @@ RUN go build
 
 RUN go mod download github.com/gomodule/redigo
 
-CMD [" cd backend/ && go run . "]
+CMD [" "]
