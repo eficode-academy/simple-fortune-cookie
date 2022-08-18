@@ -1,0 +1,26 @@
+name: 03-cd
+on: push
+jobs:
+  clone-repository:
+    runs-on: self-hosted
+    container: golang:latest
+    steps: 
+    - name: Clone repository
+      uses: actions/checkout@v2
+      with:
+        name: repository
+        path: .
+  run-application:
+    needs: clone-repository
+    runs-on: self-hosted
+    container: golang:latest
+    steps:
+      - name: Download repostiry
+        uses: actions/download-artifact@v2
+        with:
+          name: repository
+          path: .
+      - name: run backend
+        run: cd backend && go build && go run backend && cd ..
+      - name: run frontend
+        run: cd frontend && go build && go run frontend && cd ..
