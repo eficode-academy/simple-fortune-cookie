@@ -71,7 +71,7 @@ jobs:
       with:
         go-version: 1.16
     - name: Frontend-Build
-      run: go build
+      run: cd frontend && go build
     #- name: Build with Gradle
     #  run: chmod +x ci/build-app.sh && ci/build-app.sh
     #- name: Test with Gradle
