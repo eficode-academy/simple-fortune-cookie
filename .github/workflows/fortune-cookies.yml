@@ -1,5 +1,4 @@
 name: CICD
-
 on:
   push:
     branches:
@@ -29,7 +28,6 @@ jobs:
         go get -u golang.org/x/lint/golint
     - name: Run build
       run: cd frontend/ && go build  
-      
     - name: Run testing
       run: cd frontend/ && go test
     
