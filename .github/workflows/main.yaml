@@ -41,12 +41,19 @@ jobs:
         with: 
           name: code
           path: .
-  # Docker-image:
-  #   runs-on: ubuntu-latest
-  #   needs: [Build]
-  #   steps: 
-  #     - name: Download repo
-  #       uses: actions
+  Docker-image:
+    runs-on: ubuntu-latest
+    needs: [Build]
+    steps: 
+      - name: Download repo
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: build docker
+        run: chmod +x ci/build-docker.sh && ci/build-docker.sh
+      - name: push docker
+        run: chmod +x ci/push-docker.sh && ci/push-docker.sh
   Frontend-test:
     runs-on: ubuntu-latest
     needs: [Clone-down]
