@@ -84,6 +84,8 @@ jobs:
       with:
         name: code
         path: .
+    - name: Check out code
+      uses: actions/checkout@v2
     - name: Login to DockerHub
       uses: docker/login-action@v1
       with:
