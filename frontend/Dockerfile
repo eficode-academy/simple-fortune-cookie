@@ -6,6 +6,6 @@ COPY ./frontend .
 
 EXPOSE 8080
 
-RUN chmod +x frontend/frontend
+RUN chmod +x ./frontend
 
-CMD ["frontend/frontend"]
+CMD ["app/frontend"]
