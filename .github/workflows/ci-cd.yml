@@ -8,7 +8,7 @@ on:
       - main
 jobs:
   Clone-down:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted]
     steps:
       - name: Clone-down
         uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
             path: .
   Build:
       needs: Clone-down
-      runs-on: ubuntu-latest
+      runs-on: [self-hosted]  
       container: golang:latest
       steps:
         - name: Download Repo
