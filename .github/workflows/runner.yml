@@ -38,12 +38,12 @@ jobs:
         with:
           context: ./frontend/
           push: true
-          tags: frontend:latest
+          tags: olexmeister/frontend:latest
       - name: Build and push backend to dockerhub
         uses: docker/build-push-action@v3
         with:
           context: ./backend/
           push: true
-          tags: frontend:latest
+          tags: olexmeister/backend:latest
 
 
