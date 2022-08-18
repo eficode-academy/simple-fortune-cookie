@@ -27,7 +27,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: get Path
-        run: cd frontend
+        working-directory: ./app
+        run: ls
       - name: TELL ME WHYY!!
         run: cd frontend
       - name: AIN'T
