@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: <insert-image-here>
+        image: frontend:latest
         ports:
         - containerPort: 8080

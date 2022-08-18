@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: backend
-        image: <insert-image-here>
+        image: backend:latest
         ports:
         - containerPort: 9000
