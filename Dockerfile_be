@@ -1,10 +1,11 @@
 # Build
-FROM golang:1.13.2 as builder
+FROM golang:1.19-alpine as builder
 ADD . /src/
+ENV CGO_ENABLED=0
+ENV GOOS=linux
 RUN cd /src/backend && go build -o backend
 
 # Run
-FROM ubuntu:22.04
-COPY --from=builder /src/backend/backend /app/
-WORKDIR /app
-ENTRYPOINT ["./backend"]
+FROM scratch
+COPY --from=builder /src/backend/backend /
+ENTRYPOINT ["/backend"]
