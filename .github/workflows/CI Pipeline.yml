@@ -41,7 +41,7 @@ jobs:
       - name: Build frontend
         run: cd frontend && go build .  
       - name: Test with GO
-        run: go Test ./frontend
+        run: cd frontend go test .
       - name: Upload repository
         uses: actions/upload-artifact@v2
         with:
