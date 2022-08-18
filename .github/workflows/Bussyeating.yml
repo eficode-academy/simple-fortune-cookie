@@ -31,8 +31,8 @@ jobs:
       - name: Install dependencies for frontend
         working-directory: ./frontend
         run: |
-        go version
-        go get -u golang.org/x/lint/golint
+          go version
+          go get -u golang.org/x/lint/golint
       - name: Build frontend
         working-directory: ./frontend
         run: chmod +x go build
