@@ -3,6 +3,8 @@ FROM golang:1.13.2 as builder
 ADD . /src/
 RUN cd /src/frontend && go build -o frontend
 
-FROM scratch as frontend
-COPY --from=builder /src/frontend/frontend /
-ENTRYPOINT ["/frontend"]
+# Run
+FROM ubuntu:22.04
+COPY --from=builder /src/frontend/frontend /app/
+WORKDIR /app
+ENTRYPOINT ["./frontend"]

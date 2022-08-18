@@ -4,6 +4,7 @@ ADD . /src/
 RUN cd /src/backend && go build -o backend
 
 # Run
-FROM scratch as backend
-COPY --from=builder /src/backend/backend/backend /
-ENTRYPOINT ["/backend"]
+FROM ubuntu:22.04
+COPY --from=builder /src/backend/backend /app/
+WORKDIR /app
+ENTRYPOINT ["./backend"]
