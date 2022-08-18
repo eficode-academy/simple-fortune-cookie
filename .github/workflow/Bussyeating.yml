@@ -1,0 +1,22 @@
+name: Bussy
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    branches:
+      - 'main'
+jobs:
+  Automated test:
+    name: Run automatic test
+    runs-on: ubuntu-latest
+    container: golang:latest
+    steps:
+      - name: Build backend
+        run: chmod +x cd /backend && go build
+      - name: Run application
+        run: chmod +x cd /backend && go run backend
+      - name: Build frontend
+        run: chmod +x cd /frontend && go build
+      - name: Run application
+        run: chmod +x cd /frontend && go run frontend && go test
