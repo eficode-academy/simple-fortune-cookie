@@ -11,4 +11,4 @@ RUN go build .
 
 RUN go mod download github.com/gomodule/redigo
 
-CMD ["go", "run", "."]
+# CMD ["go", "run", "."]
