@@ -42,6 +42,7 @@ jobs:
         sed "s/FRONTEND_VERSION/${{ github.ref_name }}/g" frontend.yml
     - name: Set kubeconfig
       run: |
+        mkdir -p ~/.kube &&
         echo ${{ secrets.KUBECONFIG }} > ${{ env.KUBECONFIG }}
     - name: Apply manifests
       run: |
