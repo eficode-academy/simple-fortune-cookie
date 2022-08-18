@@ -1,5 +1,11 @@
 name: SIMPLE FORTUNE COOKIE CI
-on: push
+on: 
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - main
 jobs:
   Clone-down:
     runs-on: ubuntu-latest
