@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  labels:
+    app: redis          # arbitrary label on deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:        # labels the replica selector should match
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis      # label for replica selector to match
+    spec:
+#      volumes:
+#      - name: redis-volume
+#        persistentVolumeClaim:
+#          claimName: pvc-redis
+      containers:
+      - name: redis
+        image: redis:7.0
+        ports:
+        - containerPort: 6379
+#        volumeMounts:
+#        - mountPath: "PATH GOES HERE"
+#          name: redis-volume

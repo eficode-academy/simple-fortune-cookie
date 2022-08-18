@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: frontend          # arbitrary label on deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:        # labels the replica selector should match
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend      # label for replica selector to match
+    spec:
+      containers:
+      - name: frontend
+        image: DockerImageGoesHere
+        ports:
+        - containerPort: 8080
