@@ -5,7 +5,7 @@ services:
   frontend:
     build: /frontend
     ports:
-      - "808:8080"
+      - "8080:8080"
 
   backend:
     build: /backend
