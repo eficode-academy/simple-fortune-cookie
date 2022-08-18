@@ -8,12 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup Go
-        uses: actions/setup-go@v3
-        with:
-          go-version: '1.18'
       - name: Install dependencies
-        run: go get ./frontend/
+        run: apt-get update && apt-get install golang-go && go mod download github.com/gomodule/redigo
       - name: Build
-        run: go build -v ./...
+        run: go build /frontend
       - name: Test
-        run: go test
+        run: go test /frontend
