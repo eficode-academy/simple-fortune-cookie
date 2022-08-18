@@ -13,7 +13,7 @@ env:
   KUBECONFIG: "~/.kube/config"
 
 jobs:
-  clone_down:
+  setup_repo:
     name: Setup repo
     runs-on: ubuntu-22.04
     steps:
@@ -28,6 +28,7 @@ jobs:
   deploy-to-kubernetes:
     name: Deploy to kubernetes
     runs-on: self-hosted
+    needs: setup_repo
     container: lachlanevenson/k8s-kubectl:v1.24.3
     steps:
     - name: Download manifests
