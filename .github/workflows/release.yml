@@ -2,11 +2,7 @@ name: Release CD
 
 on:
   release:
-    branches:
-      - main
-  push:
-    branches:
-      - 5-push-container-to-gh-packages
+    types: [published, edited]
 
 env:
   REGISTRY: ghcr.io
