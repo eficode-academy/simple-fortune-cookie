@@ -52,7 +52,6 @@ jobs:
       packages: write
 
     steps:
-      - run: echo ${ github.event.release.prerelease }
       - name: Checkout repository
         uses: actions/checkout@v3
 
