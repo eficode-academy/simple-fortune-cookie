@@ -1,6 +1,7 @@
 package main
 
 import (
+	"io"
 	"encoding/json"
 	"fmt"
 	"math/rand"
@@ -175,6 +176,8 @@ func HealthzHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+    http.HandleFunc("/healthz", HealthzHandler)
+	
 	mux := http.NewServeMux()
 	fortuneH := &fortuneHandler{
 		store: &datastoreDefault,
@@ -183,5 +186,4 @@ func main() {
 	mux.Handle("/fortunes/", fortuneH)
 
 	http.ListenAndServe(":9000", mux)
-    http.HandleFunc("/healthz", HealthzHandler)
 }
