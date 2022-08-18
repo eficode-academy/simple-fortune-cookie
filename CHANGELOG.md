@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/compare/v1.1.1...v1.1.2) (2022-08-18)
+
+
+### Bug Fixes
+
+* **ci:** trigger pipeline ([6e8949a](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/commit/6e8949a3f6b54fa178c85451d5aabb6213f25c6d))
+
 ## [1.1.1](https://github.com/amatzen/SE05-CD-SimpleFortuneCookie/compare/v1.1.0...v1.1.1) (2022-08-18)
 
 
