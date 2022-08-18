@@ -16,36 +16,38 @@ jobs:
       name: Clone down repo
       runs-on: ubuntu-latest
       steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Upload Repo
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: code
           path: .
   docker-image-frontend:
     runs-on: ubuntu-latest
+    needs: Clone-down
     steps:
     - name: Download code
-      uses: actions/download-artifact@v1
+      uses: actions/download-artifact@v2
       with:
         name: code
         path: .
     - name: build docker
       run: chmod +x ci/build-docker-frontend.sh && ci/build-docker-frontend.sh
     - name: push docker
-      run: chmod +x ci/push-docker.sh && ci/push-docker.sh
+      run: chmod +x ci/push-docker-frontend.sh && ci/push-docker-frontend.sh
   docker-image-backend:
     runs-on: ubuntu-latest
+    needs: clone-down
     steps:
     - name: Download code
-      uses: actions/download-artifact@v1
+      uses: actions/download-artifact@v2
       with:
         name: code
         path: .
     - name: build docker
       run: chmod +x ci/build-docker-backend.sh && ci/build-docker-backend.sh
     - name: push docker
-      run: chmod +x ci/push-docker.sh && ci/push-docker.sh
+      run: chmod +x ci/push-docker-backend.sh && ci/push-docker-backend.sh
 
   # The "build" workflow
   test-cloud:

@@ -7,4 +7,4 @@ COPY . .
 
 RUN go build . 
 
-CMD ["go", "run", "."]
+# CMD ["go", "run", "."]
