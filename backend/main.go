@@ -159,6 +159,26 @@ func (h *fortuneHandler) Create(w http.ResponseWriter, r *http.Request) {
 	w.Write(jsonBytes)
 }
 
+func (h *fortuneHandler) Delete(w http.ResponseWriter, r *http.Request) {
+	matches := getFortuneRe.FindStringSubmatch(r.URL.Path)
+	if len(matches) < 2 {
+		notFound(w, r)
+		return
+	}
+
+	h.store.Lock()
+	delete(h.store.m, matches[1])
+	h.store.Unlock()
+	
+	if usingRedis {
+		_, err := dbLink.Do("hdel", "fortunes", matches[1])
+		if err != nil {
+			fmt.Println("redis hdel failed", err.Error())
+		}
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
 func internalServerError(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusInternalServerError)
 	w.Write([]byte("internal server error"))
