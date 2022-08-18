@@ -12,4 +12,3 @@ jobs:
         with:
           release-type: simple
           token: ${{ secrets.BOT_PAT }}
-          command: github-release
