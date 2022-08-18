@@ -1,4 +1,4 @@
-name: Java_CI
+name: Go-CI
 on: push
 env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
@@ -25,4 +25,3 @@ jobs:
         path: .
     - name: Execute go test
       run: chmod +x frontend/main_test.go && frontend/main_test.go.sh
-      
