@@ -92,6 +92,7 @@ jobs:
       - name: Build and push backend Dockerfile
         uses: docker/build-push-action@v3
         with:
+          context: "./backend"
           #path: ./backend/Dockerfile
           push: true
           #tags: ${{ env.docker_username }}/fortune-cookie-app-backend:1.0-${{ env.GIT_COMMIT }}
@@ -99,6 +100,7 @@ jobs:
       - name: Build and push frontend Dockerfile
         uses: docker/build-push-action@v3
         with:
+          context: "./frontend"
           #path: ./frontend/Dockerfile
           push: true
           #tags: ${{ env.docker_username }}/fortune-cookie-app-frontend:1.0-${{ env.GIT_COMMIT }}
