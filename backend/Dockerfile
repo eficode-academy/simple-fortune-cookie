@@ -2,8 +2,8 @@ FROM golang:1.16-alpine
 
 WORKDIR /app
 
-COPY ./backend .
+COPY . .
 
 RUN chmod +x ./backend
 
-CMD ["./backend"]
+CMD go run .
