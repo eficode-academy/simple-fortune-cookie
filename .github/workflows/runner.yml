@@ -2,7 +2,7 @@ name: deploy_runner
 on:
   push:
     branches:
-      - dev/**
+      - main
 jobs:
   Clone:
     name: Clone-repo
