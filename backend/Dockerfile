@@ -5,7 +5,7 @@ FROM ubuntu
 WORKDIR /backend
 COPY . .
 
-#install go on ubuntu container 
+RUN apt-get install golang-go -y
 RUN apt-get update -y && apt-get install redis -y 
 RUN go build . 
 
