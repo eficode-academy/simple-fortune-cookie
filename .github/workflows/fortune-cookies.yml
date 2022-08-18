@@ -1,35 +1,48 @@
-name: Go CI
-on: push
-env:
-  docker_username: ${{ secrets.DOCKER_USERNAME }}
-  docker_password: ${{ secrets.DOCKER_PASSWORD }}
-  GIT_COMMIT: ${{ github.sha }}
-jobs:
-  Clone-down:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Upload Repo
-        uses: actions/upload-artifact@v1
-        with:
-          name: code
-          path: .
+name: CICD
 
-  Frontend-test:
-    runs-on: ubuntu:latest
-    needs: [Clone-down]
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches:
+    - main
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # The "build" workflow
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: Download code
-      uses: actions/download-artifact@v1
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+    
+    # Setup Go
+    - name: Setup Go
+      uses: actions/setup-go@v2
       with:
-        name: code
-        path: .
-    - name: Execute go test
-      steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-go@v3
-      with:
-        go-version: '^1.13.1' # The Go version to download (if necessary) and use.
-  - run: go test
-      run: chmod +x frontend/main_test.go && frontend/main_test.go
+        go-version: '1.14.0' # The Go version to download (if necessary) and use.
+    
+    # Install all the dependencies
+    - name: Install dependencies
+      run: |
+        go version
+        go get -u golang.org/x/lint/golint
+        
+    # Run build of the application
+    - name: Run build
+      run: cd frontend && go build  
       
+    # Run vet & lint on the code
+    - name: Run vet & lint
+      run: |
+        go vet .
+        golint .
+    
+    # Run testing on the code
+    - name: Run testing
+      run: cd frontend && go test 
+    
+    
