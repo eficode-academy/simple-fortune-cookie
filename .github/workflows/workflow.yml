@@ -61,6 +61,3 @@ jobs:
       - name: Run Go Test on frontend
         run: go test
         working-directory: ./frontend
-      - name: Run Go test on backend
-        run: go test
-        working-directory: ./backend
