@@ -6,7 +6,7 @@ name: Release Manager
 jobs:
   release:
     name: Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: google-github-actions/release-please-action@v3
         with:
