@@ -17,17 +17,17 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: '1.19.0'
-      - name: Install dependencies for backend
-        working-directory: ./backend
-        run: |
-          go version
-          go get -u golang.org/x/lint/golint
-      - name: Build backend
-        working-directory: ./backend
-        run: go build
-      - name: Run application
-        working-directory: ./backend
-        run: go run backend
+      # - name: Install dependencies for backend
+      #   working-directory: ./backend
+      #   run: |
+      #     go version
+      #     go get -u golang.org/x/lint/golint
+      # - name: Build backend
+      #   working-directory: ./backend
+      #   run: go build
+      # - name: Run application
+      #   working-directory: ./backend
+      #   run: go run backend
       - name: Install dependencies for frontend
         working-directory: ./frontend
         run: |
@@ -36,6 +36,9 @@ jobs:
       - name: Build frontend
         working-directory: ./frontend
         run: go build
-      - name: Run application
+      # - name: Run application
+      #   working-directory: ./frontend
+      #   run: go run frontend && go test
+      - name: Test frontend build
         working-directory: ./frontend
-        run: go run frontend && go test
+        run: go test
