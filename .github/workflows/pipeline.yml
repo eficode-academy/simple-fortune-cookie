@@ -1,5 +1,5 @@
 name: Fortune Cookie CI/CD Pipeline
-on: push
+on:
   push:
     branches:
       - main
