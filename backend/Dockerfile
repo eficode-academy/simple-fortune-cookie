@@ -1,10 +1,16 @@
-FROM bitnami/redis:latest
+FROM redis:latest
 
-# pre-copy/cache go.mod for pre-downloading dependencies and only redownloading them in subsequent builds if they change
-# COPY go.mod go.sum ./
-# RUN go mod download && go mod verify
+WORKDIR ~
 
-COPY . .
-RUN go build -v
+RUN mkdir backend
+COPY . ./backend
 
-CMD ["backend"]
+# RUN apt-get update -y && \
+#     apt-get install -y golang-go --no-install-recommends && \
+#     apt-get autoremove -y && \
+#     apt-get clean -y && \
+#     rm -rf /var/lib/apt/lists/* && \
+#     CGO_ENABLED=0 GOOS=linux go build ./backend
+
+# CMD ["go", "run", "./backend"]
+CMD ["which", "go"]

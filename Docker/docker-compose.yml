@@ -26,6 +26,6 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-    - "db:/bitnami/redis/data"
+    - "db:/data"
     networks:
       - dbbridge
