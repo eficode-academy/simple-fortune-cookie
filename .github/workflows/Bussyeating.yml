@@ -15,10 +15,10 @@ jobs:
     - name: Download and clone repo
       uses: actions/checkout@v2
     - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: code
-          path: ./artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: code
+        path: ./artifacts
   Build:
     needs: Clone_repo
     name: Install Go language and dependecies & build
