@@ -10,7 +10,7 @@ on:
       - 29-make-a-kubernetes-manifest-file
 
 env:
-  KUBECONFIG: "~/.kube/config"
+  KUBECONFIG: "/.kube/config"
 
 jobs:
   setup_repo:
@@ -42,7 +42,7 @@ jobs:
         sed "s/FRONTEND_VERSION/${{ github.ref_name }}/g" frontend.yml
     - name: Set kubeconfig
       run: |
-        mkdir -p ~/.kube &&
+        mkdir -p /.kube &&
         echo ${{ secrets.KUBECONFIG }} > ${{ env.KUBECONFIG }}
     - name: Apply manifests
       run: |
