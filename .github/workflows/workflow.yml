@@ -1,0 +1,66 @@
+name: COOKIE CI
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    branches:
+      - 'main'
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+  GIT_COMMIT: ${{ github.sha }}
+jobs:
+  Clone-down:
+    name: Clone down repo
+    runs-on: ubuntu-latest
+    container: gradle:6-jdk11
+    steps:
+      - uses: actions/checkout@v1
+      - name: Upload Repo
+        uses: actions/upload-artifact@v1
+        with:
+          name: code
+          path: .
+  Docker-image-backend:
+    runs-on: ubuntu-latest
+    needs: [Clone-down]
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v1
+        with:
+          name: code
+          path: .
+      - name: build docker
+        run: chmod +x ci/build-docker-backend.sh && ci/build-docker-backend.sh
+      - name: push docker
+        run: chmod +x ci/push-docker-backend.sh && ci/push-docker-backend.sh
+  Docker-image-frontend:
+    runs-on: ubuntu-latest
+    needs: [Clone-down]
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v1
+        with:
+          name: code
+          path: .
+      - name: build docker
+        run: chmod +x ci/build-docker-frontend.sh && ci/build-docker-frontend.sh
+      - name: push docker
+        run: chmod +x ci/push-docker-frontend.sh && ci/push-docker-frontend.sh
+  Test:
+    needs: Clone-down
+    runs-on: ubuntu-latest
+    container: golang:latest
+    steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: code
+          path: .
+      - name: Run Go Test on frontend
+        run: go test
+        working-directory: ./frontend
+      - name: Run Go test on backend
+        run: go test
+        working-directory: ./backend
