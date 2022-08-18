@@ -5,3 +5,4 @@ COPY . .
 
 RUN go build
 
+CMD [ "/backend" ]
