@@ -4,6 +4,9 @@ on:
   release:
     branches:
       - main
+    types:
+      - published
+      - edited
   push:
     branches:
       - 29-make-a-kubernetes-manifest-file 
@@ -65,6 +68,9 @@ jobs:
   
   setup_repo:
     name: Setup repo
+    needs:
+      - build_image_backend
+      - build_image_frontend
     runs-on: ubuntu-22.04
     steps:
     - name: Checkout repo
@@ -89,7 +95,7 @@ jobs:
       run: |
         sed "s/BACKEND_VERSION/${{ github.ref_name }}/g" backend.yml > backend.yml
         sed "s/FRONTEND_VERSION/${{ github.ref_name }}/g" frontend.yml > frontend.yml
-        cat backend.yml
+        echo ${{ github.ref_name }}
     - name: Apply manifests
       run: |
         kubectl apply -f .

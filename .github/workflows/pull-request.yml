@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  clone_down:
-    name: Clone down repo
+  setup:
+    name: Setup
     runs-on: ubuntu-22.04
     steps:
     - name: Checkout repo
@@ -25,7 +25,7 @@ jobs:
 
   build_frontend:
     name: Build frontend
-    needs: clone_down
+    needs: setup
     runs-on: ubuntu-22.04
     steps:
     - name: Download frontend
@@ -46,7 +46,7 @@ jobs:
 
   build_backend:
     name: Build backend
-    needs: clone_down
+    needs: setup
     runs-on: ubuntu-22.04
     steps:
     - name: Download backend
