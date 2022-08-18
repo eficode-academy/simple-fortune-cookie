@@ -37,7 +37,7 @@ jobs:
         with:
           go-version: '1.19.0'    
       - name: Build with GO
-        run: go build .
+        run: go build ./backend/main.go && ./frontend/main.go
       - name: Test with GO
         run: go Test ./frontend
       - name: Upload repository
