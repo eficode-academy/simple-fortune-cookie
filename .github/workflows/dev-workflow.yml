@@ -36,11 +36,16 @@ jobs:
         with: 
           name: code
           path: .
-      - name: Upload jar
+      - name: Upload frontend
         uses: actions/upload-artifact@v2
         with:
-          name: build
-          path: app/build/libs/app-0.1-all.jar
+          name: build-frontend
+          path: app/frontend
+      - name: Upload backend
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-backend
+          path: app/backend
   Test:
     runs-on: ubuntu-latest
     needs: Build
@@ -53,3 +58,26 @@ jobs:
           path: .
       - run: chmod +x ci/go-test.sh && ci/go-test.sh
         name: Go-test
+  Docker-image:
+    runs-on: ubuntu-latest
+    needs: [Build, Test]
+    steps:
+      - name: Download Repo
+        uses: actions/download-artifact@v2
+        with: 
+          name: code
+          path: .
+      - name: Download frontend
+        uses: actions/download-artifact@v2
+        with:
+          name: build-frontend
+          path: app/frontend
+      - name: Download backend
+        uses: actions/download-artifact@v2
+        with:
+          name: build-backend
+          path: app/backend
+      - name: build docker backend
+        run: chmod +x ci/build-docker-backend.sh && ci/build-docker-backend.sh
+      - name: build docker frontend
+        run: chmod +x ci/build-docker-frontend.sh && ci/build-docker-frontend.sh
