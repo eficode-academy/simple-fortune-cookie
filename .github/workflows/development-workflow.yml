@@ -1,0 +1,19 @@
+name: Go
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - development
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: sudo apt-get update  && sudo apt-get install golang-go -y
+      - name: Build
+        run: cd frontend && go build .
+      - name: Test
+        run: cd frontend && go test .
