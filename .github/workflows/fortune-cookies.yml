@@ -5,14 +5,17 @@ env:
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
   GIT_COMMIT: ${{ github.sha }}
 jobs:
+  Clone-down:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Upload Repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
 
-
-
-
-
-
-
-  test:
+  Frontend-test:
     runs-on: ubuntu-latest
     needs: [Docker-image]
     steps:
