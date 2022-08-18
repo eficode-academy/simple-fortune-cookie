@@ -7,7 +7,7 @@ on:
     branches:
       - 'main'
 jobs:
-  Automated test:
+  Auto_test:
     name: Run automatic test
     runs-on: ubuntu-latest
     container: golang:latest
