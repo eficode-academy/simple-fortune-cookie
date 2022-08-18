@@ -28,7 +28,7 @@ jobs:
       - name: get Path
         run: pwd
       - name: Check if File Exits
-        run: go build -o frontend/go.mod
+        run: go build frontend/
       - name: go run
         run: go run ..
 
