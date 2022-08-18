@@ -9,9 +9,6 @@ on:
     branches:
       - 29-make-a-kubernetes-manifest-file
 
-env:
-  KUBECONFIG: "/.kubeconfig"
-
 jobs:
   setup_repo:
     name: Setup repo
@@ -40,9 +37,6 @@ jobs:
       run: |
         sed "s/BACKEND_VERSION/${{ github.ref_name }}/g" backend.yml && 
         sed "s/FRONTEND_VERSION/${{ github.ref_name }}/g" frontend.yml
-    - name: Set kubeconfig
-      run: |
-        echo "${{ secrets.KUBECONFIG }}" > "${{ env.KUBECONFIG }}"
     - name: Apply manifests
       run: |
         kubectl apply -f .
