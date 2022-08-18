@@ -1,24 +1,8 @@
 name: Cookie CI
 on: push
 jobs:
-  Clone-down:
-    name: Clone down repo
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clone down
-        uses: actions/checkout@v2
-      - name: Clone down
-        uses: actions/upload-artifact@v2
-        with:
-          name: code
-          path: .
   Frontend-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Download code
-        uses: actions/download-artifact@v1
-        with:
-          name: code
-          path: .
       - name: Execute frontend test
         run: chmod +x frontend/main_test.go && frontend/main_test.go
