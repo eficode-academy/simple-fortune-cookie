@@ -2,7 +2,7 @@ name: Dev CI
 on:
   push:
     branches:
-      - “dev/**”
+      - dev/**
 env:
   GIT_COMMIT: ${{ github.sha }}
   docker_username: ${{ secrets.DOCKER_USERNAME }}
