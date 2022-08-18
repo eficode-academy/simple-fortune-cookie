@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backenddeployment
+spec:
+  selector:
+    matchLabels:
+      app: backenddeployment
+  template:
+    metadata:
+      labels:
+        app: backenddeployment
+    spec:
+      containers:
+      - name: backenddeployment
+        image: olexmeister/backend
+        env:
+          - name: REDIS_DNS
+            value: databaseservice

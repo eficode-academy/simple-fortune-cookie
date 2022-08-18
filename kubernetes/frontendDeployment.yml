@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontenddeployment
+spec:
+  selector:
+    matchLabels:
+      app: frontenddeployment
+  template:
+    metadata:
+      labels:
+        app: frontenddeployment
+    spec:
+      containers:
+      - name: frontenddeployment
+        image: olexmeister/frontend
+        env:
+          - name: BACKEND_DNS
+            value: backendservice
