@@ -21,7 +21,7 @@ jobs:
       steps:
       - uses: actions/checkout@v2
       - name: Upload Repo
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v1
         with:
           name: code
           path: .
@@ -62,7 +62,7 @@ jobs:
     container: gradle:6-jdk11
     steps:
     - name: Download code
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v1
       with:
         name: code
         path: . 
@@ -72,12 +72,8 @@ jobs:
         go-version: 1.16
     - name: Frontend-Build
       run: cd frontend && go build
-    #- name: Build with Gradle
-    #  run: chmod +x ci/build-app.sh && ci/build-app.sh
-    #- name: Test with Gradle
-    #  run: chmod +x ci/unit-test-app.sh && ci/unit-test-app.sh
     - name: Upload Repo
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v1
       with:
         name: code
         path: .
