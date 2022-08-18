@@ -68,6 +68,9 @@ jobs:
   
   setup_repo:
     name: Setup repo
+    needs:
+      - build_image_backend
+      - build_image_frontend
     runs-on: ubuntu-22.04
     steps:
     - name: Checkout repo
