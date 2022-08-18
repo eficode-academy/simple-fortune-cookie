@@ -4,8 +4,10 @@ on:
   push:
     branches:
       - "trunk"
+  release:
     tags:
       - "v*"
+
 jobs:
   build-and-push-frontend-image:
     runs-on: ubuntu-latest
@@ -50,6 +52,7 @@ jobs:
       packages: write
 
     steps:
+      - run: echo ${ github.event.release.prerelease }
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -79,7 +82,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
   deploy-development-environment:
-    if: github.ref == 'refs/heads/trunk'
+    if: github.ref_name == 'trunk'
     needs: [build-and-push-backend-image, build-and-push-frontend-image]
     runs-on: [self-hosted, development]
     steps:
@@ -87,7 +90,7 @@ jobs:
       - run: chmod +x ci/deploy.sh
       - run: ci/deploy.sh trunk
   deploy-staging-environment:
-    if: "!github.event.release.prerelease"
+    if: github.event_name == 'release' && github.event.release.prerelease
     needs: [build-and-push-backend-image, build-and-push-frontend-image]
     runs-on: [self-hosted, staging]
     steps:
@@ -95,7 +98,7 @@ jobs:
       - run: chmod +x ci/deploy.sh
       - run: ci/deploy.sh ${{ github.ref_name }}
   deploy-production-environment:
-    if: github.event_name == 'release'
+    if: github.event_name == 'release' && !github.event.release.prerelease
     needs: [build-and-push-backend-image, build-and-push-frontend-image]
     runs-on: [self-hosted, production]
     steps:
