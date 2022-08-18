@@ -1,0 +1,28 @@
+version: '3'
+services:
+  frontend:
+    container_name: Frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      - BACKEND_DNS=backend
+    networks:
+      - default
+  backend:
+    container_name: Backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 9000:9000
+    networks:
+      - default
+  # database:
+  #   container_name: Database
+  #   image: mysql:5.7
+networks:
+  default:
+    driver: bridge
