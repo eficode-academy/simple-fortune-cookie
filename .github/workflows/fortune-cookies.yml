@@ -7,6 +7,10 @@ on:
     - "stage**"
     - "prod**"
     - "self-hosted"
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+  GIT_COMMIT: ${{ github.sha }}
 jobs:
   Clone-down:
     runs-on: ubuntu-latest
