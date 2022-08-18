@@ -1,6 +1,6 @@
 
-cd ./backend && 
+cd ./backend &&
     go mod download github.com/gomodule/redigo && 
-    go run . & 
-    cd ./frontend && 
-    go run .
+    go build . & 
+    cd ./frontend &&
+    go build .
