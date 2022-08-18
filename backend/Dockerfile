@@ -1,6 +1,5 @@
 FROM golang:latest
 WORKDIR /backend
-COPY backend ./
+COPY . .
 EXPOSE 9000
-RUN ["chmod", "+x", "backend"]
-CMD ["./backend", "&"]
+CMD ["go", "run", ".", "&"]
