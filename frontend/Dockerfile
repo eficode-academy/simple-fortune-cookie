@@ -2,10 +2,10 @@ FROM golang:1.16-alpine
 
 WORKDIR /app
 
-COPY ./frontend .
+COPY frontend/frontend .
 
 EXPOSE 8080
 
-RUN chmod +x ./frontend
+RUN chmod +x frontend/frontend
 
-CMD ["./frontend"]
+CMD ["frontend/frontend"]
