@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  redis-server:
+    container_name: redis-server
+    image: "redis:alpine"
+    command: redis-server
+    ports:
+      - "6379:6379"   
+
+  go-backend:
+    container_name: go-backend
+    build:
+      context: ../backend
+      dockerfile: dockerfile
+    depends_on:
+      - redis-server
+
+  go-frontend:
+    container_name: go-frontend
+    build: 
+      context: ../frontend
+      dockerfile: dockerfile
+    depends_on:
+      - go-backend
+

@@ -1,0 +1,13 @@
+FROM golang:1.16 AS builder
+WORKDIR /app
+ADD . . 
+ENV REDIS_DNS=127.0.0.1
+COPY . .
+RUN go mod download 
+RUN go build -o /app
+
+FROM ubuntu:latest AS main
+COPY --from=builder /app /myapp
+RUN ls /myapp
+WORKDIR /myapp
+ENTRYPOINT ["/myapp/app"]
