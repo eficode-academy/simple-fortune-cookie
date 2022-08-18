@@ -9,3 +9,7 @@ services:
 
   backend:
     build: /backend
+
+  db: 
+    image: redis
+    

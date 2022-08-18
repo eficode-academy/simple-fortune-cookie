@@ -1,0 +1,28 @@
+apiVersion: app/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: deployment-frontend
+  name: deployment-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-frontend
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: deployment-frontend
+    spec:
+      containers:
+      - image: nanies20/simple-fortune-cookie-frontend:latest
+        name: frontend
+        resources: {}
+status: {}
