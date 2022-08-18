@@ -1,8 +1,5 @@
 name: Go webpage
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main

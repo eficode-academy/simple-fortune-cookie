@@ -2,8 +2,7 @@ version: "3"
 services:
 
   frontend:
-    image: frontend
-    build: .
+    image: olexmeister/frontend:latest
     ports:
     - 8080:8080
     environment:
@@ -12,7 +11,6 @@ services:
 
   backend:
     container_name: backend-container
-    image: backend
-    build: .
+    image: olexmeister/backend:latest
     ports:
     - 9000:9000
