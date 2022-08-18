@@ -12,12 +12,3 @@ jobs:
         run: echo "Hello World!"
       - name: frontend-test
         run: go build -v frontend/main_test.go
-  Run-npm-on-Ubuntu:
-    name: Run npm on Ubuntu
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-      - run: npm help
