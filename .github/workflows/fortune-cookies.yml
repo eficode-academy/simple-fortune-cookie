@@ -4,6 +4,8 @@ on:
     branches:
     - "main"
     - "dev**"
+    - "stage**"
+    - "prod**"
     - "self-hosted"
 jobs:
   Clone-down:
