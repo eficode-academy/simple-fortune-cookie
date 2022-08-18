@@ -93,8 +93,8 @@ jobs:
         path: .
     - name: Inject release versions
       run: |
-        sed "s/BACKEND_VERSION/${{ github.ref_name }}/g" backend.yml > backend.yml
-        sed "s/FRONTEND_VERSION/${{ github.ref_name }}/g" frontend.yml > frontend.yml
+        sed -i "s/BACKEND_VERSION/${{ github.ref_name }}/g" backend.yml
+        sed -i "s/FRONTEND_VERSION/${{ github.ref_name }}/g" frontend.yml
         echo ${{ github.ref_name }}
     - name: Apply manifests
       run: |
