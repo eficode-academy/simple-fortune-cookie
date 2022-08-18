@@ -10,6 +10,6 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get update  && sudo apt-get install golang-go -y
       - name: Build
-        run: go build /frontend
+        run: go build ./frontend
       - name: Test
-        run: go test /frontend
+        run: go test ./frontend
