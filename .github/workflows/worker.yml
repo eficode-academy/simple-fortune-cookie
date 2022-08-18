@@ -28,8 +28,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: get Path
         run: cd frontend
+      - name: TELL ME WHYY!!
+        run: ls
       #- name: Check if File Exits
       #  run: go build ./frontend/
       - name: go run
-        run: go run ./frontend/main.go
+        run: go run main.go
 
