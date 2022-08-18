@@ -1,12 +1,7 @@
 name: test
 on:
   pull_request:
-    branches:
-      - trunk
-    paths:
-      - ./backend
-      - ./frontend
-      - ./.github
+    types: [opened, reopened]
 
 env:
   COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
