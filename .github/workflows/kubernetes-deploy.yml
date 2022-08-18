@@ -1,0 +1,41 @@
+name: Deploy CI
+
+on:
+  workflow_run:
+    workflows: ["Release CD"]
+    types:
+      - completed
+
+env:
+  KUBECONFIG: ${{ secrets.KUBECONFIG }}
+
+jobs:
+  clone_down:
+    name: Setup repo
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Upload frontend
+      uses: actions/upload-artifact@v2
+      with:
+        name: manifests
+        path: ./kubernetes-manifests
+
+  deploy-to-kubernetes:
+    name: Deploy to kubernetes
+    runs-on: ubuntu-22.04
+    container: lachlanevenson/k8s-kubectl:v1.24.3
+    steps:
+    - name: Download manifests
+      uses: actions/download-artifact@v2
+      with:
+        name: manifests
+        path: .
+    - name: Inject release versions
+      run: |
+        sed "s/BACKEND_VERSION/${{ github.ref_name }}/g" backend.yml && 
+        sed "s/FRONTEND_VERSION/${{ github.ref_name }}/g" frontend.yml
+    - name: Apply manifests
+      run: |
+        kubectl apply -f .
