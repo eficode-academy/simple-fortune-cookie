@@ -89,11 +89,18 @@ jobs:
         with:
           username: ${{ env.docker_username }}
           password: ${{ env.docker_password }}
-      - name: Build and push
+      - name: Build and push backend Dockerfile
         uses: docker/build-push-action@v3
         with:
+          context: ./backend
           push: true
-          tags: ${{ env.docker_username }}/fortune-cookie-app:1.0-${{ env.GIT_COMMIT }}
+          tags: ${{ env.docker_username }}/fortune-cookie-app-backend:1.0-${{ env.GIT_COMMIT }}
+      - name: Build and push frontend Dockerfile
+        uses: docker/build-push-action@v3
+        with:
+          context: ./frontend
+          push: true
+          tags: ${{ env.docker_username }}/fortune-cookie-app-frontend:1.0-${{ env.GIT_COMMIT }}
     # - name: Download repo
     #   uses: actions/download-artifact@v2
     #   with:
