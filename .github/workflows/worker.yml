@@ -30,7 +30,6 @@ jobs:
         working-directory: frontend
         run: go build
       - uses: actions/upload-artifact@v3
-        working-directory: frontend
         with:
           name: Build
           path: .
