@@ -7,9 +7,43 @@ on:
     branches:
     - "main"
     - "dev**"
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+  GIT_COMMIT: ${{ github.sha }}
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  Docker-image:
+    on: push
+jobs:
+  Docker-image-frontend:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download code
+      uses: actions/download-artifact@v1
+      with:
+        name: code
+        path: .
+    - name: build docker
+      run: chmod +x ci/build-docker-frontend.sh && ci/build-docker-frontend.sh
+    - name: push docker
+      run: chmod +x ci/push-docker.sh && ci/push-docker.sh
+
+  Docker-image-backend:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download code
+      uses: actions/download-artifact@v1
+      with:
+        name: code
+        path: .
+    - name: build docker
+      run: chmod +x ci/build-docker-backend.sh && ci/build-docker-backend.sh
+    - name: push docker
+      run: chmod +x ci/push-docker.sh && ci/push-docker.sh
+
   # The "build" workflow
   test:
     # The type of runner that the job will run on
