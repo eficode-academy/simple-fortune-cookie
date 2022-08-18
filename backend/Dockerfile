@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY ./backend .
 
-EXPOSE 8080
+RUN chmod +x ./backend
 
 CMD ["./backend"]
