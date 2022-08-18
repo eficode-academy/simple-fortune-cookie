@@ -15,10 +15,17 @@ services:
     ports:
     - 9000:9000
     environment:
-        REDIS_DNS: backend
+        REDIS_DNS: redis
         REDIS_PORT: 6379
+
+  redis:
+    container_name: redis_container
+    image: redis:1.8.5
+    build: .
+    ports:
+    - 6397:6397
     volumes:
-      - redisVolume: /storage
+      - redisVolume:/data
 
 volumes:
   redisVolume:
