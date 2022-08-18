@@ -9,7 +9,7 @@ env:
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
 jobs:
   Clone-down:
-    runs-on: ubuntu-latest
+    runs-on: dev-runner
     container: golang:latest
     steps:
       - name: Clone-down
@@ -20,7 +20,7 @@ jobs:
           name: code
           path: .
   Build:
-    runs-on: ubuntu-latest
+    runs-on: dev-runner
     needs: Clone-down
     container: golang:latest
     steps:
@@ -47,7 +47,7 @@ jobs:
           name: build-backend
           path: backend/backend
   Test:
-    runs-on: ubuntu-latest
+    runs-on: dev-runner
     needs: Build
     container: golang:latest
     steps:
@@ -59,7 +59,7 @@ jobs:
       - run: chmod +x ci/go-test.sh && ci/go-test.sh
         name: Go-test
   Docker-image:
-    runs-on: ubuntu-latest
+    runs-on: dev-runner
     needs: [Build, Test]
     steps:
       - name: Download Repo
