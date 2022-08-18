@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fortune
+  labels:
+    app: fortune
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fortune
+  template:
+    metadata:
+      labels:
+        app: fortune
+    spec:
+      containers:
+      - name: frontend
+        image: nicolajh/simple-fortune-cookie-frontend
+      - name: backend
+        image:  nicolajh/simple-fortune-cookie-backend
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fortune-service
+  labels:
+    app: fortune
+spec:
+  selector:
+    app: fortune
+  type: NodePort
+  ports:
+  - name: fortune-service
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
