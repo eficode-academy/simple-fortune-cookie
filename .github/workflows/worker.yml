@@ -30,6 +30,8 @@ jobs:
         run: cd frontend
       - name: TELL ME WHYY!!
         run: ls && cd frontend
+      - name: AIN'T
+        run: ls
       #- name: Check if File Exits
       #  run: go build ./frontend/
       - name: go run
