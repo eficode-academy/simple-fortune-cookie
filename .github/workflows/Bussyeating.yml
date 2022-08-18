@@ -79,13 +79,13 @@ jobs:
     needs: [Build,Auto_test]
     runs-on: ubuntu-latest
     steps:
-    - name: Download repo
-      uses: actions/download-artifact@v2
-      with:
-        name: code
-        path: .
-    - name: Check out code
-      uses: actions/checkout@v2
+    # - name: Download repo
+    #   uses: actions/download-artifact@v2
+    #   with:
+    #     name: code
+    #     path: .
+    # - name: Check out code
+    #   uses: actions/checkout@v2
     # - name: Set up Docker Buildx
     #   uses: docker/setup-buildx-action@v2
     - name: Login to DockerHub
