@@ -6,6 +6,7 @@ RUN go get -d -v && CGO_ENABLED=0 GOOS=linux go build frontend
 # final stage
 FROM scratch
 COPY --from=builder /src/frontend /src/frontend
-COPY /static /src
-COPY /templates /src
-ENTRYPOINT ["/src/frontend"]
+COPY static /src/static
+COPY templates /src/templates
+WORKDIR /src
+ENTRYPOINT ["./frontend"]
