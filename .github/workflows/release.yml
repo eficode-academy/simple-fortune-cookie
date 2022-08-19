@@ -81,9 +81,9 @@ jobs:
         name: manifests
         path: ./kubernetes-manifests
 
-  deploy-to-kubernetes:
-    name: Deploy to kubernetes
-    runs-on: self-hosted
+  deploy-to-staging:
+    name: Deploy to staging
+    runs-on: [self-hosted, linux, x64, staging]
     needs: setup_repo
     steps:
     - name: Download manifests
@@ -99,3 +99,4 @@ jobs:
     - name: Apply manifests
       run: |
         kubectl apply -f .
+        

@@ -1,0 +1,28 @@
+name: Production release CD
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version to release'
+        required: true
+
+jobs:
+  deploy-to-production:
+    name: Deploy to production
+    runs-on: [self-hosted, linux, x64, production]
+    needs: setup_repo
+    steps:
+    - name: Download manifests
+      uses: actions/download-artifact@v2
+      with:
+        name: manifests
+        path: .
+    - name: Inject release versions
+      run: |
+        sed -i "s/BACKEND_VERSION/${{ github.ref_name }}/g" backend.yml
+        sed -i "s/FRONTEND_VERSION/${{ github.ref_name }}/g" frontend.yml
+        echo ${{ github.ref_name }}
+    - name: Apply manifests
+      run: |
+        kubectl apply -f .
