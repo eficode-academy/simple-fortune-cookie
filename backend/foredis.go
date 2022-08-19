@@ -5,19 +5,35 @@ import (
 	"github.com/gomodule/redigo/redis"
 	"log"
 	"sync"
+	"time"
+	"strconv"
 )
 
 var dbLink redis.Conn
 var usingRedis = false
+var maxAttempts = 10
 
 func init() {
-	conn, err := redis.Dial("tcp", fmt.Sprintf("%s:6379", getEnv("REDIS_DNS", "localhost")))
+	var attempts = 0
+	var err error
+	var conn redis.Conn
+
+	for attempts < maxAttempts {
+		time.Sleep(10 * time.Second)
+		log.Println("redis", "Attempting to connect dial redis.. (" + strconv.Itoa(attempts) + ")")
+		conn, err = redis.Dial("tcp", fmt.Sprintf("%s:6379", getEnv("REDIS_DNS", "localhost")))
+		attempts += 1
+		if err == nil {
+			break
+		}
+	}
 	if err != nil {
 		log.Println("redis", err)
 	} else {
 		dbLink = conn
 		usingRedis = true
 
+		log.Println("redis", "Succesfully dialed redis!")
 		resKeys, err := redis.Values(dbLink.Do("hkeys", "fortunes"))
 		if err != nil {
 			fmt.Println("redis hkeys failed", err.Error())
