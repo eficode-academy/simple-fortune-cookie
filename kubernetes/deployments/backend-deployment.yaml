@@ -39,5 +39,5 @@ spec:
           httpGet:
             path: /ready
             port: 9000
-          initialDelaySeconds: 10
+          initialDelaySeconds: 60
           periodSeconds: 5

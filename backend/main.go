@@ -181,12 +181,10 @@ func ReadinessHandler(w http.ResponseWriter, r *http.Request) {
 		_, err := dbLink.Do("PING")
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-		}
-		else {
+		} else {
 			w.WriteHeader(http.StatusOK)
 		}
-	}
-	else {
+	} else {
 		w.WriteHeader(http.StatusOK)
 	}
 }
