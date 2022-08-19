@@ -7,6 +7,6 @@ RUN mkdir backend
 COPY ./** ./backend/
 
 RUN cd ./backend && \
-    GOOS=linux go build -o golang-memtest . -a
+    GOOS=linux go build -o golang-memtest -a .
 
 CMD ["bash","./backend/launch.sh"]
