@@ -1,2 +1,2 @@
 #!bin/bash
-go run backend
+go run .
