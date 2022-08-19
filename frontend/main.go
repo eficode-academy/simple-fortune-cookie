@@ -32,9 +32,22 @@ func HealthzHandler(w http.ResponseWriter, r *http.Request) {
     io.WriteString(w, "healthy")
 }
 
+func ReadinessHandler(w http.ResponseWriter, r *http.Request) {
+	// Check backend connectivity
+    resp, err := myClient.Get(fmt.Sprintf("http://%s:%s/ready", BACKEND_DNS, BACKEND_PORT))
+
+	if resp.StatusCode != 200 || err != nil {
+        w.WriteHeader(http.StatusInternalServerError)
+    } else {
+        w.WriteHeader(http.StatusOK)
+    }
+}
+
 func main() {
 
     http.HandleFunc("/healthz", HealthzHandler)
+
+    http.HandleFunc("/ready", ReadinessHandler)
 
     http.HandleFunc("/api/random", func (w http.ResponseWriter, r *http.Request) {
         resp, err := myClient.Get(fmt.Sprintf("http://%s:%s/fortunes/random", BACKEND_DNS, BACKEND_PORT))
