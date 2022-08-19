@@ -47,6 +47,8 @@ func main() {
 
     http.HandleFunc("/healthz", HealthzHandler)
 
+    http.HandleFunc("/ready", ReadinessHandler)
+
     http.HandleFunc("/api/random", func (w http.ResponseWriter, r *http.Request) {
         resp, err := myClient.Get(fmt.Sprintf("http://%s:%s/fortunes/random", BACKEND_DNS, BACKEND_PORT))
         if err != nil {
