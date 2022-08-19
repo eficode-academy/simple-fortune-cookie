@@ -35,3 +35,9 @@ spec:
             path: /healthz
             port: 9000
           initialDelaySeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 9000
+          initialDelaySeconds: 10
+          periodSeconds: 5

@@ -175,6 +175,22 @@ func HealthzHandler(w http.ResponseWriter, r *http.Request) {
     io.WriteString(w, "healthy")
 }
 
+func ReadinessHandler(w http.ResponseWriter, r *http.Request) {
+	// PING PONG to check connectivity
+	if usingRedis {
+		_, err := dbLink.Do("PING")
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+		}
+		else {
+			w.WriteHeader(http.StatusOK)
+		}
+	}
+	else {
+		w.WriteHeader(http.StatusOK)
+	}
+}
+
 func main() {
 	
 	mux := http.NewServeMux()
@@ -184,6 +200,7 @@ func main() {
 	mux.Handle("/fortunes", fortuneH)
 	mux.Handle("/fortunes/", fortuneH)
     mux.HandleFunc("/healthz", HealthzHandler)
+	mux.HandleFunc("/ready", ReadinessHandler)
 
 	http.ListenAndServe(":9000", mux)
 }
