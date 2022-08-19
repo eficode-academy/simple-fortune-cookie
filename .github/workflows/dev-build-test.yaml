@@ -39,19 +39,6 @@ jobs:
           path: .
       - name: Build frontend
         run: cd frontend && go build
-  Lint_Dockerfile_be:
-    runs-on: ubuntu-22.04
-    needs: Clone-down
-    steps:
-      - name: Download code
-        uses: actions/download-artifact@v2
-        with:
-          name: code
-          path: .
-      - name: Lint Dockerfile_be
-        uses: hadolint/hadolint-action@v2.0.0
-        with:
-          dockerfile: Dockerfile_be
   Lint_Dockerfile_backend:
     runs-on: ubuntu-22.04
     needs: Clone-down
