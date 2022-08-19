@@ -50,14 +50,17 @@ jobs:
       - name: docker login
         run: | # log into docker hub account
           docker login -u ${{env.docker_username}} -p ${{env.docker_password}} 
-      - name: docker build frontend # get the date of the build
-        run: cd frontend && docker build . --file Dockerfile --tag fortune_cookie && cd ..
+      - name: Get current date # get the date of the build
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d--%M-%S')"
+      - name: docker build frontend 
+        run: cd frontend && docker build . --file Dockerfile --tag $REPO_NAME:${{ steps.date.outputs.date }} && cd ..
       - name: Docker Push
-        run: docker push ${{env.docker_username}}/$REPO_NAME
+        run: docker push $REPO_NAME:${{ steps.date.outputs.date }}
       - name: docker build backend # get the date of the build
-        run: cd backend && docker build . --file Dockerfile --tag 
+        run: cd backend && docker build . --file Dockerfile --tag $REPO_NAME:${{ steps.date.outputs.date }}
       - name: Docker Push
-        run: docker push ${{env.docker_username}}/$REPO_NAME
+        run: docker push $REPO_NAME:${{ steps.date.outputs.date }}
   Frontend-test:
     runs-on: ubuntu-latest
     needs: [Clone-down]
