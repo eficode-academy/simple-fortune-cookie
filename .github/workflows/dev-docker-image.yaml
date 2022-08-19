@@ -1,9 +1,9 @@
 name: Development Docker Image Push
 on:
   workflow_dispatch:
-  pull_request:
-    types:
-      - closed
+  #pull_request:
+  #  types:
+  #    - closed
 env: # Set the secret as an input
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
@@ -22,7 +22,7 @@ jobs:
           path: .
   Lint_Dockerfile_be:
     runs-on: ubuntu-22.04
-    needs: if_merged
+    #needs: if_merged
     steps:
       - name: Download code
         uses: actions/download-artifact@v2
@@ -37,7 +37,6 @@ jobs:
     runs-on: ubuntu-22.04
     needs: Lint_Dockerfile_be
     steps:
-      - name: build
       - name: Download code
         uses: actions/download-artifact@v2
         with:
