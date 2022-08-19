@@ -14,6 +14,7 @@ env: # Set the secret as an input
 jobs:
   Clone-down:
     runs-on: ubuntu-22.04
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Clone-down
         uses: actions/checkout@v2
