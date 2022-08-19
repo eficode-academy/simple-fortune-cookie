@@ -97,13 +97,13 @@ jobs:
       - name: Build and push backend Dockerfile
         uses: docker/build-push-action@v3
         with:
-          file: ./backend/Dockerfile
+          context: ./backend
           push: true
           tags: ${{ env.docker_username }}/simple-fortune-cookie_go-frontend:latest-${{ env.GIT_COMMIT }}
       - name: Build and push frontend Dockerfile
         uses: docker/build-push-action@v3
         with:
-          file: ./frontend/Dockerfile
+          context: ./frontend
           push: true
           tags: ${{ env.docker_username }}/simple-fortune-cookie_go-backend:latest-${{ env.GIT_COMMIT }}
     # - name: Download repo
