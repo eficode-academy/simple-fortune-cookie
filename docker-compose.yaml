@@ -4,16 +4,15 @@ services:
 
   backend:
     image: asterixcode/fortune-cookie-backend:latest
-    #build: ./backend 
-    ports: 
+    ports:
       - "9000:9000"
-  
+
   frontend:
     depends_on:
       - backend
     image: asterixcode/fortune-cookie-frontend:latest
-    #build: ./frontend
     ports:
       - "8080:8080"
     environment:
       - BACKEND_DNS=backend
+      - BACKEND_PORT=9000
