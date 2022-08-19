@@ -10,7 +10,7 @@ env: # Set the secret as an input
   GIT_COMMIT: ${{ github.sha }}
 jobs:
   if_merged:
-    if: github.event.pull_request.merged == true
+    #if: github.event.pull_request.merged == true
     runs-on: ubuntu-22.04
     steps:
       - name: Clone-down
