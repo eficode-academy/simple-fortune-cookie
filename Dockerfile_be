@@ -1,10 +1,10 @@
 # Build
 FROM golang:1.19-alpine as builder
-ADD . /src/
+COPY . /src/
 ENV CGO_ENABLED=0
 ENV GOOS=linux
-RUN cd /src/backend && \
-    go mod tidy && \
+WORKDIR /src/backend
+RUN go mod tidy && \
     go build -o backend
 
 # Run
