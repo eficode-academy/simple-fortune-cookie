@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Verion'     
+        description: 'Version'     
         required: true
     branch:
       - main
