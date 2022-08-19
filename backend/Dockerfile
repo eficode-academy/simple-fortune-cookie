@@ -1,11 +1,12 @@
 FROM golang:latest
 
 WORKDIR ~
+ENV CGO_ENABLED=0 
 
 RUN mkdir backend
 COPY ./** ./backend/
 
 RUN cd ./backend && \
-    CGO_ENABLED=0 GOOS=linux go build -a -o golang-memtest .
+    GOOS=linux go build -o golang-memtest . -a
 
 CMD ["bash","./backend/launch.sh"]
