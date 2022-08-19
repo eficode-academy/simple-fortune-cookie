@@ -1,10 +1,7 @@
-name: Dev Build Test CI
+name: Dev Build Test 
 on: 
   push:
-    branches: dev/**
-env: # Set the secret as an input
-  docker_username: ${{ secrets.DOCKER_USERNAME }}
-  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+    branches-ignore: [main, release/**]
 jobs:
   Clone-down: 
     runs-on: ubuntu-22.04
@@ -42,3 +39,29 @@ jobs:
           path: .
       - name: Build frontend
         run: cd frontend && go build
+  Lint_Dockerfile_backend:
+    runs-on: ubuntu-22.04
+    needs: Clone-down
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: Lint Dockerfile Backend
+        uses: hadolint/hadolint-action@v2.0.0
+        with:
+          dockerfile: Dockerfile_be
+  Lint_Dockerfile_frontend:
+    runs-on: ubuntu-22.04
+    needs: Clone-down
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: Lint Dockerfile Front
+        uses: hadolint/hadolint-action@v2.0.0
+        with:
+          dockerfile: Dockerfile_fe
