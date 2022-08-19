@@ -1,0 +1,66 @@
+name: Development Docker Image Push
+on:
+  pull_request:
+    types:
+      - closed
+env: # Set the secret as an input
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+  GIT_COMMIT: ${{ github.sha }}
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Clone-down
+        uses: actions/checkout@v2
+      - name: Upload Repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
+  Lint_Dockerfile_be:
+    runs-on: ubuntu-22.04
+    needs: if_merged
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: Lint Dockerfile_be
+        uses: hadolint/hadolint-action@v2.0.0
+        with:
+          dockerfile: Dockerfile_be
+  Build_Image_be:
+    runs-on: ubuntu-22.04
+    needs: Lint_Dockerfile_be
+    steps:
+      - name: build
+      - name: Download code
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - uses: docker/login-action@v1.10.0
+        name: Login to Dockerhub
+        with:
+          username: ${{ env.docker_username }}
+          password: ${{ env.docker_password }}
+      - name: Build Docker image backend
+        run: docker build . --file Dockerfile_be -t ${{ env.docker_username }}/dev-fortune:latest -t ${{ env.docker_username }}/dev-fortune:1.0-${GIT_COMMIT::8}
+      - name: Push Docker image backend latest
+        run: docker push ${{ env.docker_username }}/dev-fortune:latest
+      - name: Push Docker image backend commit
+        run: docker push ${{ env.docker_username }}/dev-fortune:1.0-${GIT_COMMIT::8}
+    
+#docker build 
+
+
+# Docker-Build:
+ #   runs-on: ubuntu-22.04
+ #   needs:
+ #   steps:
+ #     
+ #     - name: Build the Docker image fronend
+ #       run: docker build . --file Dockerfile_fe --tag devops/fronend:latest
