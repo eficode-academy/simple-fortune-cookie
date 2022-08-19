@@ -46,3 +46,13 @@ jobs:
           context: ./frontend
           push: true
           tags: nicobah/devops_frontend
+  Test_kubernetes:
+    runs-on: self-hosted
+
+    steps:
+      - name: check out
+        uses: actions/checkout@v3
+      - name: setup cluster
+        run: chmod +x ./kubernetes/td.sh && bash ./kubernetes/td.sh
+      - name: test cluster
+        run: chmod +x ./kubernetes/test.sh && bash ./kubernetes/test.sh
