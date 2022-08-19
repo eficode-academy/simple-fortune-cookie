@@ -5,7 +5,7 @@ on:
     branches:
       - "trunk"
   release:
-    types: [published]
+    types: [published, edited]
     tags:
       - "v*"
 
