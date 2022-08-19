@@ -1,13 +1,11 @@
 FROM golang:latest
 
-WORKDIR ~
 ENV CGO_ENABLED=0
 ENV GOOS=linux
 
-RUN mkdir backend
-COPY ./** ./backend/
+COPY . .
 
-RUN cd ./backend && go build
+RUN go build
  # cd ./backend && \
 #    go build -a -o golang-memtest .
 
