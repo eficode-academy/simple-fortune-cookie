@@ -1,0 +1,64 @@
+name: Release Docker Image
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Verion'     
+        required: true
+    branch:
+      - main
+env: # Set the secret as an input
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+  GIT_COMMIT: ${{ github.sha }}
+jobs:
+  Clone-down:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Clone-down
+        uses: actions/checkout@v2
+      - name: Upload Repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
+  Build_Image_release_be:
+    runs-on: ubuntu-22.04
+    needs: Clone-down
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - uses: docker/login-action@v1.10.0
+        name: Login to Dockerhub
+        with:
+          username: ${{ env.docker_username }}
+          password: ${{ env.docker_password }}
+      - name: Build Docker image backend
+        run: docker build . --file Dockerfile_be -t ${{ env.docker_username }}/backend-fortune:latest -t ${{ env.docker_username }}/backend-fortune:${{ github.event.inputs.version }}
+      - name: Push Docker image backend latest
+        run: docker push ${{ env.docker_username }}/backend-fortune:latest
+      - name: Push Docker image backend
+        run: docker push ${{ env.docker_username }}/backend-fortune:${{ github.event.inputs.version }}
+  Build_Image_release_fe:
+    runs-on: ubuntu-22.04
+    needs: Clone-down
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - uses: docker/login-action@v1.10.0
+        name: Login to Dockerhub
+        with:
+          username: ${{ env.docker_username }}
+          password: ${{ env.docker_password }}
+      - name: Build Docker image frontend
+        run: docker build . --file Dockerfile_be -t ${{ env.docker_username }}/frontend-fortune:latest -t ${{ env.docker_username }}/frontend-fortune:${{ github.event.inputs.version }}
+      - name: Push Docker image frontend latest
+        run: docker push ${{ env.docker_username }}/frontend-fortune:latest
+      - name: Push Docker image frontend
+        run: docker push ${{ env.docker_username }}/frontend-fortune:${{ github.event.inputs.version }}
