@@ -6,12 +6,9 @@ if [ $# -eq 0 ]
   then
     echo "No arguments supplied. Please provide time and concurrent calls"
 else
-    echo poopy
-    cat ./endpoints.txt | while read line 
-    do
-        echo line
-        URL=$ADDRESS:$line
-        echo Sieging $URL
-        siege -t$1 -c$2 -v $URL
-done
+  while read line; do
+    URL=http://$ADDRESS$line
+    echo Sieging $URL
+    siege -t$1 -c$2 -v $URL
+  done < endpoints.txt
 fi

@@ -1,1 +1,3 @@
-/healthz
+/api/all
+/api/random
+/
