@@ -1,7 +1,7 @@
 name: Dev Build Test 
 on: 
   push:
-    branches-ignore: [main, release]
+    branches-ignore: [main]
 jobs:
   Clone-down: 
     runs-on: ubuntu-22.04
