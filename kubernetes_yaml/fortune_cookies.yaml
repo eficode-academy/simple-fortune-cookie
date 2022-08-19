@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: eficodeacademy/devopsacademya:latest
+        image: mizzlethehorse/frotend:latest
         ports:
         - containerPort: 80
 ---
@@ -52,7 +52,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: eficodeacademy/devopsacademya:latest
+        image: mizzlethehorse/backend:latest
         ports:
         - containerPort: 80
 ---
