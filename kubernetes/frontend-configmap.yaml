@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: frontend-configmap
-data:
-  BACKEND_DNS: backend-service
-  BACKEND_PORT: "9000"
