@@ -3,7 +3,9 @@ FROM golang:1.19-alpine as builder
 ADD . /src/
 ENV CGO_ENABLED=0
 ENV GOOS=linux
-RUN cd /src/backend && go build -o backend
+RUN cd /src/backend && \
+    go mod tidy && \
+    go build -o backend
 
 # Run
 FROM scratch

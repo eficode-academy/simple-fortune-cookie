@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: backend-configmap
 data:
-  REDIS_DNS: redis-service-primary
+  REDIS_DNS: redis-service
