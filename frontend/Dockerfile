@@ -1,5 +1,6 @@
 FROM golang:latest
-WORKDIR frontend
-COPY frontend.exe ./
+WORKDIR /frontend
+COPY . .
 EXPOSE 8080
-RUN ["frontend.exe"]
+RUN [ "go", "build" ]
+CMD [ "go", "run", "." ]
