@@ -22,7 +22,7 @@ jobs:
           path: .
   Lint_Dockerfile_be:
     runs-on: ubuntu-22.04
-    #needs: if_merged
+    needs: if_merged
     steps:
       - name: Download code
         uses: actions/download-artifact@v2
