@@ -95,7 +95,6 @@ jobs:
       run: |
         sed -i "s/BACKEND_VERSION/${{ github.ref_name }}/g" backend.yml
         sed -i "s/FRONTEND_VERSION/${{ github.ref_name }}/g" frontend.yml
-        echo ${{ github.ref_name }}
     - name: Apply manifests
       run: |
         kubectl apply -f .
