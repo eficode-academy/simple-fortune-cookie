@@ -6,3 +6,4 @@ RUN apt-get update \
 RUN go build
 EXPOSE 9000
 CMD go run backend
+

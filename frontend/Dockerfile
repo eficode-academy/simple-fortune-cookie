@@ -6,3 +6,4 @@ RUN apt-get update \
 RUN go build
 EXPOSE 8080
 CMD go run frontend
+
