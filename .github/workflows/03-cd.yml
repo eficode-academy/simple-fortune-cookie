@@ -1,7 +1,8 @@
 name: 03-cd2
-pull_request:
-    branches:
-      - main
+on: 
+  pull_request:
+      branches:
+        - main
 jobs:
   clone-repository:
     runs-on: self-hosted
