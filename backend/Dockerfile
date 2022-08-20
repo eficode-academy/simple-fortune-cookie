@@ -1,6 +1,9 @@
 FROM golang:1.18
-COPY . /app
+WORKDIR /app
+COPY . .
 RUN apt-get update \
     && apt-get install golang -y
-CMD [go build backend]
+RUN pwd && ls 
+RUN go build
+EXPOSE 80/tcp
 CMD [go run backend]

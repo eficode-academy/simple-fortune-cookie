@@ -6,7 +6,6 @@ services:
     build: ./frontend
     depends_on:
       - backend
-  
   backend:
     container_name: backend
     build: ./backend
