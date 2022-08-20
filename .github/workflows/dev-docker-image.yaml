@@ -91,6 +91,7 @@ jobs:
     runs-on:  [self-hosted, linux, x64, deployment]
     needs: [Build_Image_be, Build_Image_fe]
     steps:
-      - name: Run kubernetes
-        run: /home/ubuntu/simple-fortune-cookie/run.sh
+      - run: chmod -x /home/ubuntu/simple-fortune-cookie/setimage.sh
+      - name: run kubernetes cluster
+        run: /bin/bash /home/ubuntu/simple-fortune-cookie/setimage.sh ${{ env.docker_username }}/dev-backend-fortune:1.0.0-${GIT_COMMIT::8} ${{ env.docker_username }}/dev-frontend-fortune:1.0.0-${GIT_COMMIT::8} 
 
