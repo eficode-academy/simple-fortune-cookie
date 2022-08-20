@@ -7,5 +7,5 @@ if [[ "$status_code" == 200 ]] ; then
     echo "The site is up!"
 else
     echo "The site is not running... :-("
-    exit 0
+    exit 1
 fi
