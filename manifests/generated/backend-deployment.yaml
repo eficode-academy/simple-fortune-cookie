@@ -26,6 +26,7 @@ spec:
       containers:
         - name: backend
           image: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-backend:<replaceme>'
+          imagePullPolicy: Always
           env:
             - name: REDIS_DNS
               value: redis

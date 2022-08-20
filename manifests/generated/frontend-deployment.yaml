@@ -32,6 +32,7 @@ spec:
             - name: BACKEND_PORT
               value: "9000"
           image: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-frontend:<replaceme>'
+          imagePullPolicy: Always
           name: frontend
           ports:
             - containerPort: 8080
