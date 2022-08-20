@@ -86,15 +86,9 @@ jobs:
     runs-on: [self-hosted, development]
     steps:
       - uses: actions/checkout@v3
-      - uses: azure/k8s-set-context@v1
-        with:
-          method: kubeconfig
-          kubeconfig: /home/ubuntu/.kube/config
-      - uses: Azure/k8s-deploy@v4
-        with:
-          namespace: 'student58'
-          manifests: manifests/generated
-          images: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-frontend:trunk'
+      - run: kubectl apply -f ./manifests/generated
+      - name: change image tag to branch name
+        run: sed -i 's/<replaceme>/${{ github.ref_name }}/g' ./manifests/generated/*-deployment.yaml      
       - run: chmod +x ci/health-check.sh
       - run: ci/health-check.sh inst58.z1
   deploy-staging-environment:
@@ -103,15 +97,9 @@ jobs:
     runs-on: [self-hosted, staging]
     steps:
       - uses: actions/checkout@v3
-      - uses: azure/k8s-set-context@v1
-        with:
-          method: kubeconfig
-          kubeconfig: /home/ubuntu/.kube/config
-      - uses: Azure/k8s-deploy@v4
-        with:
-          namespace: 'student41'
-          manifests: manifests/generated
-          images: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-frontend:trunk'
+      - run: kubectl apply -f ./manifests/generated
+      - name: change image tag to version name
+        run: sed -i 's/<replaceme>/${{ github.ref_name }}/g' ./manifests/generated/*-deployment.yaml
       - run: chmod +x ci/health-check.sh
       - run: ci/health-check.sh inst41.z2
   deploy-production-environment:
@@ -120,14 +108,9 @@ jobs:
     runs-on: [self-hosted, production]
     steps:
       - uses: actions/checkout@v3
-      - uses: azure/k8s-set-context@v1
-        with:
-          method: kubeconfig
-          kubeconfig: /home/ubuntu/.kube/config
-      - uses: Azure/k8s-deploy@v4
-        with:
-          namespace: 'student42'
-          manifests: manifests/generated
-          images: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-frontend:trunk'
+      - run: kubectl apply -f ./manifests/generated
+      - name: change image tag to version name
+        run: sed -i 's/<replaceme>/${{ github.ref_name }}/g' ./manifests/generated/*-deployment.yaml
       - run: chmod +x ci/health-check.sh
       - run: ci/health-check.sh inst42.z2
+

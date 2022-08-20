@@ -24,7 +24,7 @@ spec:
         io.kompose.service: backend
     spec:
       containers:
-        - image: 'backend:'
+        - image: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-backend:<replaceme>'
           name: backend
           ports:
             - containerPort: 9000
