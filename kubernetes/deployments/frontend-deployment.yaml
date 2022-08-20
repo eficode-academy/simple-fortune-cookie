@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: lomztein/fortune_cookie_fe:latest
+        image: zuzuzazu/frontend-fortune:latest
         ports:
         - containerPort: 8080
         env:
