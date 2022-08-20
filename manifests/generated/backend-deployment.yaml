@@ -24,8 +24,11 @@ spec:
         io.kompose.service: backend
     spec:
       containers:
-        - image: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-backend:<replaceme>'
-          name: backend
+        - name: backend
+          image: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-backend:<replaceme>'
+          env:
+            - name: REDIS_DNS
+              value: redis
           ports:
             - containerPort: 9000
           resources: {}
