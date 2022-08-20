@@ -6,6 +6,8 @@ services:
     image: "backend:${tag}"
     ports:
       - "9000:9000"
+    environment:
+      - REDIS_DNS=redis
   frontend:
     build: 
       context: frontend/
