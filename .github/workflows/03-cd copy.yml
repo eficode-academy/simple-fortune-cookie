@@ -1,5 +1,8 @@
-name: Cookie CI
-on: push
+name: 03-cd
+on:
+  push: 
+    branches: 
+     - "feature/**"
 jobs:
   Clone-down:
     name: Clone down repo
@@ -25,3 +28,4 @@ jobs:
           path: .
       - name: Execute frontend test
         run: cd frontend && go test
+  

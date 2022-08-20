@@ -1,15 +1,25 @@
 version: '3'
 
 services:
+  redis: 
+    image: redis:latest
+  backend:
+    container_name: backend
+    build: ./backend
+    depends_on:
+      - redis
+    restart: always
+    ports: 
+      - "9000:9000"
+    environment:
+        REDIS_DNS: redis
   frontend:
     container_name: frontend
     build: ./frontend
     depends_on:
       - backend
-  
-  backend:
-    container_name: backend
-    build: ./backend
-    restart: always
-    ports:
-      - "80:80"
+    ports: 
+      - "8080:8080"
+    environment:
+        BACKEND_DNS: backend
+        BACKEND_PORT: 9000

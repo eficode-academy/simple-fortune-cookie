@@ -8,7 +8,7 @@ import (
 )
 
 var dbLink redis.Conn
-var usingRedis = false
+var usingRedis = true
 
 func init() {
 	conn, err := redis.Dial("tcp", fmt.Sprintf("%s:6379", getEnv("REDIS_DNS", "localhost")))
