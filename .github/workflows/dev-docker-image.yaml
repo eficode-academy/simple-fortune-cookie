@@ -82,13 +82,13 @@ jobs:
           username: ${{ env.docker_username }}
           password: ${{ env.docker_password }}
       - name: Build Docker image frontend
-        run: docker build . --file Dockerfile_be -t ${{ env.docker_username }}/dev-frontend-fortune:latest -t ${{ env.docker_username }}/dev-frontend-fortune:1.0.0-${GIT_COMMIT::8}
+        run: docker build . --file Dockerfile_fe -t ${{ env.docker_username }}/dev-frontend-fortune:latest -t ${{ env.docker_username }}/dev-frontend-fortune:1.0.0-${GIT_COMMIT::8}
       - name: Push Docker image frontend latest
         run: docker push ${{ env.docker_username }}/dev-frontend-fortune:latest
       - name: Push Docker image frontend
         run: docker push ${{ env.docker_username }}/dev-frontend-fortune:1.0.0-${GIT_COMMIT::8}
   Deployemnt_dev:
-    runs-on:  [self-hosted, linux, x64]
+    runs-on:  [self-hosted, linux, x64, deployment]
     needs: [Build_Image_be, Build_Image_fe]
     steps:
       - name: Run kubernetes
