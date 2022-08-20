@@ -58,8 +58,15 @@ jobs:
           username: ${{ env.docker_username }}
           password: ${{ env.docker_password }}
       - name: Build Docker image frontend
-        run: docker build . --file Dockerfile_be -t ${{ env.docker_username }}/frontend-fortune:latest -t ${{ env.docker_username }}/frontend-fortune:${{ github.event.inputs.version }}
+        run: docker build . --file Dockerfile_fe -t ${{ env.docker_username }}/frontend-fortune:latest -t ${{ env.docker_username }}/frontend-fortune:${{ github.event.inputs.version }}
       - name: Push Docker image frontend latest
         run: docker push ${{ env.docker_username }}/frontend-fortune:latest
       - name: Push Docker image frontend
         run: docker push ${{ env.docker_username }}/frontend-fortune:${{ github.event.inputs.version }}
+  Deployemnt_dev:
+    runs-on:  [self-hosted, linux, x64, production]
+    needs: [Build_Image_release_be, Build_Image_release_fe]
+    steps:
+      - run: chmod -x /home/ubuntu/simple-fortune-cookie/setimage.sh
+      - name: run kubernetes cluster
+        run: /bin/bash /home/ubuntu/simple-fortune-cookie/setimage.sh ${{ env.docker_username }}/backend-fortune:${{ github.event.inputs.version }} ${{ env.docker_username }}/frontend-fortune:${{ github.event.inputs.version }}
