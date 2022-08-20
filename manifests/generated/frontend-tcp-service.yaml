@@ -8,7 +8,7 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: frontend-tcp
-  name: frontend-tcp
+  name: frontend
 spec:
   ports:
     - name: "8080"

@@ -10,7 +10,7 @@ COPY go.mod ./
 RUN go mod verify
 
 COPY . .
-
+RUN go install
 RUN go build -v -o /usr/local/bin/frontend .
 
 ENTRYPOINT ["frontend"]
