@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: lomztein/fortune_cookie_be:latest
+        image: zuzuzazu/backend-fortune:latest
         ports:
         - containerPort: 9000
         env:
