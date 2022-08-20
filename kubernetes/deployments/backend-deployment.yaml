@@ -18,5 +18,5 @@ spec:
       - name: backend
         image: dannyhnl/simple-fortune-cookie-backend:latest
         ports:
-        - containerPort: 8000
+        - containerPort: 9000
       restartPolicy: Always
