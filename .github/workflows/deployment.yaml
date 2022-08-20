@@ -86,9 +86,9 @@ jobs:
     runs-on: [self-hosted, development]
     steps:
       - uses: actions/checkout@v3
-      - run: kubectl apply -f ./manifests/generated
       - name: change image tag to branch name
-        run: sed -i 's/<replaceme>/${{ github.ref_name }}/g' ./manifests/generated/*-deployment.yaml; cat ./manifests/generated/*-deployment.yaml
+        run: sed -i 's/<replaceme>/${{ github.ref_name }}/g' ./manifests/generated/*-deployment.yaml
+      - run: kubectl apply -f ./manifests/generated
       - run: chmod +x ci/health-check.sh
       - run: ci/health-check.sh inst58.z1
   deploy-staging-environment:
@@ -97,9 +97,9 @@ jobs:
     runs-on: [self-hosted, staging]
     steps:
       - uses: actions/checkout@v3
-      - run: kubectl apply -f ./manifests/generated
       - name: change image tag to version name
         run: sed -i 's/<replaceme>/${{ github.ref_name }}/g' ./manifests/generated/*-deployment.yaml
+      - run: kubectl apply -f ./manifests/generated
       - run: chmod +x ci/health-check.sh
       - run: ci/health-check.sh inst41.z2
   deploy-production-environment:
@@ -108,9 +108,9 @@ jobs:
     runs-on: [self-hosted, production]
     steps:
       - uses: actions/checkout@v3
-      - run: kubectl apply -f ./manifests/generated
       - name: change image tag to version name
         run: sed -i 's/<replaceme>/${{ github.ref_name }}/g' ./manifests/generated/*-deployment.yaml
+      - run: kubectl apply -f ./manifests/generated
       - run: chmod +x ci/health-check.sh
       - run: ci/health-check.sh inst42.z2
 
