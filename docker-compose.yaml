@@ -1,9 +1,11 @@
-version: "3.9"
+version: "3"
 services:
   backend:
     build:
       context: backend/
     image: "backend:${tag}"
+    ports:
+      - "9000:9000"
   frontend:
     build: 
       context: frontend/
@@ -14,3 +16,9 @@ services:
       - backend
     environment:
       - BACKEND_DNS=backend
+    labels:
+      kompose.service.type: LoadBalancer
+  redis:
+    image: 'redis:latest'
+    ports:
+      - "6379:6379"

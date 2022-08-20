@@ -92,7 +92,7 @@ jobs:
       - uses: Azure/k8s-deploy@v4
         with:
           namespace: 'student58'
-          manifests: manifests/cookie-app
+          manifests: manifests/generated
           images: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-frontend:trunk'
       - run: chmod +x ci/health-check.sh
       - run: ci/health-check.sh inst58.z1
@@ -108,7 +108,7 @@ jobs:
       - uses: Azure/k8s-deploy@v4
         with:
           namespace: 'student41'
-          manifests: manifests/cookie-app
+          manifests: manifests/generated
           images: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-frontend:trunk'
       - run: chmod +x ci/health-check.sh
       - run: ci/health-check.sh inst41.z2
@@ -124,7 +124,7 @@ jobs:
       - uses: Azure/k8s-deploy@v4
         with:
           namespace: 'student42'
-          manifests: manifests/cookie-app
+          manifests: manifests/generated
           images: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-frontend:trunk'
       - run: chmod +x ci/health-check.sh
       - run: ci/health-check.sh inst42.z2

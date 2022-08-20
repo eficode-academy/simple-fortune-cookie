@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o ./manifests/generated
+    kompose.service.type: LoadBalancer
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: frontend-tcp
+  name: frontend-tcp
+spec:
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+  selector:
+    io.kompose.service: frontend
+  type: LoadBalancer
+status:
+  loadBalancer: {}
