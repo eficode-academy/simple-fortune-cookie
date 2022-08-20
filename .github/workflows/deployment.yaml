@@ -89,6 +89,7 @@ jobs:
       - uses: azure/k8s-set-context@v1
         with:
           method: kubeconfig
+          kubeconfig: /home/ubuntu/.kube/config
       - uses: Azure/k8s-deploy@v4
         with:
           namespace: 'student58'
@@ -105,6 +106,7 @@ jobs:
       - uses: azure/k8s-set-context@v1
         with:
           method: kubeconfig
+          kubeconfig: /home/ubuntu/.kube/config
       - uses: Azure/k8s-deploy@v4
         with:
           namespace: 'student41'
@@ -121,6 +123,7 @@ jobs:
       - uses: azure/k8s-set-context@v1
         with:
           method: kubeconfig
+          kubeconfig: /home/ubuntu/.kube/config
       - uses: Azure/k8s-deploy@v4
         with:
           namespace: 'student42'
