@@ -11,8 +11,8 @@ metadata:
   name: frontend
 spec:
   ports:
-    - name: "8080"
-      port: 8080
+    - name: "http"
+      port: 80
       targetPort: 8080
   selector:
     io.kompose.service: frontend

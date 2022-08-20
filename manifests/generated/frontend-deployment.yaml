@@ -29,7 +29,9 @@ spec:
         - env:
             - name: BACKEND_DNS
               value: backend
-          image: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-backend:<replaceme>'
+            - name: BACKEND_PORT
+              value: "9000"
+          image: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-frontend:<replaceme>'
           name: frontend
           ports:
             - containerPort: 8080
