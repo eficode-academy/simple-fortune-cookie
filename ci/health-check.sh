@@ -1,4 +1,4 @@
-echo "Testing wait command"
+echo "Waiting for site to spin up..."
 sleep 5
 
 instance_name=$1
