@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: backend
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: backend
+  template:
+    metadata:
+      labels:
+        service: backend
+    spec:
+      containers:
+      - name: backend
+        image: dannyhnl/simple-fortune-cookie-backend:latest
+        ports:
+        - containerPort: 8000
+      restartPolicy: Always
