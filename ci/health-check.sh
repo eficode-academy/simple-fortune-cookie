@@ -1,11 +1,13 @@
-echo "Waiting for site to spin up..."
-sleep 5
+echo "Waiting for site to spin up... ⏱"
+sleep 180
 
-instance_name=$1
-status_code=$(curl --head --location --connect-timeout 5 --write-out %{http_code} --silent --output /dev/null http://${instance_name}.eficode.academy:8080/)
+echo "Retrieving loadbalancer hostname from service 🚀"
+hostname=$( kubectl get services frontend --output jsonpath='{.status.loadBalancer.ingress[0].hostname}' )
+
+status_code=$( curl --head --location --connect-timeout 5 --write-out %{http_code} --silent --output /dev/null http://${hostname} )
 if [[ "$status_code" == 200 ]] ; then
-    echo "The site is up!"
+    echo "The site is up! 🤘🏻🥳🤘🏻"
 else
-    echo "The site is not running... :-("
+    echo "The site is not running... 🤬"
     exit 1
 fi
