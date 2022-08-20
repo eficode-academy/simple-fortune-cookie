@@ -4,4 +4,4 @@ COPY . /app
 RUN apt-get update \
     && apt-get install golang -y
 RUN go build
-CMD [go run frontend]
+CMD go run frontend
