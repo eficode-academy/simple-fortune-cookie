@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    app: {{ .Values.appLabel }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.maxSurge }}
+      maxUnavailable: {{ .Values.maxUnavailable }}
+  selector:
+    matchLabels:
+      app: {{ .Values.appLabel }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appLabel }}
+    spec:
+      containers:
+        - name: {{ .Values.name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.containerPort }}
+          {{- if .Values.env }}
+          env:
+            {{ tpl .Values.env . | indent 12 }}
+          {{- end }}
+          {{- if .Values.livenessProbe.address }}
+          livenessProbe:
+            httpGet:
+              path: /{{ .Values.livenessProbe.address }}
+              port: {{ .Values.containerPort }}
+          {{- end }}
+          {{- if .Values.readinessProbe.address }}
+          readinessProbe:
+            httpGet:
+              path: /{{ .Values.readinessProbe.address }}
+              port: {{ .Values.containerPort }}
+          {{- end }}
