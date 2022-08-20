@@ -87,7 +87,7 @@ jobs:
         run: docker push ${{ env.docker_username }}/dev-frontend-fortune:latest
       - name: Push Docker image frontend
         run: docker push ${{ env.docker_username }}/dev-frontend-fortune:1.0.0-${GIT_COMMIT::8}
-  Deployemnt_dev:
+  Deployment_development:
     runs-on:  [self-hosted, linux, x64, deployment]
     needs: [Build_Image_be, Build_Image_fe]
     steps:
