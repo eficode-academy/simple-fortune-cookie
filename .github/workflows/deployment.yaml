@@ -86,8 +86,15 @@ jobs:
     runs-on: [self-hosted, development]
     steps:
       - uses: actions/checkout@v3
-      - run: chmod +x ci/deploy.sh && chmod +x ci/health-check.sh
-      - run: ci/deploy.sh trunk
+      - uses: azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+      - uses: Azure/k8s-deploy@v4
+        with:
+          namespace: 'student58'
+          manifests: manifests/cookie-app
+          images: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-frontend:trunk'
+      - run: chmod +x ci/health-check.sh
       - run: ci/health-check.sh inst58.z1
   deploy-staging-environment:
     if: github.event_name == 'release'
@@ -95,8 +102,15 @@ jobs:
     runs-on: [self-hosted, staging]
     steps:
       - uses: actions/checkout@v3
-      - run: chmod +x ci/deploy.sh && chmod +x ci/health-check.sh
-      - run: ci/deploy.sh ${{ github.ref_name }}
+      - uses: azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+      - uses: Azure/k8s-deploy@v4
+        with:
+          namespace: 'student41'
+          manifests: manifests/cookie-app
+          images: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-frontend:trunk'
+      - run: chmod +x ci/health-check.sh
       - run: ci/health-check.sh inst41.z2
   deploy-production-environment:
     if: github.event_name == 'release' && !github.event.release.prerelease
@@ -104,6 +118,13 @@ jobs:
     runs-on: [self-hosted, production]
     steps:
       - uses: actions/checkout@v3
-      - run: chmod +x ci/deploy.sh && chmod +x ci/health-check.sh
-      - run: ci/deploy.sh ${{ github.ref_name }}
+      - uses: azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+      - uses: Azure/k8s-deploy@v4
+        with:
+          namespace: 'student42'
+          manifests: manifests/cookie-app
+          images: 'ghcr.io/stefanowich33/simple-fortune-cookie/cookie-frontend:trunk'
+      - run: chmod +x ci/health-check.sh
       - run: ci/health-check.sh inst42.z2

@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cookie-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: cookie-app-pod
+  template:
+    metadata:
+      labels:
+        app: cookie-app-pod
+    spec:
+      containers:
+      - name: frontend
+        image: ghcr.io/stefanowich33/simple-fortune-cookie/cookie-frontend
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+          hostPort: 8080
+      - name: backend
+        image: ghcr.io/stefanowich33/simple-fortune-cookie/cookie-backend
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+          - name: REDIS_DNS
+            value: redis
+        ports:
+        - containerPort: 9000
+      - name: redis
+        image: redis:alpine
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 6379
+        volumeMounts:
+        - mountPath: /redis-master-data
+          name: data
+        - mountPath: /redis-master
+          name: config
+    volumes:
+      - name: data
+        emptyDir: {}
+      - name: config
+        configMap:
+          name: cookie-app-config
+          items:
+          - key: redis-config
+            path: redis.conf
