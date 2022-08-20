@@ -63,7 +63,7 @@ jobs:
         run: docker push ${{ env.docker_username }}/frontend-fortune:latest
       - name: Push Docker image frontend
         run: docker push ${{ env.docker_username }}/frontend-fortune:${{ github.event.inputs.version }}
-  Deployemnt_dev:
+  Deployment_production:
     runs-on:  [self-hosted, linux, x64, production]
     needs: [Build_Image_release_be, Build_Image_release_fe]
     steps:
