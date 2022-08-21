@@ -9,7 +9,7 @@ env: # Set the secret as an input
   GIT_COMMIT: ${{ github.sha }}
 jobs:
   Clone-down:
-    runs-on: fuglogfuad
+    runs-on: live
     steps:
       - name: Clone-down
         uses: actions/checkout@v2
@@ -22,7 +22,7 @@ jobs:
           path: code.tar
   Build:
     needs: Clone-down
-    runs-on: fuglogfuad
+    runs-on: live
     container: golang:latest
     steps:
       - name: Download Repo
@@ -44,7 +44,7 @@ jobs:
           name: code
           path: code.tar
   Docker-image:
-    runs-on: fuglogfuad
+    runs-on: live
     needs: [Build]
     steps:
       - name: Download Repo
@@ -57,7 +57,7 @@ jobs:
       - name: push docker
         run: chmod +x ci/push-docker.sh && ci/push-docker.sh
   Deploy:
-    runs-on: fuglogfuad
+    runs-on: live
     needs: [Docker-image]
     steps:
       - name: Download Repo
