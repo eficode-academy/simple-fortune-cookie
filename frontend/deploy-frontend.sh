@@ -1,1 +1,0 @@
-echo "Hello Dev, I'm deploying frontend now ...";
