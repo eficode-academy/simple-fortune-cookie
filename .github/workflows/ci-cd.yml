@@ -2,7 +2,7 @@ name: SIMPLE FORTUNE COOKIE CI new
 on: 
   push:
     branches:
-      - dev
+      - "dev**"
   pull_request:
     branches:
       - main
