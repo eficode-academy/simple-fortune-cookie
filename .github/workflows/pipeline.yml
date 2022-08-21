@@ -38,13 +38,13 @@ jobs:
            path: .
        - name: Test
          run: chmod +x ci/test.sh && ci/test.sh
-  deploy:
-    runs-on: self-hosted
-    needs:
-      - upload-to-dockerhub
-    steps:
-      - name: Deploy
-        run: chmod +x ci/deploy.sh && ci/deploy.sh
+  #deploy:
+  #  runs-on: self-hosted
+  #  needs:
+  #    - upload-to-dockerhub
+  #  steps:
+  #    - name: Deploy
+  #      run: chmod +x ci/deploy.sh && ci/deploy.sh
   upload-to-dockerhub:
     runs-on: self-hosted
     needs:
@@ -59,3 +59,10 @@ jobs:
         run: chmod +x ci/build-docker.sh && ci/build-docker.sh
       - name: Push Docker
         run: chmod +x ci/push-docker.sh && ci/push-docker.sh
+  k8s:
+    runs-on: self-hosted
+      needs:
+        - upload-to-dockerhub
+      steps:
+        - name: k8s deployment
+          run: chmod +x ci/k8s.sh && ci/k8s.sh
