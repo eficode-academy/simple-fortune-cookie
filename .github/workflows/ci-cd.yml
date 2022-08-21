@@ -12,7 +12,7 @@ env: # Set the secret as an input
   GIT_COMMIT: ${{ github.sha }}
 jobs:
   Clone-down:
-    runs-on: self-hosted
+    runs-on: dev
     steps:
       - name: Clone-down
         uses: actions/checkout@v2
@@ -23,7 +23,7 @@ jobs:
             path: .
   Build:
       needs: Clone-down
-      runs-on: self-hosted
+      runs-on: dev
       steps:
         - name: Download Repo
           uses: actions/download-artifact@v2
