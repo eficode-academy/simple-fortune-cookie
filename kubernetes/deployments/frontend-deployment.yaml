@@ -15,7 +15,12 @@ spec:
         service: frontend
     spec:
       containers:
-      - name: frontend
+      - env:
+        - name: BACKEND_DNS
+          value: backend
+        - name: BACKEND_PORT
+          value: "9000"
+        name: frontend
         image: dannyhnl/simple-fortune-cookie:2022-08-20--49-28
         ports:
         - containerPort: 8080
