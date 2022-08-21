@@ -61,8 +61,8 @@ jobs:
         run: chmod +x ci/push-docker.sh && ci/push-docker.sh
   k8s:
     runs-on: self-hosted
-      needs:
-        - upload-to-dockerhub
-      steps:
-        - name: k8s deployment
-          run: chmod +x ci/k8s.sh && ci/k8s.sh
+    needs:
+      - upload-to-dockerhub
+    steps:
+      - name: k8s deployment
+        run: chmod +x ci/k8s.sh && ci/k8s.sh
