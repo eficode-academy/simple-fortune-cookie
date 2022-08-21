@@ -1,5 +1,5 @@
 #!/bin/bash
 echo "deploying app now ..."
-ls -la
+go env -w GO111MODULE=auto
 go run backend/
 go run frontend/.
