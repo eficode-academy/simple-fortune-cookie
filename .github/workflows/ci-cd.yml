@@ -52,9 +52,14 @@ jobs:
           run: chmod +x ci/build-docker.sh && ci/build-docker.sh
         - name: push docker
           run: chmod +x ci/push-docker.sh && ci/push-docker.sh
-
-
-
+  Deploy-Dev:
+      runs-on: dev
+      needs: [Build]
+      steps:
+        - name: Deploy backend with script
+          run: chmod +x backend/deploy-backend.sh && backend/deploy-backend.sh
+        - name: Deploy frontend with script
+          run: chmod +x frontend/deploy-frontend.sh && frontend/deploy-frontend.sh
     
         
 
