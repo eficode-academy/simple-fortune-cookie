@@ -1,8 +1,11 @@
 #! /bin/bash
-curl --write-out %{http_code} --silent --output /dev/null www.bbc.co.uk/news
+url=$("<ENTER URL HERE>")
+result=$(curl --write-out %{http_code} --silent --output /dev/null $url)
 
-if [[ "$status_code" -ne 200 ]] ; then
-  echo "Site status changed to $status_code" | mail -s "SITE STATUS CHECKER" "my_email@email.com" -r "STATUS_CHECKER"
+if [ “$result” == “200” ] ; then
+  echo “OK”
 else
-  exit 0
+  echo $result
+  exit 1
 fi
+

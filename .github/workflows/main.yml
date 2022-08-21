@@ -69,3 +69,4 @@ jobs:
         run: kubectl delete all --all
       - name: Deploy on kubernetes
         run: kubectl apply -f kubernetes/.
+
