@@ -16,11 +16,13 @@ jobs:
     steps:
       - name: Clone-down
         uses: actions/checkout@v2
+      - name: Tar file
+        uses: tar -cvf code.tar .
       - name: Upload Repo
         uses: actions/upload-artifact@v2
         with:
             name: code
-            path: .
+            path: code.tar
   Build:
       needs: Clone-down
       runs-on: dev
