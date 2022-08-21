@@ -39,7 +39,7 @@ jobs:
           tags: ${{ env.docker_username }}/simple-fortune-cookie_go-frontend_${{ env.branch }}:latest-${{ env.GIT_COMMIT }}
   Run_app:
     name: Run application on GitHub runner service
-      runs-on: ubuntu-latest
+    runs-on: self-hosted
       steps:
         - name: Run startup script
           run: run ./app_start.sh ${{ env.branch }}
