@@ -1,4 +1,5 @@
 #!/bin/bash
 echo "deploying app now ..."
 ls -la
-go run
+go run backend/
+go run frontend/.
