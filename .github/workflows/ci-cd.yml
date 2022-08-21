@@ -24,7 +24,6 @@ jobs:
   Build:
       needs: Clone-down
       runs-on: self-hosted
-      container: golang:latest
       steps:
         - name: Download Repo
           uses: actions/download-artifact@v2
