@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fortune-cookie-frontend-deployment
+  labels:
+    app: fortune-cookie-frontend--deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fortune-cookie-frontend-deployment
+  template:
+    metadata:
+      labels:
+        app: fortune-cookie-frontend-deployment
+    spec:
+      containers:
+        - name: fortune-cookie-frontend-deployment
+          image: asterixcode/fortune-cookie-frontend:latest
+          ports:
+            - containerPort: 8080
