@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+
+  backend:
+    image: asterixcode/fortune-cookie-backend:latest
+    ports:
+      - "9000:9000"
+
+  frontend:
+    depends_on:
+      - backend
+    image: asterixcode/fortune-cookie-frontend:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - BACKEND_DNS=backend
+      - BACKEND_PORT=9000
