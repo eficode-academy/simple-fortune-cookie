@@ -17,7 +17,7 @@ jobs:
       - name: Clone-down
         uses: actions/checkout@v2
       - name: Tar file
-        uses: tar -cvf code.tar .
+        run: tar -cvf code.tar .
       - name: Upload Repo
         uses: actions/upload-artifact@v2
         with:
