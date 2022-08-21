@@ -1,0 +1,15 @@
+# TODO
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels: 
+    app: frontend
+spec:
+  selector:
+    app: frontend
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
