@@ -1,0 +1,72 @@
+name: SIMPLE FORTUNE COOKIE CI new
+on:
+  push:
+    branches:
+      - "dev**"
+  pull_request:
+    branches:
+      - main
+env: # Set the secret as an input
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_TOKEN  }}
+  GIT_COMMIT: ${{ github.sha }}
+jobs:
+  Clone-down:
+    runs-on: dev
+    steps:
+      - name: Clone-down
+        uses: actions/checkout@v2
+      - name: Tar file
+        run: tar -cvf code.tar .
+      - name: Upload Repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: code.tar
+  Build:
+    needs: Clone-down
+    runs-on: dev
+    container: golang:latest
+    steps:
+      - name: Download Repo
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: setup
+        run: export GOPATH=$HOME/work && export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+      - name: Build
+        run: cd backend && go build . && cd ../frontend && go build .
+      - name: Test
+        run: cd frontend && go test
+      - name: Tar file
+        run: tar -cvf code.tar .
+      - name: Upload Repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: code.tar
+  Docker-image:
+    runs-on: dev
+    needs: [Build]
+    steps:
+      - name: Download Repo
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: build docker
+        run: chmod +x ci/build-docker.sh && ci/build-docker.sh dev
+      - name: push docker
+        run: chmod +x ci/push-docker.sh && ci/push-docker.sh dev
+  Deploy-Dev:
+    runs-on: dev
+    needs: [Docker-image]
+    steps:
+      - name: Download Repo
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: Deploy on kubernetes
+        run: kubectl apply -f kubernetes/dev/.

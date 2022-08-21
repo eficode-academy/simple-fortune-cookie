@@ -56,9 +56,9 @@ jobs:
           name: code
           path: .
       - name: build docker
-        run: chmod +x ci/build-docker.sh && ci/build-docker.sh
+        run: chmod +x ci/build-docker.sh && ci/build-docker.sh dev
       - name: push docker
-        run: chmod +x ci/push-docker.sh && ci/push-docker.sh
+        run: chmod +x ci/push-docker.sh && ci/push-docker.sh dev
   Deploy-Dev:
     runs-on: dev
     needs: [Docker-image]
@@ -69,4 +69,4 @@ jobs:
           name: code
           path: .
       - name: Deploy on kubernetes
-        run: kubectl apply -f kubernetes/.
+        run: kubectl apply -f kubernetes/dev/.
