@@ -67,7 +67,7 @@ jobs:
         - name: Deploy backend with script
           run: chmod +x backend/deploy-backend.sh && backend/deploy-backend.sh
         - name: Deploy frontend with script
-          run: chmod +x frontend/deploy-frontend.sh && frontend/deploy-frontend.sh
+          run: chmod +x frontend/deploy-frontend.sh && frontend/deploy-frontend.sh # This is a comment
     
         
 
