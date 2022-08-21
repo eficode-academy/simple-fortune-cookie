@@ -1,3 +1,4 @@
 #!/bin/bash
 echo "deploying app now ..."
-go run ..
+ls -la
+go run
