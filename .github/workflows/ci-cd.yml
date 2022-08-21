@@ -59,17 +59,14 @@ jobs:
         run: chmod +x ci/build-docker.sh && ci/build-docker.sh
       - name: push docker
         run: chmod +x ci/push-docker.sh && ci/push-docker.sh
-  #Deploy-Dev:
-   # runs-on: dev
-   # container: golang:latest
-   # needs: [Build]
-   # steps:
-    #  - name: Download Repo
-    #    uses: actions/download-artifact@v2
-    #    with:
-     #     name: code
-     #     path: .
-    #  - name: setup
-    #    run: export GOPATH=$HOME/work && export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-     # - name: Deploy app with script
-    #    run: chmod +x ci/deploy-app.sh && ci/deploy-app.sh
+  Deploy-Dev:
+    runs-on: dev
+    needs: [Docker-image]
+    steps:
+      - name: Download Repo
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: Deploy on kubernetes
+        run: kubectl apply -f kubernetes/.

@@ -15,7 +15,8 @@ WORKDIR     /home/container
 #&& go run ..
 # COPY ./entrypoint.sh /home/container/entrypoint.sh
 COPY . /home/container/
-CMD go build && go run .
+RUN export GOPATH=$HOME/work && export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+CMD go run .
 EXPOSE 8080
 # RUN cd /home/container && chmod +x ./entrypoint.sh
 # ENTRYPOINT  [ "/entrypoint.sh"]
