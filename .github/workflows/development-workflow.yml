@@ -9,7 +9,8 @@ env:
   docker_username: ${{ secrets.DOCKERHUB_USERNAME }}
   docker_password: ${{ secrets.DOCKERHUB_TOKEN }}
 jobs:
-  build:
+  Build:
+    needs: Test
     runs-on: self-hosted
 
     steps:
@@ -18,10 +19,15 @@ jobs:
         run: sudo apt-get update  && sudo apt-get install golang-go -y
       - name: Build
         run: cd frontend && go build .
+      - name: Build
+        run: cd backend && go build .
+  Test:
+    runs-on: self-hosted
+    steps:
       - name: Test
         run: cd frontend && go test .
   Push_to_docker:
-    needs: build
+    needs: Build
     runs-on: ubuntu-latest
     steps:
       - name: check out
@@ -47,6 +53,7 @@ jobs:
           push: true
           tags: nicobah/devops_frontend
   Test_kubernetes:
+    needs: Push_to_docker
     runs-on: self-hosted
 
     steps:
