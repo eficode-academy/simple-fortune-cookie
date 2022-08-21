@@ -26,6 +26,7 @@ jobs:
   Build:
       needs: Clone-down
       runs-on: dev
+      container: golang:latest
       steps:
         - name: Download Repo
           uses: actions/download-artifact@v2
