@@ -68,10 +68,8 @@ jobs:
           with:
             name: code
             path: .
-        - name: Deploy backend with script
-          run: chmod +x backend/deploy-backend.sh && backend/deploy-backend.sh
-        - name: Deploy frontend with script
-          run: chmod +x frontend/deploy-frontend.sh && frontend/deploy-frontend.sh #comment
+        - name: Deploy app with script
+          run: chmod +x ci/deploy-app.sh && ci/deploy-app.sh
     
         
 
