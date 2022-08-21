@@ -69,6 +69,8 @@ jobs:
           with:
             name: code
             path: .
+        - name: setup
+          run:  export GOPATH=$HOME/work && export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
         - name: Deploy app with script
           run: chmod +x ci/deploy-app.sh && ci/deploy-app.sh
     
