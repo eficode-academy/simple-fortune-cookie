@@ -39,11 +39,13 @@ jobs:
           run:  cd backend && go build . && cd ../frontend && go build .
         - name: Test
           run:  cd frontend && go test
+        - name: Tar file
+          run: tar -cvf build.tar .
         - name: Upload Repo
           uses: actions/upload-artifact@v2
           with:
             name: build
-            path: .
+            path: build.tar
   Docker-image:
       runs-on: dev
       needs: [Build]
