@@ -40,14 +40,17 @@ jobs:
         - name: Upload Repo
           uses: actions/upload-artifact@v2
           with:
-            name: code
+            name: build
             path: .
   Docker-image:
       runs-on: self-hosted
       needs: [Build]
       steps:
-        - name: Download code
-          run: ls
+        - name: Download Repo
+          uses: actions/download-artifact@v1
+          with:
+            name: code
+            path: .
         - name: build docker
           run: chmod +x ci/build-docker.sh && ci/build-docker.sh
         - name: push docker
@@ -57,7 +60,7 @@ jobs:
       needs: [Build]
       steps:
         - name: Download Repo
-          uses: actions/download-artifact@v2
+          uses: actions/download-artifact@v1
           with:
             name: code
             path: .
