@@ -65,5 +65,7 @@ jobs:
         with:
           name: code
           path: .
+      - name: Delete all running pods
+        run: kubectl delete all --all
       - name: Deploy on kubernetes
         run: kubectl apply -f kubernetes/.
