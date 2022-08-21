@@ -1,5 +1,5 @@
 name: SIMPLE FORTUNE COOKIE CI new
-on: 
+on:
   push:
     branches:
       - "dev**"
@@ -21,60 +21,55 @@ jobs:
       - name: Upload Repo
         uses: actions/upload-artifact@v2
         with:
-            name: code
-            path: code.tar
+          name: code
+          path: code.tar
   Build:
-      needs: Clone-down
-      runs-on: dev
-      container: golang:latest
-      steps:
-        - name: Download Repo
-          uses: actions/download-artifact@v2
-          with:
-            name: code
-            path: .
-        - name: setup
-          run:  export GOPATH=$HOME/work && export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-        - name: Build
-          run:  cd backend && go build . && cd ../frontend && go build .
-        - name: Test
-          run:  cd frontend && go test
-        - name: Tar file
-          run: tar -cvf code.tar .
-        - name: Upload Repo
-          uses: actions/upload-artifact@v2
-          with:
-            name: code
-            path: code.tar
+    needs: Clone-down
+    runs-on: dev
+    container: golang:latest
+    steps:
+      - name: Download Repo
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: setup
+        run: export GOPATH=$HOME/work && export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+      - name: Build
+        run: cd backend && go build . && cd ../frontend && go build .
+      - name: Test
+        run: cd frontend && go test
+      - name: Tar file
+        run: tar -cvf code.tar .
+      - name: Upload Repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: code.tar
   Docker-image:
-      runs-on: dev
-      needs: [Build]
-      steps:
-        - name: Download Repo
-          uses: actions/download-artifact@v2
-          with:
-            name: code
-            path: .
-        - name: build docker
-          run: chmod +x ci/build-docker.sh && ci/build-docker.sh
-        - name: push docker
-          run: chmod +x ci/push-docker.sh && ci/push-docker.sh
-  Deploy-Dev:
-      runs-on: dev
-      container: golang:latest
-      needs: [Build]
-      steps:
-        - name: Download Repo
-          uses: actions/download-artifact@v2
-          with:
-            name: code
-            path: .
-        - name: setup
-          run:  export GOPATH=$HOME/work && export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-        - name: Deploy app with script
-          run: chmod +x ci/deploy-app.sh && ci/deploy-app.sh
-    
-        
-
-        
-        
+    runs-on: dev
+    needs: [Build]
+    steps:
+      - name: Download Repo
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: build docker
+        run: chmod +x ci/build-docker.sh && ci/build-docker.sh
+      - name: push docker
+        run: chmod +x ci/push-docker.sh && ci/push-docker.sh
+  #Deploy-Dev:
+   # runs-on: dev
+   # container: golang:latest
+   # needs: [Build]
+   # steps:
+    #  - name: Download Repo
+    #    uses: actions/download-artifact@v2
+    #    with:
+     #     name: code
+     #     path: .
+    #  - name: setup
+    #    run: export GOPATH=$HOME/work && export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+     # - name: Deploy app with script
+    #    run: chmod +x ci/deploy-app.sh && ci/deploy-app.sh
