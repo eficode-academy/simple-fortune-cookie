@@ -23,20 +23,20 @@ spec:
         - name: {{ .Values.name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
-            - containerPort: {{ .Values.containerPort }}
+            - containerPort: {{ .Values.service.port }}
           {{- if .Values.env }}
           env:
-            {{ tpl .Values.env . | indent 12 }}
+            {{- .Values.env | toYaml | trim | nindent 12 }}
           {{- end }}
-          {{- if .Values.livenessProbe.address }}
+          {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
-              path: /{{ .Values.livenessProbe.address }}
-              port: {{ .Values.containerPort }}
+              path: {{ .Values.livenessProbe.address }}
+              port: {{ .Values.service.port }}
           {{- end }}
-          {{- if .Values.readinessProbe.address }}
+          {{- if .Values.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
-              path: /{{ .Values.readinessProbe.address }}
-              port: {{ .Values.containerPort }}
+              path: {{ .Values.readinessProbe.address }}
+              port: {{ .Values.service.port }}
           {{- end }}

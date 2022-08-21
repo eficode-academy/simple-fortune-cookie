@@ -10,4 +10,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: {{ .Value.name }}
+    app: {{ .Values.name }}

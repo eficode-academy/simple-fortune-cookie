@@ -1,0 +1,53 @@
+# Default values for simple-fortune-cookie.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+maxSurge: 1
+maxUnavailable: 0
+
+name: backend-deployment
+appLabel: backend
+
+image:
+  repository: pointnone/fortune_cookie_be
+  tag: "latest"
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+env:
+  - name: REDIS_DNS
+    valueFrom:
+      configMapKeyRef:
+        name: backend-configmap
+        key: REDIS_DNS
+
+livenessProbe:
+  enabled: true
+  address: "/healthz"
+
+readinessProbe:
+  enabled: true
+  address: "/ready"
+
+service:
+  name: backend-service
+  port: 9000
+  type: ClusterIP
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
