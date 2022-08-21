@@ -1,0 +1,43 @@
+name: 03-cd2
+on: 
+  pull_request:
+      branches:
+        - main
+jobs:
+  clone-repository:
+    runs-on: self-hosted
+    container: golang:latest
+    steps: 
+    - name: Clone repository
+      uses: actions/checkout@v2
+    - name: Upload repository
+      uses: actions/upload-artifact@v2
+      with:
+        name: repository
+        path: .
+  run-backend:
+    needs: [clone-repository]
+    runs-on: self-hosted
+    container: golang:latest
+    steps:
+      - name: Download repository
+        uses: actions/download-artifact@v2
+        with:
+          name: repository
+          path: .
+      - name: run backend
+        run: cd backend && go build && go run backend && cd ..
+  run-frontend:
+    needs: [clone-repository]
+    runs-on: self-hosted
+    container: golang:latest
+    steps:
+      - name: Download repository
+        uses: actions/download-artifact@v2
+        with:
+          name: repository
+          path: .
+      - name: run frontend
+        run: cd frontend && go build && go run frontend
+
+  

@@ -1,7 +1,9 @@
 FROM golang:1.18
-COPY . /app
+WORKDIR /app
+COPY . .
 RUN apt-get update \
     && apt-get install golang -y
+RUN go build
 EXPOSE 9000
-CMD [go build backend]
-CMD [go run backend]
+CMD go run backend
+
