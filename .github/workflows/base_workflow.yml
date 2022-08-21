@@ -3,13 +3,13 @@ env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
   GIT_COMMIT: ${{ github.sha }}
-on:
-  push:
-    branches:
-      - 'main'
-  pull_request:
-    branches:
-      - 'main'
+# on:
+#   push:
+#     branches:
+#       - 'main'
+#   pull_request:
+#     branches:
+#       - 'main'
 jobs:
   Clone_repo:
     name: Clone repo and create artifact
@@ -75,30 +75,30 @@ jobs:
         with: 
           name: code
           path: .
-  Docker-image:
-    needs: [Build,Auto_test]
-    name: Create Docker image and push it to DockerHub
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download a single artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: code
-          path: .
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ env.docker_username }}
-          password: ${{ env.docker_password }}
-      - name: Build and push backend Dockerfile
-        uses: docker/build-push-action@v3
-        with:
-          context: ./backend
-          push: true
-          tags: ${{ env.docker_username }}/simple-fortune-cookie_go-backend:latest-${{ env.GIT_COMMIT }}
-      - name: Build and push frontend Dockerfile
-        uses: docker/build-push-action@v3
-        with:
-          context: ./frontend
-          push: true
-          tags: ${{ env.docker_username }}/simple-fortune-cookie_go-frontend:latest-${{ env.GIT_COMMIT }}
+  # Docker-image:
+  #   needs: [Build,Auto_test]
+  #   name: Create Docker image and push it to DockerHub
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Download a single artifact
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: code
+  #         path: .
+  #     - name: Login to DockerHub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ env.docker_username }}
+  #         password: ${{ env.docker_password }}
+  #     - name: Build and push backend Dockerfile
+  #       uses: docker/build-push-action@v3
+  #       with:
+  #         context: ./backend
+  #         push: true
+  #         tags: ${{ env.docker_username }}/simple-fortune-cookie_go-backend:latest-${{ env.GIT_COMMIT }}
+  #     - name: Build and push frontend Dockerfile
+  #       uses: docker/build-push-action@v3
+  #       with:
+  #         context: ./frontend
+  #         push: true
+  #         tags: ${{ env.docker_username }}/simple-fortune-cookie_go-frontend:latest-${{ env.GIT_COMMIT }}
