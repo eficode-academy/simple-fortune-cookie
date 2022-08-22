@@ -99,8 +99,11 @@ jobs:
        # run: chmod +x CI/build-docker.sh && CI/build-docker.sh
       #- name: push docker
        # run: chmod +x CI/push-docker.sh && CI/push-docker.sh
-      - name: Build and Push Docker
+      - name: Build and Push Frontend #starting with frontend, if it works, try both
         uses: docker/build-push-action@v2
         with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          platforms: linux/amd64,linux/arm64,linux/386 #https://github.com/docker/build-push-action/issues/276
           push: true
-          tags: $spedsbjerg/simple_fortune_cookie
+          tags: $spedsbjerg/simple_fortune_cookie:latest
