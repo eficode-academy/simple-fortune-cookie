@@ -96,9 +96,9 @@ jobs:
           images: spedsbjerg/simple_fortune_cookie #Might be here
            
       - name: Build docker
-        run: chmod +x ci/build-docker.sh && ci/build-docker.sh
+        run: chmod +x CI/build-docker.sh && CI/build-docker.sh
       - name: push docker
-        run: chmod +x ci/push-docker.sh && ci/push-docker.sh
+        run: chmod +x CI/push-docker.sh && CI/push-docker.sh
       #  uses: docker/build-push-action@v2
        # with:
         #  push: true
