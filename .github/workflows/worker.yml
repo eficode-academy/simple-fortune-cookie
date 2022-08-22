@@ -93,13 +93,13 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: spedsbjerg/simple_fortune_cookie #Might be here
+          images: ghcr.io/backend | ghcr.io/frontend
            
-      - name: Build docker
-        run: chmod +x CI/build-docker.sh && CI/build-docker.sh
-      - name: push docker
-        run: chmod +x CI/push-docker.sh && CI/push-docker.sh
-      #  uses: docker/build-push-action@v2
-       # with:
-        #  push: true
-         # tags: $spedsbjerg/simple_fortune_cookie:1.0-${GIT_COMMIT::8} 
+      #- name: Build docker
+       # run: chmod +x CI/build-docker.sh && CI/build-docker.sh
+      #- name: push docker
+       # run: chmod +x CI/push-docker.sh && CI/push-docker.sh
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: $spedsbjerg/simple_fortune_cookie:1.0-${GIT_COMMIT::8} 
