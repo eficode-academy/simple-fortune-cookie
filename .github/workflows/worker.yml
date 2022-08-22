@@ -95,10 +95,6 @@ jobs:
         with:
           images: ghcr.io/backend | ghcr.io/frontend
            
-      #- name: Build docker
-       # run: chmod +x CI/build-docker.sh && CI/build-docker.sh
-      #- name: push docker
-       # run: chmod +x CI/push-docker.sh && CI/push-docker.sh
       - name: Build and Push Frontend #starting with frontend, if it works, try both
         uses: docker/build-push-action@v2
         with:
@@ -113,4 +109,4 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tages: spedsbjerg/simple_fortune_cookie:Backend
+          tags: spedsbjerg/simple_fortune_cookie:Backend
