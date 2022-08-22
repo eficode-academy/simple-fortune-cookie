@@ -3,8 +3,12 @@ FROM golang:1.16-alpine
 
 
 WORKDIR /frontend
-COPY . .
+COPY . /frontend/
 
-RUN go build . 
+COPY go.mod ./
 
-# CMD ["go", "run", "."]
+RUN go mod download 
+
+RUN go build -o /docker-frontend
+
+CMD ["/docker-frontend"]

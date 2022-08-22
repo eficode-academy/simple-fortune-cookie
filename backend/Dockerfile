@@ -1,14 +1,16 @@
 # syntax=docker/dockerfile:1
-FROM ubuntu
+FROM golang:1.16-alpine
 
 
 WORKDIR /backend
-COPY . .
+COPY . /backend/
 
-# RUN apt-get install golang-go -y
-#RUN apt-get update -y && apt-get install redis -y 
-#RUN go build . 
+COPY go.mod ./
+COPY go.sum ./
 
-#RUN go mod download github.com/gomodule/redigo
+RUN go mod download
+RUN go build -o /docker-backend
 
-# CMD ["go", "run", "."]
+EXPOSE 8080
+
+CMD ["/docker-backend"]

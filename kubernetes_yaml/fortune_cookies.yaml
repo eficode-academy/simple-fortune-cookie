@@ -30,8 +30,8 @@ spec:
     tier: frontend
   ports:
   - protocol: "TCP"
-    port: 80
-    targetPort: 80
+    port: 5000
+    targetPort: 5000
   type: NodePort
 ---
 apiVersion: apps/v1
@@ -66,7 +66,7 @@ spec:
     tier: backend
   ports:
   - protocol: "TCP"
-    port: 80
-    targetPort: 80
+    port: 5000
+    targetPort: 5000
   type: ClusterIP
 ---
