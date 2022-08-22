@@ -1,4 +1,5 @@
 #! /bin/bash
+echo "testing frontend"
 url=$("<ENTER URL HERE>")
 result=$(curl --write-out %{http_code} --silent --output /dev/null $url)
 

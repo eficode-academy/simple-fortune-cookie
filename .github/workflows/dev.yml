@@ -72,3 +72,15 @@ jobs:
         run: kubectl delete all --all
       - name: Deploy on kubernetes
         run: kubectl apply -f kubernetes/.
+  Test-dev:
+      runs-on: dev
+      needs: [Deploy-Dev]
+      steps:
+        - name: Download Repo
+          uses: actions/download-artifact@v2
+          with:
+            name: code
+            path: .
+        - name: test
+          run: chmod +x ci/test-app.sh && ci/test-app.sh dev
+   
