@@ -9,7 +9,7 @@ on:
     branches:
       - main
 env:
-  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_username: spedsbjerg
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
   GIT_COMMIT: ${{ github.sha }}
 jobs:
