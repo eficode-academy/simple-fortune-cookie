@@ -95,4 +95,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: $spedsbjerg/simple_fortune_cookie:${GIT_COMMIT::8} 
+          tags: $spedsbjerg/simple_fortune_cookie:frontend:latest
