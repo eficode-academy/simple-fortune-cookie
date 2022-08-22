@@ -72,6 +72,7 @@ jobs:
         run: kubectl delete all --all
       - name: Deploy on kubernetes
         run: kubectl apply -f kubernetes/.
+  
   Test-dev:
       runs-on: dev
       needs: [Deploy-Dev]
