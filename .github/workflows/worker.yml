@@ -95,8 +95,11 @@ jobs:
         with:
           images: spedsbjerg/simple_fortune_cookie #Might be here
            
-      - name: Build and Push
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: $spedsbjerg/simple_fortune_cookie:1.0-${GIT_COMMIT::8} 
+      - name: Build docker
+        run: chmod +x ci/build-docker.sh && ci/build-docker.sh
+      - name: push docker
+        run: chmod +x ci/push-docker.sh && ci/push-docker.sh
+      #  uses: docker/build-push-action@v2
+       # with:
+        #  push: true
+         # tags: $spedsbjerg/simple_fortune_cookie:1.0-${GIT_COMMIT::8} 
