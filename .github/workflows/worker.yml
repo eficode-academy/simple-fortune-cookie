@@ -105,4 +105,12 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: spedsbjerg/simple_fortune_cookie:latest
+          tags: spedsbjerg/simple_fortune_cookie:Frontend
+
+      - name: Build and Push Backend
+        uses: docker/build-push-action@v2
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tages: spedsbjerg/simple_fortune_cookie:Backend
