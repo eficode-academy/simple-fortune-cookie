@@ -1,14 +1,22 @@
-FROM golang:1.16-alpine
+FROM golang:1.16-alpine AS build
 
 WORKDIR /app
 
 COPY go.mod ./
 RUN go mod download
 
-COPY *.go ./
+COPY . ./
 
-RUN go build -o /main
+RUN go build -o /main 
 
 EXPOSE 8080
 
-CMD [ "/main" ]
+## Deploy
+FROM alpine:3.11.3
+COPY --from=build /main /main
+COPY ./static ./static
+COPY ./templates ./templates
+
+EXPOSE 8080
+
+ENTRYPOINT ["/main"]

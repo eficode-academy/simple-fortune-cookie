@@ -1,4 +1,4 @@
-FROM golang:1.16-alpine
+FROM golang:1.16-alpine AS build
 
 WORKDIR /app
 
@@ -8,8 +8,12 @@ RUN go mod download
 
 COPY *.go ./
 
-RUN go build -o /main
+RUN go build -o /main 
 
-EXPOSE 8080
+## Deploy
+FROM alpine:3.11.3
+COPY --from=build /main /main
 
-CMD [ "/main" ]
+EXPOSE 9000
+
+ENTRYPOINT ["/main"]

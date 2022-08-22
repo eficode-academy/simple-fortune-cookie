@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - Build-Go
+      - DockerLogin
   pull_request:
     branches:
       - main
@@ -86,11 +87,12 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: #INSERT IMAGE!
+          images: spedsbjerg/simple_fortune_cookie
+           
 
       - name: Build and Push
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
           push: true
-          tags: $docker_username/micronaut-app:1.0-${GIT_COMMIT::8} 
+          tags: $spedsbjerg/simple_fortune_cookie:1.0-${GIT_COMMIT::8} 
