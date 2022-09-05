@@ -3,3 +3,6 @@ backend/backend
 
 # frontend binary
 frontend/frontend
+
+#VM dev env
+.vagrant

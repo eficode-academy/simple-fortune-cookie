@@ -1,0 +1,6 @@
+robot:latest
+git:latest
+ssh-slaves:latest
+credentials:latest
+credentials-binding:latest
+influxdb:latest
