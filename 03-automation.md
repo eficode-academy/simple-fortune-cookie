@@ -21,16 +21,5 @@ and you look to your good old friend GitHub Actions for some needed support.
 
 ### Task
 
-- Setup a Continuous Integration pipeline (a GitHub Action Workflow)
-- Run the tests in the Workflow
-- Make sure you maintain mainline integrity meaning all PRs
-    against `main` needs to be tested by CI before merging.
-
-> Hint: The [GitHub Flow](https://help.github.com/en/articles/github-flow)
-> has an interesting reference to "Status Checks."
-
-- (Optional) Pristine `main`-branch. Looking at Status Checks passing
-    is all fine and dandy, but it doesn't _enforce_ integrity
-    if you can still push directly to `main`.
-    Maybe you should look into some kind of "branch protection rule,"
-    for it.
+- Setup a Continuous Integration pipeline
+- Run the tests in the pipeline
