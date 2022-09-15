@@ -10,4 +10,4 @@ Succesful To Add Cookie
     Get Text    css=div#output    Cookie Added!
     
 *** Variables ***
-${HEADLESS}=    ${FALSE}
+${HEADLESS}=    ${TRUE}
