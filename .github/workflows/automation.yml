@@ -27,7 +27,7 @@ jobs:
 
     - name: Test frontend
       working-directory: ./frontend
-      run: go test .
+      run: go test -v
       
     - name: Build backend
       working-directory: ./backend
@@ -35,6 +35,6 @@ jobs:
 
     - name: Test backend
       working-directory: ./backend
-      run: go test .
+      run: go test -v
       
             
