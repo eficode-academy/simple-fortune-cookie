@@ -25,18 +25,18 @@ jobs:
       run: cd ./frontend
 
     - name: Build frontend
-      run: go build -v ../...
+      run: go build .
 
     - name: Test frontend
-      run: go test -v ./...
+      run: go test .
       
     - name: Change to backend
       run: cd ./backend
 
     - name: Build backend
-      run: go build -v ../...
+      run: go build .
 
     - name: Test backend
-      run: go test -v ./...
+      run: go test .
       
             
