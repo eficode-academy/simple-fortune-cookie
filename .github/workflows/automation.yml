@@ -23,6 +23,9 @@ jobs:
         
     - name: Change to frontend
       run: cd ./frontend
+      
+    - name: Show frontend
+      run: ls -la      
 
     - name: Build frontend
       run: go build frontend
