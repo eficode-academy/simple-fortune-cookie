@@ -25,7 +25,7 @@ jobs:
       run: cd ./frontend
 
     - name: Build frontend
-      run: go build .
+      run: go build frontend
 
     - name: Test frontend
       run: go test .
