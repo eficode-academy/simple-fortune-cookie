@@ -25,6 +25,7 @@ jobs:
       run: cd frontend
       
     - name: Show frontend
+      working-directory: ./frontend
       run: ls -la      
 
     - name: Build frontend
