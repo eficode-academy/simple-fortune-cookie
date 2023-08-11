@@ -22,7 +22,7 @@ jobs:
         go-version: '1.20'
         
     - name: Change to frontend
-      run: cd ./frontend
+      run: cd frontend
       
     - name: Show frontend
       run: ls -la      
@@ -34,7 +34,7 @@ jobs:
       run: go test .
       
     - name: Change to backend
-      run: cd ./backend
+      run: cd backend
 
     - name: Build backend
       run: go build .
