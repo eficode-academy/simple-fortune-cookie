@@ -14,3 +14,6 @@ For both front and backend:
 - Build the Docker image
 - Run the application in Docker with a docker-compose file
 - Check Dockerfile and compose file into your repository.
+
+Extra:
+- Use a multi-stage build to reduce the size of the image.
