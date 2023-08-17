@@ -11,7 +11,7 @@ ADD . /home/
 RUN go build -o frontend .
 
 #his line indicates that the container will expose port 8000.
-EXPOSE 8000
+EXPOSE 8080
 
 #This line specifies the default command that will be executed when the container is run. In this case, it sets the entry point to the /home/frontend
 ENTRYPOINT ["/home/frontend"]
