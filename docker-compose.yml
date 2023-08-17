@@ -4,7 +4,7 @@ services:
     build:
       context: ./frontend
     ports:
-      - "8000:8000"  #this is the port for the frontend
+      - "8080:8080"  #this is the port for the frontend
   backend:
     build:
       context: ./backend
