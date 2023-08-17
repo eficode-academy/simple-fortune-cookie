@@ -12,8 +12,7 @@ It's probably time anyways,
 ### Task
 
 - Create Kubernetes manifests for your applications
-- Change your deploy step, so it's deploying to Kubernetes
-    instead of just running containers.
+- Try to deploy it manually to your cluster
 
 > Hint: notice that the Kubernetes workers haven't had any of your images
 > built on them, so they can't start the containers,

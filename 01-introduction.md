@@ -95,9 +95,9 @@ _"First of all, the datacenter we used crashed last night,
 - [02-run-app](./02-run-app.md).
 - [03-containers](./03-containers.md).
 - [03-automation](./03-automation.md).
-- [03-cd](./03-cd.md).
 - [03-container-registry](./03-container-registry.md).
-- [04-container-orchestration](./04-container-orchestration.md).
+- [03-container-orchestration](./03-container-orchestration.md).
+- [04-cd](./04-cd.md).
 - [04-database](./04-database.md).
 - [04-testing](./04-testing.md).
 
