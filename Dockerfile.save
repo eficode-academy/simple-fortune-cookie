@@ -1,0 +1,25 @@
+# Set the working directory to the backend directory
+WORKDIR /usr/local/backend
+
+# Build and run the backend application
+RUN apk --no-cache add go && \
+    go build && \
+    go run main.go
+
+# Set the default command to start the backend application
+CMD ["./main"]#Builder
+FROM golang:1.13-alpine3.11 as builder
+RUN mkdir /build
+ADD *.go /build/
+WORKDIR /build
+RUN CGO_ENABLED=0 GOOS=linux go build -a -o golang-memtest .
+
+# generate clean, final image for end users
+FROM alpine:3.11.3
+COPY --from=builder /build/golang-memtest .
+
+COPY /backend /usr/local/backend
+
+RUN go build backend && go run backend
+
+CMD['backend']  
