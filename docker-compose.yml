@@ -1,0 +1,12 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "8000:8000"  #this is the port for the frontend
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "9000:9000"  #this is the port for the backend
