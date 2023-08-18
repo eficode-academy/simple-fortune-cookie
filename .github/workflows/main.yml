@@ -47,9 +47,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         
-      - name: Build Docker Frontend
-        run: chmod +x ci/build-docker-frontend.sh && ci/build-docker-frontend.sh 
+      - name: Build Docker 
+        run: chmod +x ci/docker-build-backend.sh && ci/docker-build-frontend.sh 
         
-      - name: Push Docker Frontend
-        run: chmod +x ci/push-docker-frontend.sh && ci/push-docker-frontend.sh
+      - name: Push Docker 
+        run: chmod +x ci/docker-push-backend.sh && ci/docker-push-frontend.sh
         
