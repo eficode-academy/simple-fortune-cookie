@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: frontend
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: frontend
+  template:
+    metadata:
+      labels:
+        run: frontend
+    spec:
+      containers:
+        - image: ghcr.io/CasperKirud/simple-fortune-frontend:latest
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+            - containerPort: 9000
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always
+status: {}
