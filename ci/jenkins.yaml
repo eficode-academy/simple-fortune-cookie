@@ -1,0 +1,22 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - usernamePassword:
+          description: "vagrant"
+          id: "vagrant"
+          password: "{AQAAABAAAAAQtscsjX0q0OTqy3v+lQk4dzLovasm/xVs7vAHWCiZtXE=}"
+          scope: GLOBAL
+          username: "vagrant"
+jenkins:
+  nodes:
+  - permanent:
+      launcher:
+        ssh:
+          credentialsId: "vagrant"
+          host: "172.17.0.1"
+          port: 22
+          sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+      name: "localhost"
+      remoteFS: "/var/jenkins"
+      retentionStrategy: "always"

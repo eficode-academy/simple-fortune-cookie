@@ -84,5 +84,14 @@ Vagrant.configure("2") do |config|
      mv "$TMPFILE" /home/vagrant/.docker/cli-plugins/docker-compose
      chmod +x /home/vagrant/.docker/cli-plugins/docker-compose
      ln -s /home/vagrant/.docker/cli-plugins/docker-compose /usr/local/bin/docker-compose
+     # setup needed items for jenkins
+     cp /home/vagrant/project/ci/sshd_config /etc/ssh/sshd_config # don't do this in real environment
+     systemctl restart ssh
+     apt-get install openjdk-11-jdk
+     mkdir -p /var/jenkins
+     chown -R vagrant:vagrant /var/jenkins
+     mkdir -p /var/casc
+     chown -R vagrant:vagrant /var/casc
+     cp /home/vagrant/project/ci/jenkins.yaml /var/casc/jenkins.yaml
   SHELL
 end

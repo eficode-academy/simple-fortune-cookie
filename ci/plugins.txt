@@ -91,3 +91,4 @@ workflow-basic-steps:latest
 echarts-api:latest
 scm-api:latest
 workflow-api:latest
+configuration-as-code:latest
