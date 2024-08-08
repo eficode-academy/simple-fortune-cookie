@@ -11,12 +11,7 @@ Fork the project to get your own private working copy:
 
 ![Forking the Project](./images/forking-project.png)
 
-## Configuring the Project
-
-Enable issues on the repository and invite the team as collaborators,
-    so you can make changes:
-
-![Configuring the Project](./images/settings-project.png)
+* invite the team as collaborators, so you can make changes:
 
 When you have a fork that your teammates can access,
 please proceed to the [01-introduction](./01-introduction.md).

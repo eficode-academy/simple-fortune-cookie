@@ -22,6 +22,7 @@ and you look to your good old friend GitHub Actions for some needed support.
 ### Task
 
 - Setup a Continuous Integration pipeline (a GitHub Action Workflow)
+- Build your application
 - Run the tests in the Workflow
 - Make sure you maintain mainline integrity meaning all PRs
     against `main` needs to be tested by CI before merging.

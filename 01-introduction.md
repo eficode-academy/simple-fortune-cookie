@@ -47,29 +47,13 @@ You need to know what is happening to the code and who is working on what.
 The first steps are obvious.
 
 - ~~Put your code under version control~~ easy!
-- Set up a task management system for your project.
+- Set up issues to track your progress.
 
 ### Collaboration with GitHub Projects
 
 Soon™ you'll be presented a lot of individual tasks to complete.
 Just as with any other project, you will want some way of managing which tasks you are currently working on and what is on you backlog.
-You could do this with sticky-notes on a wall,
-but we would recommend you use an actual online task management system instead - especially if you are working as a group.
-
-An easy way to create an agile task management setup for your project
-is to use GitHub issues together with the GitHub Projects feature
-found on the `projects` tab.
-This allows you to have a full swim lane and track your tasks
-in a nice visual way that is completely integrated with GitHub.
-
-Go over to the `Projects` tab and create your project.
-(Notice the templates available.)
-
-![Create project](./images/create-project.png)
-
-_Consider every step in a task as a story,
-also created as an issue in your GH repository.
-Groom them together, breaking down the stories where it makes sense._
+So create Issues in your GitHub repository to track your progress.
 
 It is good practice to always mention which issue you are working on
 in your commit messages. GitHub will actually use this information to
@@ -78,7 +62,7 @@ giving you valuable traceability information.
 
 The even cooler next step is to use GitHubs build in automation to automatically close issues when you commit the change. See [Closing issues using keywords](https://help.github.com/en/articles/closing-issues-using-keywords).
 
-> Optional reading: [Automation for project boards](https://help.github.com/en/articles/about-automation-for-project-boards).
+> Optional task: you can also set up a project inside github to do full fledged project management. Link: [Automation for project boards](https://help.github.com/en/articles/about-automation-for-project-boards).
 
 ... and now on to the actual project work.
 

@@ -19,6 +19,7 @@ well, okay, not that many.. we have work to do!"_
 The following are suggestions to explorations that you can take.
 
 - Run a linter as part of the pipeline
+- Run security scanner (Trivy) as part of your pipeline
 - Stress the application, using for instance the docker image `rufus/siege-engine`
   (more info about using the application can be found
   [here](https://www.linode.com/docs/tools-reference/tools/load-testing-with-siege/))
