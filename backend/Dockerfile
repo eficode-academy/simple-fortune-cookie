@@ -2,13 +2,17 @@ FROM golang:1.21.13-alpine3.20 AS builder
 
 WORKDIR /app
 
+COPY go.mod go.sum ./
+
+RUN go mod download
+
 COPY . .
 
 RUN go build -o backend .
 
-FROM golang:1.21.13-alpine3.20 AS final
+FROM golang:1.21.13-alpine3.20
 
-WORKDIR /backend
+WORKDIR /app
 
 COPY --from=builder /app/backend .
 
