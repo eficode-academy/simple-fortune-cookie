@@ -23,4 +23,4 @@ spec:
         - name: BACKEND_PORT
           value: "9000"
         - name: BACKEND_DNS
-          value: backend-service
+          value: localhost
