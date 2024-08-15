@@ -11,4 +11,4 @@ spec:
       targetPort: 9000
   selector:
     app: backend  
-  type: NodePort
+  type: ClusterIP
