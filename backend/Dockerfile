@@ -14,6 +14,8 @@ FROM golang:1.21.13-alpine3.20
 
 WORKDIR /app
 
+COPY . .
+
 COPY --from=builder /app/backend .
 
 EXPOSE 9000
