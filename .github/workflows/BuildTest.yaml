@@ -14,5 +14,13 @@ jobs:
           cd frontend
           go build
       
-      - name: Test fronend
+      - name: Test fronend 
+        run: go test
+
+      - name: Build backend
+        run: |
+          cd ../backend
+          go build
+      
+      - name: Test backend
         run: go test
