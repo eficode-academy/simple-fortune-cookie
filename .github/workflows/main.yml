@@ -25,10 +25,6 @@ jobs:
       working-directory: ./frontend
       run: go build -v .
       
-  Test:
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
     - name: Test frontend
       working-directory: ./frontend
       run: go test -v .
