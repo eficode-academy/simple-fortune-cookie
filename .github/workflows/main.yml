@@ -1,0 +1,90 @@
+name: Main workflow
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  Build:
+    name: Build Frontend and Backend images
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - name: Clone down repository
+        uses: actions/checkout@v4
+        # Using the Github action Docker buildx - https://github.com/docker/setup-buildx-action
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-actions@v2
+      - name: Build Docker images
+        run: docker-compose build
+        # Create Github packages/artifacts
+      - name: Package application
+        run: |
+          docker save -o backend.tar backend
+          docker save -o frontend.tar frontend
+      - name: Upload backend package
+        uses: actions/upload-artifact@v3
+        with:
+          name: backend-image
+          path: backend.tar
+      - name: Upload frontend package
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-image
+          path: frontend.tar
+  Test:
+    name: Frontend tests
+    runs-on: ubuntu-latest
+    needs: Build # wait for build to finish
+    steps:
+        # Code is used for running the tests
+      - name: Get code
+        uses: actions/checkout@v3
+        # Get the images
+      - name: Download Backend package
+        uses: actions/download-artifact@v3
+        with:
+          name: backend-image
+      - name: Download Frontend package
+        uses: actions/download-artifact@v3
+        with:
+          name: frontend-image
+      - name: Load Docker images
+        run: |
+          docker load -i backend.tar
+          docker load -i frontend.tar
+      - name: Run tests
+        run: docker-compose run --rm frontend go test -v ./frontend/main_test.go
+  Push:
+    name: Push to Docker Hub
+    runs-on: ubuntu-latest
+    needs: Test # Could be Build but we don't want to push if the test fails.
+    steps:
+      # Get the images
+      - name: Download Backend package
+        uses: actions/download-artifact@v3
+        with:
+          name: backend-image
+      - name: Download Frontend package
+        uses: actions/download-artifact@v3
+        with:
+          name: frontend-image
+      - name: Load Docker images
+        run: |
+          docker load -i backend.tar
+          docker load -i frontend.tar
+        # Push to Docker Hub
+      - name: Authenticating with Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Push Backend Image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/backend:latest
+
+      - name: Push Frontend Image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/frontend:latest
+      
