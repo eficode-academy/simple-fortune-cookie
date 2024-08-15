@@ -1,10 +1,19 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: frontend
+  name: backend-deployment
 spec:
-  containers:
-    - name: frontend
-      image: ghcr.io/bjornestad/backend:latest
-      ports:
-        - containerPort: 9000
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: ghcr.io/bjornestad/backend:latest
+          ports:
+            - containerPort: 9000
