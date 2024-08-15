@@ -5,7 +5,7 @@ env:
   GIT_COMMIT: ${{ github.sha }}
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "Yalcinva03-patch-4" ]
   pull_request:
     branches: [ "main" ]
 
