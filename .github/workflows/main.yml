@@ -22,10 +22,10 @@ jobs:
       - name: Build Docker images
         run: docker compose build
         # Create Github packages/artifacts
-      - name: Package application
+      - name: Package backend application
         run: |
-          docker save -o backend.tar backend
-          docker save -o frontend.tar frontend
+          docker save -o backend.tar mpldocker/backend:latest
+          docker save -o frontend.tar mpldocker/frontend:latest
       - name: Upload backend package
         uses: actions/upload-artifact@v3
         with:
