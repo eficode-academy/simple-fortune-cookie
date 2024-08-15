@@ -3,3 +3,7 @@ backend/backend
 
 # frontend binary
 frontend/frontend
+.idea/.gitignore
+.idea/modules.xml
+.idea/simple-fortune-cookie.iml
+.idea/vcs.xml
