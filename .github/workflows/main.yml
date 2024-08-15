@@ -56,9 +56,9 @@ jobs:
         name: backend
         path: ./backend
     - name: build docker
-      run: bash ci/build-docker.sh
+      run: bash backend/ci/build-docker.sh
     - name: push docker
-      run: bash ci/push-docker.sh
+      run: bash backend/ci/push-docker.sh
   frontend-docker-image:
     runs-on: ubuntu-latest
     needs: [Build]
@@ -71,6 +71,6 @@ jobs:
         name: frontend
         path: ./frontend
     - name: build docker
-      run: bash ci/build-docker.sh
+      run: bash frontend/ci/build-docker.sh
     - name: push docker
-      run: bash ci/push-docker.sh
+      run: bash frontend/ci/push-docker.sh
