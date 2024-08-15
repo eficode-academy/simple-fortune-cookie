@@ -1,22 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp
+  name: frontend-deployment
+  labels:
+    app: frontend
 spec:
+  replicas: 2
   selector:
     matchLabels:
-      app: myapp
+      app: frontend
   template:
     metadata:
       labels:
-        app: myapp
+        app: frontend
     spec:
       containers:
-      - name: myapp
-        image: <Image>
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+      - name: frontend
+        image: <insert image>
         ports:
-        - containerPort: <Port>
+        - containerPort: 8080
+        env:
+        - name: BACKEND_PORT
+          value: "9000"
+        - name: BACKEND_DNS
+          value: backend-service
