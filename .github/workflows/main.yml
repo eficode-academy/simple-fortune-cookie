@@ -7,23 +7,12 @@ on:
     branches:
       - main
 jobs:
-  build:
+  Build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Set up Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: 1.16 
-    # Step 5: Build the application
-    - name: Build the application
-      run: go build -v ./...
-
-    # Step 6: Run tests
-    - name: Run tests
-      run: go test -v ./...
-
-    # Step 7: Ensure code quality (optional)
-    - name: Run static analysis (optional)
-      run: go vet ./...
+      - name: Clone down repository
+        uses: actions/checkout@v4       
+      - name: Build application
+        run: frontend/go.mod
+      - name: Test
+        run: frontend/main_test.go
