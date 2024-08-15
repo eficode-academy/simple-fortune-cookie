@@ -1,19 +1,41 @@
-name: Auto workflow
-on: push
+name: CI Pipeline
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
-  Build:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Clone down repository
-        uses: actions/checkout@v4       
-      - run: frontend/main.go
-  Main-test:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Download code
-      uses: actions/download-artifact@v4
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Set up Go
+      uses: actions/setup-go@v4
       with:
-        name: code
-        path: .
-    - name: Execute main test
-      run: bash frontend/main_test.go
+        go-version: 1.16 
+    - name: Cache Go modules
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cache/go-build
+          ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
+    - name: Install dependencies
+      run: go mod download
+
+    # Step 5: Build the application
+    - name: Build the application
+      run: go build -v ./...
+
+    # Step 6: Run tests
+    - name: Run tests
+      run: go test -v ./...
+
+    # Step 7: Ensure code quality (optional)
+    - name: Run static analysis (optional)
+      run: go vet ./...
