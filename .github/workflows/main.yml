@@ -13,6 +13,6 @@ jobs:
       - name: Clone down repository
         uses: actions/checkout@v4       
       - name: Build application
-        run: frontend/main.go
+        run: frontend/util.go
       - name: Test
         run: frontend/main_test.go
