@@ -29,6 +29,8 @@ services:
       - BACKEND_PORT=9000
       - BACKEND_DNS=localhost
       - REDIS_DNS=redis  
+    depends_on:
+      - redis
 
   redis:
     image: redis:latest
