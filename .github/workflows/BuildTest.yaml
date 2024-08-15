@@ -1,0 +1,30 @@
+name: Build and Test
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  BuildAndTest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone down repository
+        uses: actions/checkout@v4   
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          go build
+      
+      - name: Test fronend 
+        run: |
+          cd frontend
+          go test
+
+      - name: Build backend
+        run: |
+          cd backend
+          go build
+      
+      - name: Test backend
+        run: |
+          cd backend
+          go test
