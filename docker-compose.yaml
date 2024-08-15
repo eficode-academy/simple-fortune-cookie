@@ -10,8 +10,8 @@ services:
     depends_on:
       - backend
     environment:
-      BACKEND_DNS: "backend"
-      BACKEND_PORT: "9000"
+      BACKEND_DNS: backend
+      BACKEND_PORT: 9000
 
   backend:
     container_name: backend
