@@ -1,12 +1,12 @@
 FROM golang:1.18 AS builder
 
-WORKDIR /app/frontend
+WORKDIR /app
 
 COPY frontend/go.mod ./
 
 RUN go mod download
 
-COPY frontend/ .
+COPY frontend ./
 
 RUN go build -o frontend .
 
@@ -14,11 +14,13 @@ FROM alpine:latest
 
 RUN apk --no-cache add ca-certificates
 
-COPY --from=builder /app/frontend /app/frontend
+WORKDIR /app
 
-COPY frontend /app/frontend
+COPY --from=builder /app/frontend /app
 
-WORKDIR /app/frontend
+#COPY frontend /app/frontend
+
+# WORKDIR /app/frontend
 
 RUN apk add --no-cache go
 

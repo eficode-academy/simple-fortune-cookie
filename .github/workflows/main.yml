@@ -86,3 +86,34 @@ jobs:
 
       - name: Push Frontend Image to Docker Hub
         run: docker push mpldocker/frontend:latest
+
+  deploy_to_kubernetes:
+    name: Deploying to Kubernetes
+    runs-on: ubuntu-latest
+    needs: [build_frontend_and_backend, test_frontend]
+    steps:
+      - name: Clone down repository
+        uses: actions/checkout@v4
+      
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: v1.21.0
+        
+      - name: Configure Kubernetes
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+
+      - name: Deploy Backend
+        run: |
+          kubectl apply -f k8s/backend-deployment.yaml
+          kubectl apply -f k8s/backend-service.yaml
+          kubectl rollout status deployment/backend-deployment
+      
+      - name: Deploy Frontend
+        run: |
+          kubectl apply -f k8s/frontend-deployment.yaml
+          kubectl apply -f k8s/frontend-service.yaml
+          kubectl rollout status deployment/frontend-deployment
