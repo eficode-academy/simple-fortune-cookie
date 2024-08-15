@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend_simple_fortune
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend_simple_fortune
+  template:
+    metadata:
+      labels:
+        app: backend_simple_fortune
+    spec:
+      containers:
+      - name: backend
+        image: ghcr.io/mrodense/backend_simple_fortune:latest
+        ports:
+        - containerPort: 9000
