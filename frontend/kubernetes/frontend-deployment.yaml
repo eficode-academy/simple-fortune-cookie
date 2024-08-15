@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   name: frontend-deployment
   labels:
-    app: frontend
+    app: frontend_simple_fortune
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: frontend_simple_fortune
   template:
     metadata:
       labels:
-        app: frontend
+        app: frontend_simple_fortune
     spec:
       containers:
       - name: frontend
-        image: ghcr.io/mrodense/frontend_simple_fortune:1.0-a7c36a1e7a8a7161a9b94f0d1d35ac8210ffc8d5
+        image: ghcr.io/mrodense/frontend_simple_fortune:latest
         ports:
         - containerPort: 8080
         env:

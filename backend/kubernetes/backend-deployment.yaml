@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: backend-deployment
   labels:
-    app: backend
+    app: backend_simple_fortune
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend
+      app: backend_simple_fortune
   template:
     metadata:
       labels:
-        app: backend
+        app: backend_simple_fortune
     spec:
       containers:
       - name: backend
