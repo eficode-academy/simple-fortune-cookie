@@ -58,7 +58,7 @@ jobs:
           docker load -i backend.tar
           docker load -i frontend.tar
       - name: Run tests
-        run: docker compose run --rm frontend go test -v ./frontend/main_test.go
+        run: docker compose run --rm frontend go test -v ./main_test.go
   Push:
     name: Push to Docker Hub
     runs-on: ubuntu-latest
