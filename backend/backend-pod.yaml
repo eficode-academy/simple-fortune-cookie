@@ -7,4 +7,4 @@ spec:
     - name: frontend
       image: ghcr.io/bjornestad/backend:latest
       ports:
-        - containerPort: 8080
+        - containerPort: 9000
