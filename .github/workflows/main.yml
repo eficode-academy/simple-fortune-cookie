@@ -1,0 +1,31 @@
+name: Main workflow
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+env: # Set the secret as an input
+  docker_username: ${{ github.actor }} 
+  docker_password: ${{ secrets.GITHUB_TOKEN }} #Nees to be set to be made available to the workflow
+  GIT_COMMIT: ${{ github.sha }}
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone down repository
+        uses: actions/checkout@v4       
+      - name: Build Go frontend
+        working-directory: ./frontend
+        run: go build
+      - name: Build Go backend
+        working-directory: ./backend
+        run: go build
+      - name: Test
+        run: ./frontend/main_test.go
+      - name: Upload repo
+        uses: actions/upload-artifact@v4
+        with: 
+          name: code
+          path: .
