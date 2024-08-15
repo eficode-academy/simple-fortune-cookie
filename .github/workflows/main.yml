@@ -15,6 +15,12 @@ jobs:
     - name: Install dependencies
       run: go mod tidy
       working-directory: ./frontend
+    - name: Build frontend
+      run: go build
+      working-directory: ./frontend
+    - name: Build backend
+      run: go build
+      working-directory: ./backend
     - name: Run tests
       run: go test -v ./...
       working-directory: ./frontend
