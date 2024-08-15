@@ -10,12 +10,16 @@ COPY frontend/ .
 
 RUN go build -o frontend .
 
-FROM debian:bullseye-slim
+FROM alpine:latest
 
-WORKDIR /app
+RUN apk --no-cache add ca-certificates
 
-COPY --from=builder /app/frontend /app/
+COPY --from=builder /app/frontend /app/frontend
 
-EXPOSE 8080
+COPY frontend /app/frontend
+
+WORKDIR /app/frontend
+
+RUN apk add --no-cache go
 
 CMD ["./frontend"]
