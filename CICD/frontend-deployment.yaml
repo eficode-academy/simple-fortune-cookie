@@ -17,3 +17,8 @@ spec:
           image: ghcr.io/bjornestad/frontend:latest
           ports:
             - containerPort: 8080
+          env: 
+            - name: BACKEND_PORT
+              value: "9000"
+            - name: BACKEND_HOST
+              value: backend
