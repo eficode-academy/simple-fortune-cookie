@@ -16,4 +16,5 @@ jobs:
       run: go mod tidy
       working-directory: ./frontend
     - name: Run tests
-      run: go test -v ./frontend/..
+      run: go test -v ./...
+      working-directory: ./frontend
