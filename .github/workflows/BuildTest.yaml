@@ -29,11 +29,49 @@ jobs:
           cd backend
           go test
   
+
+  CheckDocker: 
+    runs-on: ubuntu-latest
+    needs: [BuildAndTest]
+    steps:
+      - name: Clone down repository
+        uses: actions/checkout@4
+      
+      - name: Build frontend docker image
+        run: |
+          cd frontend
+          docker build 
+
+      - name: Build frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: frontend
+          dockerfile: Dockerfile
+          push: false
+          tags: frontend:latest
+
+      - name: Build backend
+        uses: docker/build-push-action@v5
+        with:
+          context: backend
+          dockerfile: Dockerfile
+          push: false
+          tags: backend:latest
+      
+      - name: Deploy docker compose
+        run: docker compose up
+
+      - name: Test
+        run: |
+          sleep 20
+          wget http://localhost:8080/
+          test -f index.html
+
   BuildDocker:
     runs-on: ubuntu-latest
     permissions:
       packages: write
-    needs: [BuildAndTest]
+    needs: [CheckDocker]
     steps:
       - name: Clone down repository
         uses: actions/checkout@v4  
