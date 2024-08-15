@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    image: mpldocker/frontend:latest
+    command: go test -v ./frontend/main_test.go
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend
+      - redis
+    networks: 
+      - proxy
+    environment:
+      - BACKEND_PORT=9000
+      - BACKEND_DNS=backend
+      - REDIS_DNS=redis  
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: mpldocker/backend:latest
+    ports:
+      - "9000:9000"
+    networks: 
+      - proxy
+    environment:
+      - BACKEND_PORT=9000
+      - BACKEND_DNS=localhost
+      - REDIS_DNS=redis  
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks: 
+      - proxy
+
+networks: 
+  proxy: 
+    driver: bridge
