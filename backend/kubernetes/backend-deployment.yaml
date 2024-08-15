@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: backend
-        image: <insert image>
+        image: ghcr.io/mrodense/backend_simple_fortune:latest
         ports:
         - containerPort: 9000

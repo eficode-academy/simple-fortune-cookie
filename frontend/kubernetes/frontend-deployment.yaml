@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: <insert image>
+        image: ghcr.io/mrodense/frontend_simple_fortune:1.0-a7c36a1e7a8a7161a9b94f0d1d35ac8210ffc8d5
         ports:
         - containerPort: 8080
         env:
