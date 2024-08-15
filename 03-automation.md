@@ -14,7 +14,10 @@ So of course you look into some sort of automated tests.
 Luckily the project was not created by entities of pure evil.
 There are some tests that can be run.
 You need to automate them.
-You can run the current set of tests with `go test`.
+
+You can run the current set of tests with `go test` in the `frontend` folder (there is no test file in the `backend` folder as of yet).
+
+Also if you get a `FAIL`, simply change the recommended line in `frontend/main.go`.
 
 Continuous Integration is the goal,
 and you look to your good old friend GitHub Actions for some needed support.
