@@ -8,84 +8,81 @@ on:
       - main
   workflow_dispatch:
 jobs:
-  Build:
-    name: Build Frontend and Backend images
+  test_frontend:
+    name: Test Frontend
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
     steps:
       - name: Clone down repository
         uses: actions/checkout@v4
-        # Using the Github action Docker buildx - https://github.com/docker/setup-buildx-action
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.18' # Same Go version as the Docker files
+
+      - name: Install dependencies
+        run: go mod tidy
+        working-directory: ./frontend
+
+      - name: Build Frontend app
+        run: go build -o app .
+        working-directory: ./frontend
+      
+      - name: Run tests
+        run: go test -v .
+        working-directory: ./frontend
+        
+  build_frontend_and_backend:
+    name: Build Frontend and Backend images
+    runs-on: ubuntu-latest
+    steps:
+        # Get code
+      - name: Clone down repository
+        uses: actions/checkout@v4
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+
+        # Build images
       - name: Build Docker images
         run: docker compose build
-        # Create Github packages/artifacts
-      - name: Package backend application
+
+        # Test if we can start the services
+      - name: Service health check
+        run: docker compose up -d
+
+      - name: Waiting for services to start
         run: |
-          docker save -o backend.tar mpldocker/backend:latest
-          docker save -o frontend.tar mpldocker/frontend:latest
-      - name: Upload backend package
-        uses: actions/upload-artifact@v3
-        with:
-          name: backend-image
-          path: backend.tar
-      - name: Upload frontend package
-        uses: actions/upload-artifact@v3
-        with:
-          name: frontend-image
-          path: frontend.tar
-  Test:
-    name: Frontend tests
-    runs-on: ubuntu-latest
-    needs: Build # wait for build to finish
-    steps:
-        # Code is used for running the tests
-      - name: Get code
-        uses: actions/checkout@v3
-        # Get the images
-      - name: Download Backend package
-        uses: actions/download-artifact@v3
-        with:
-          name: backend-image
-      - name: Download Frontend package
-        uses: actions/download-artifact@v3
-        with:
-          name: frontend-image
-      - name: Load Docker images
-        run: |
-          docker load -i backend.tar
-          docker load -i frontend.tar
-      - name: Run tests
-        run: docker compose run --rm frontend go test -v ./main_test.go
-  Push:
-    name: Push to Docker Hub
-    runs-on: ubuntu-latest
-    needs: Test # Could be Build but we don't want to push if the test fails.
-    steps:
-      # Get the images
-      - name: Download Backend package
-        uses: actions/download-artifact@v3
-        with:
-          name: backend-image
-      - name: Download Frontend package
-        uses: actions/download-artifact@v3
-        with:
-          name: frontend-image
-      - name: Load Docker images
-        run: |
-          docker load -i backend.tar
-          docker load -i frontend.tar
-        # Push to Docker Hub
+          echo "Waiting for services to be healthy..."
+          for i in {1..10}; do
+            unhealthy=$(docker-compose ps | grep -E "unhealthy|starting" | wc -l)
+            if [ $unhealthy -eq 0 ]; then
+              echo "All services are healthy."
+              break
+            fi
+            echo "Some services are not yet healthy. Retrying in 10 seconds..."
+            sleep 10
+          done
+          if [ $unhealthy -ne 0 ]; then
+            echo "Services did not become healthy in time."
+            docker-compose ps
+            exit 1
+          fi
+      
+        # Always stop the services no matter if they started or not
+      - name: Stop services
+        if: always()
+        run: docker compose down
+
+        # Push to Docker hub
       - name: Authenticating with Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          username: mpldocker
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
       - name: Push Backend Image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/backend:latest
+        run: docker push mpldocker/backend:latest
 
       - name: Push Frontend Image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/frontend:latest
-      
+        run: docker push mpldocker/frontend:latest

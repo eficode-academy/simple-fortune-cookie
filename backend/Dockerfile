@@ -1,5 +1,5 @@
 # Stage 1: Build the Go application
-FROM golang:1.16 AS builder
+FROM golang:1.18 AS builder
 
 # Set the working directory
 WORKDIR /app
