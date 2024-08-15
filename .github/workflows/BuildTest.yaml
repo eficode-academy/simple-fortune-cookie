@@ -28,3 +28,36 @@ jobs:
         run: |
           cd backend
           go test
+  
+  BuildDocker:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    needs: [BuildAndTest]
+    steps:
+      - name: Clone down repository
+        uses: actions/checkout@v4  
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: mrodense
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: frontend
+          dockerfile: Dockerfile
+          push: true
+          tags: ghcr.io/mrodense/frontend_simple_fortune:1.0-${{ github.sha }},ghcr.io/mrodense/frontend_simple_fortune:latest
+      
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: backend
+          dockerfile: Dockerfile
+          push: true
+          tags: ghcr.io/mrodense/frontend_simple_fortune:1.0-${{ github.sha }},ghcr.io/mrodense/backend_simple_fortune:latest
+
+ 
