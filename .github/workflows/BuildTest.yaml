@@ -47,7 +47,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: app
           dockerfile: ./frontend/Dockerfile.ci
           push: true
           tags: ghcr.io/${{ github.actor }}/micronaut-app:1.0-${{ github.sha }},ghcr.io/${{ github.actor }}/frontend_simple_fortune:latest
@@ -55,7 +54,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: app
           dockerfile: ./backend/Dockerfile.ci
           push: true
           tags: ghcr.io/${{ github.actor }}/micronaut-app:1.0-${{ github.sha }},ghcr.io/${{ github.actor }}/backend_simple_fortune:latest
