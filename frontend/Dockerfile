@@ -8,6 +8,6 @@ go build -o cookie-frontend
 # final stage
 FROM alpine:latest
 WORKDIR /app
-COPY --from=builder /frontend/cookie-frontend /app/
+COPY --from=builder /frontend .
 EXPOSE 8080
 ENTRYPOINT ["./cookie-frontend"]
