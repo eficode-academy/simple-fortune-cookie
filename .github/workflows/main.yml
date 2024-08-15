@@ -17,17 +17,9 @@ jobs:
       with:
         go-version: '1.22'
 
-    - name: Initialize backend module
-      working-directory: ./backend
-      run: go mod init github.com/yourusername/simple-fortune-cookie/backend
-
     - name: Build backend
       working-directory: ./backend
       run: go build -v .
-
-    - name: Initialize frontend module
-      working-directory: ./frontend
-      run: go mod init github.com/yourusername/simple-fortune-cookie/frontend
 
     - name: Build frontend
       working-directory: ./frontend
