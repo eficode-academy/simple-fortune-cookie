@@ -28,7 +28,7 @@ services:
     environment:
       - BACKEND_PORT=9000
       - BACKEND_DNS=localhost
-      - REDIS_DNS=redis  # Assuming redis is the name of the Redis service
+      - REDIS_DNS=redis  
 
   redis:
     image: redis:latest
