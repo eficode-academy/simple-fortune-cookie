@@ -55,8 +55,6 @@ jobs:
       with:
         name: backend
         path: ./backend
-    - name: ls
-      run: ls -la ci
     - name: build docker
       run: bash ci/build-docker.sh
     - name: push docker
@@ -72,8 +70,6 @@ jobs:
       with:
         name: frontend
         path: ./frontend
-    - name: ls
-      run: ls -la ci
     - name: build docker
       run: bash ci/build-docker.sh
     - name: push docker
