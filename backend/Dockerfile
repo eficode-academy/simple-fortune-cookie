@@ -10,6 +10,10 @@ COPY *.go ./
 
 RUN go build backend
 
+FROM debian:bookworm-slim
+WORKDIR /app
+COPY --from=builder /app/backend /app/
+
 EXPOSE 5000
 
-CMD ["go", "run", "./backend"]
+CMD ["./backend"]
