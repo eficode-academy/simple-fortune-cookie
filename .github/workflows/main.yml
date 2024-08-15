@@ -19,7 +19,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Build Docker images
-        run: docker-compose build
+        run: docker compose build
         # Create Github packages/artifacts
       - name: Package application
         run: |
