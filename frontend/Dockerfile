@@ -1,4 +1,4 @@
-FROM golang:1.18 AS builder
+FROM golang:1.21.13-alpine3.20 AS builder
 
 WORKDIR /app
 
@@ -6,22 +6,22 @@ COPY frontend/go.mod ./
 
 RUN go mod download
 
-COPY frontend ./
+COPY frontend/*.go ./
 
 RUN go build -o frontend .
 
 FROM alpine:latest
 
-RUN apk --no-cache add ca-certificates
-
 WORKDIR /app
 
-COPY --from=builder /app/frontend /app
+COPY --from=builder /app/frontend .
 
-#COPY frontend /app/frontend
+COPY frontend/static ./static
 
-# WORKDIR /app/frontend
+COPY frontend/templates ./templates
 
-RUN apk add --no-cache go
+RUN apk --no-cache add ca-certificates
+
+EXPOSE 8080
 
 CMD ["./frontend"]
