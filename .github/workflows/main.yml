@@ -45,5 +45,6 @@ jobs:
         path: .
     - name: ls
       run: ls -la CI
-    - name: build docker
-      run: bash CI/build-docker.sh
+    - name: Push Docker image
+      run: docker push "${REPO}micronaut-app:latest"
+
