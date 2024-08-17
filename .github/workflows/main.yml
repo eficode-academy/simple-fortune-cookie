@@ -29,9 +29,6 @@ jobs:
       - name: Run frontend test
         run: bash CI/test-frontend.sh
         
-      - name: Build the backend application
-        run: bash CI/build-backend.sh
-        
       - name: Run backend test
         run: bash CI/test-backend.sh
         
