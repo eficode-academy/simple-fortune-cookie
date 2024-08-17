@@ -18,6 +18,6 @@ jobs:
         with:
           go-version: 1.16
       - name: Build the application
-        run: bash CI/build-frontend.sh
+        run: bash CI/build.frontend.sh
       - name: Run tests
         run: bash CI/test-frontend.sh
