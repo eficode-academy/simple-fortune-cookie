@@ -69,5 +69,16 @@ jobs:
         path: .
     - name: ls
       run: ls -la CI
-    - name: build docker
-      run: bash CI/build-docker.sh
+    - name: Build and push frontend Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./frontend
+        push: true
+        tags: ghcr.io/${{ github.repository_owner }}/frontend:${{ github.sha }} 
+
+    - name: Build and push backend Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./backend
+        push: true
+        tags: ghcr.io/${{ github.repository_owner }}/backend:${{ github.sha }}
