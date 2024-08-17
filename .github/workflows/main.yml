@@ -1,12 +1,6 @@
 name: CI Pipeline
 
-on:
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
+on: push
 jobs:
   build:
     runs-on: ubuntu-latest
