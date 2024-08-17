@@ -37,14 +37,31 @@ jobs:
     needs: [build]
     permissions:
       packages: write
+      contents: read  # Needed to access code artifacts
     steps:
-    - name: Download code
-      uses: actions/download-artifact@v4
-      with:
-        name: code
-        path: .
-    - name: ls
-      run: ls -la CI
-    - name: Push Docker image
-      run: docker push "${REPO}micronaut-app:latest"
+      - name: Download code
+        uses: actions/download-artifact@v4
+        with:
+          name: code
+          path: .
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/cookie:latest  # Replace with your GHCR repo and tag
+
+      - name: List directory
+        run: ls -la CI
 
