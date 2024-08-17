@@ -106,6 +106,13 @@ jobs:
           echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
 
+      - name: Redeploy Redis
+        run: |
+          kubectl apply -f k8s/redis-pvc.yaml
+          kubectl apply -f k8s/redis-deployment.yaml
+          kubectl apply -f k8s/redis-service.yaml
+          kubectl rollout status deployment/redis-deployment
+
       - name: Deploy Backend
         run: |
           kubectl apply -f k8s/backend-deployment.yaml
@@ -116,4 +123,5 @@ jobs:
         run: |
           kubectl apply -f k8s/frontend-deployment.yaml
           kubectl apply -f k8s/frontend-service.yaml
+          kubectl apply -f k8s/frontend-ingress.yaml
           kubectl rollout status deployment/frontend-deployment
