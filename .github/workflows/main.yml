@@ -85,3 +85,15 @@ jobs:
         context: ./backend
         push: true
         tags: ghcr.io/${{ github.repository_owner }}/backend:${{ github.sha }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [docker-backend, docker-frontend]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl apply -f k8s/
+
