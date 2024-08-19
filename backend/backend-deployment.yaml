@@ -19,4 +19,9 @@ spec:
           image: ghcr.io/eficode-academy/simple-fortune-cookie/backend:latest
           ports:
           - containerPort: 9000
+env:
+  - name: REDIS_HOST
+    value: "redis"
+  - name: REDIS_PORT
+    value: "6379"
 
