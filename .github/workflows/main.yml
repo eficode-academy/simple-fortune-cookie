@@ -87,7 +87,7 @@ jobs:
         tags: ghcr.io/${{ github.repository_owner }}/backend:${{ github.sha }}
   deploy:
     runs-on: ubuntu-latest
-    needs: [docker-backend, docker-frontend]
+    needs: [Docker-image]
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
