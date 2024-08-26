@@ -1,0 +1,108 @@
+name: CI Pipeline
+
+on: 
+  pull_request:
+    branches:
+      - "**"
+  push:
+    branches:
+      - main
+env:
+  docker_username: ${{ github.actor }} 
+  docker_password: ${{ secrets.GITHUB_TOKEN }} 
+  GIT_COMMIT: ${{ github.sha }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.16
+          
+      - name: Build the frontend application
+        run: bash CI/build-frontend.sh
+        
+      - name: Run frontend test
+        run: bash CI/test-frontend.sh
+        
+      - name: Run backend test
+        run: bash CI/test-backend.sh
+        
+      - name: Upload repo
+        uses: actions/upload-artifact@v4
+        with: 
+          name: code
+          path: .
+  Linting:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v4
+        with:
+          name: code
+          path: .
+      - name: run linting
+        uses: super-linter/super-linter/slim@v5 
+        env:
+          DEFAULT_BRANCH: main
+          # To report GitHub Actions status checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISABLE_ERRORS: true      
+  Docker-image:
+    runs-on: ubuntu-latest
+    needs: [build]
+    permissions:
+      packages: write
+    steps:
+    - name: Download code
+      uses: actions/download-artifact@v4
+      with:
+        name: code
+        path: .
+    - name: ls
+      run: ls -la CI
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build and push frontend Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./frontend
+        push: true
+        tags: ghcr.io/${{ github.repository_owner }}/frontend:${{ github.sha }} 
+
+    - name: Build and push backend Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./backend
+        push: true
+        tags: ghcr.io/${{ github.repository_owner }}/backend:${{ github.sha }}
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [Docker-image]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Create kubeconfig
+      run: echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
+
+    - name: Deploy Redis to Kubernetes
+      run: |
+        kubectl --kubeconfig kubeconfig apply -f k8s/redis/
+
+    - name: Deploy Backend with Redis Configuration
+      run: |
+        kubectl --kubeconfig kubeconfig apply -f k8s/backend/
+        
+    - name: Deploy Frontend
+      run: |
+        kubectl --kubeconfig kubeconfig apply -f k8s/frontend/

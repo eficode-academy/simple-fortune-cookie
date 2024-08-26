@@ -101,5 +101,5 @@ func main() {
 
     http.Handle("/", http.FileServer(http.Dir("./static")))
     err := http.ListenAndServe(":8080", nil)
-    fmt.Println("%v", err)
+    fmt.Printf("%v", err)
 }

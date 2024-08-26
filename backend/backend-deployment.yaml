@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: backend-deployment
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: backend-deployment
+  template:
+    metadata:
+      labels:
+        run: backend-deployment
+    spec:
+      containers:
+        - name: backend-deployment
+          image: ghcr.io/eficode-academy/simple-fortune-cookie/backend:latest
+          ports:
+          - containerPort: 9000
+env:
+  - name: REDIS_HOST
+    value: "redis"
+  - name: REDIS_PORT
+    value: "6379"
+
