@@ -13,7 +13,7 @@ var dbLink redis.Conn
 var usingRedis = false
 
 func init() {
-	// Check if REDIS_DNS environment variable is set
+	// Check if REDIS_DNS environment variable is set -test
 	if os.Getenv("REDIS_DNS") == "" {
 		fmt.Println("redis config not set")
 		return
