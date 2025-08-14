@@ -23,7 +23,11 @@ jobs:
 
 
     - name: Build frontend
-      run: go build -v ../frontend
+    - run: |
+        cd ..
+        cd ..
+        cd frontend
+        go build
 
       
     - name: Build backend
