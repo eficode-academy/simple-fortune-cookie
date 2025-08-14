@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: DockerfileBackend
+    ports:
+      - "9000:9000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: DockerfileFrontend
+    ports:
+      - "8080:8080"
+    depends_on:
+      backend:
+        condition: service_healthy
