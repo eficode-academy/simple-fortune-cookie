@@ -16,4 +16,3 @@
           image: ghcr.io/emiliekilde/simple-fortune-cookie-backend:latest
           ports:
           - containerPort: 8080
-  
