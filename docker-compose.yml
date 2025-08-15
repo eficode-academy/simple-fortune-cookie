@@ -1,0 +1,27 @@
+services:
+  redis:
+    image: redis:7-alpine
+    restart: always
+    volumes:
+      - redis_data:/data
+
+  backend:
+    image: ghcr.io/albla20/backend:latest
+    environment:
+      - REDIS_DNS=redis
+    ports:
+      - "9000:9000"          # for host access (not needed for containers to talk)
+    # IMPORTANT: backend must listen on 0.0.0.0:9000 inside the container
+
+  frontend:
+    image: ghcr.io/albla20/frontend:latest
+    environment:
+      - BACKEND_DNS=backend
+      - BACKEND_PORT=9000  
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend
+
+volumes:
+  redis_data:
