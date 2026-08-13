@@ -1,0 +1,30 @@
+services:
+  frontend-container:
+    image: jeppeha/frontenddocker:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      - backend-container
+    environment:
+      BACKEND_PORT: 9000
+      BACKEND_DNS: backend-container
+    
+  
+  backend-container:
+    image: jeppeha/backenddocker:latest
+    ports:
+      - 9000:9000
+    depends_on: 
+      - redis-container
+    environment:
+      REDIS_PORT: 6379
+      REDIS_DNS: redis-container
+
+
+  redis-container:
+    image: redis:7-alpine
+    ports:
+      - 6379:6379
+  
+      
+

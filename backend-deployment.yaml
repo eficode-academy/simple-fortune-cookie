@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: jeppeha/backenddocker:latest
+        ports:
+        - containerPort: 9000
+        env:
+          - name: REDIS_DNS
+            value: redis-service

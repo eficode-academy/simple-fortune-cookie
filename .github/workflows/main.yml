@@ -1,0 +1,42 @@
+name: simple-fortune-cookie
+on: 
+  push
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Checkout repo
+       uses: actions/checkout@v4
+
+     - name: Test Frontend
+       working-directory: frontend
+       run: go test ./...
+  Dockerpush:
+    needs: Test
+    name: push dockerimage to dockerhub
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: login to docker hub
+        id: docker-hub
+        env:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        run: |
+          docker login -u $username -p $password
+      - name: build the frontend docker image
+        id: build-frontend-docker-image
+        run: | 
+          ls -la
+          docker build frontend -t jeppeha/frontenddocker:latest
+      - name: push the frontend docker image
+        id: push-frontend-docker-image
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontenddocker:latest
+      - name: build the backend docker image
+        id: build-backend-docker-image
+        run: | 
+          ls -la
+          docker build backend -t jeppeha/backenddocker:latest
+      - name: push the backend docker image
+        id: push-backend-docker-image
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/backenddocker:latest  

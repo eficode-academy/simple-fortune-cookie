@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: jeppeha/frontenddocker:latest
+        ports:
+          - containerPort: 8080
+        env:
+          - name: BACKEND_DNS
+            value: backend-service
+          - name: BACKEND_PORT
+            value: "9000"
+           

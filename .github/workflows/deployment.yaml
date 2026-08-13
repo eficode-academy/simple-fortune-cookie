@@ -1,0 +1,81 @@
+name: deployment
+on: push
+jobs:
+  Setup-kubeconfig:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: latest
+      - name: Set up kubeconfig
+        run: echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
+      
+      - name: Upload kubeconfig artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kubeconfig
+          path: kubeconfig
+
+  Redis:
+    needs: Setup-kubeconfig
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: kubeconfig
+
+      - name: deploy-redis
+        run: kubectl --kubeconfig kubeconfig apply -f redis-deployment.yaml
+
+      - name: redis-services
+        run: kubectl --kubeconfig kubeconfig apply -f redis-svc.yaml
+
+      - name: redis-persitance
+        run: kubectl --kubeconfig kubeconfig apply -f redis-pvc.yaml
+
+  Backend:
+    runs-on: ubuntu-latest
+    needs: Redis
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: kubeconfig
+      - name: deploy-backend
+        run: kubectl --kubeconfig kubeconfig apply -f backend-deployment.yaml
+
+      - name: backend-services
+        run: kubectl --kubeconfig kubeconfig apply -f backend-svc.yaml
+
+  Frontend:
+    runs-on: ubuntu-latest
+    needs: Backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: kubeconfig
+      - name: deploy-frontend
+        run: kubectl --kubeconfig kubeconfig apply -f frontend-deployment.yaml
+
+      - name: frontend-services
+        run: kubectl --kubeconfig kubeconfig apply -f frontend-svc.yaml
+
+  Test-runnig:
+    runs-on: ubuntu-latest
+    needs: Frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: kubeconfig
+      - name: test-frontend-deployment
+        run:  kubectl --kubeconfig kubeconfig get pods -l app=frontend
+      - name: test-backend-deployment
+        run:  kubectl --kubeconfig kubeconfig get pods -l app=backend
+      - name: test-redis-deployment
+        run:  kubectl --kubeconfig kubeconfig get pods -l app=redis
