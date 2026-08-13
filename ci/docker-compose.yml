@@ -1,0 +1,32 @@
+version: '3.3'
+services:
+  jenkins:
+      build: .
+      restart: unless-stopped
+      privileged: true
+      user: root
+      ports:
+        - 3001:8080
+      container_name: jenkins
+      volumes:
+        - ~/jenkins:/var/jenkins_home
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /usr/local/bin/docker:/usr/local/bin/docker
+      environment:
+        JAVA_OPTS: -Djenkins.install.runSetupWizard=false
+        JENKINS_OPTS: --argumentsRealm.roles.user=admin --argumentsRealm.passwd.admin=admin --argumentsRealm.roles.admin=admin
+  grafana:
+    image: grafana/grafana:9.1.2
+    user: "0"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ~/grafana:/var/lib/grafana/
+    restart: unless-stopped
+  influxdb:
+    image: influxdb:1.8.10
+    ports:
+      - "8086:8086"
+    volumes:
+      - ~/influxdb:/var/lib/influxdb/
+    restart: always
