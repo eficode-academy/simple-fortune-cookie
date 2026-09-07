@@ -1,0 +1,14 @@
+name: simple-fortune-cookie
+on: 
+  push
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Checkout repo
+       uses: actions/checkout@v4
+
+     - name: Test Frontend
+       working-directory: frontend
+       run: go test ./...
+  

@@ -1,0 +1,17 @@
+services:
+  frontend-container:
+    image: frontenddocker
+    ports:
+      - 8080:8080
+    depends_on:
+      - backend-container
+    environment:
+      BACKEND_PORT: 9000
+      BACKEND_DNS: backend-container
+    
+  
+  backend-container:
+    image: backenddocker
+    ports:
+      - 9000:9000
+
