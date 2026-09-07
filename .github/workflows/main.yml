@@ -1,0 +1,21 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4    
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: frontend/go.mod
+      - name: Build
+        working-directory: frontend
+        run: go build ./...    
+      - name: Test
+        working-directory: frontend
+        run: go test ./... -v
