@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: frontend-deployment
+  name: frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: frontend-deployment
+  template:
+    metadata:
+      labels:
+        run: frontend-deployment
+    spec:
+      containers:
+        - name: frontend-deployment
+          image: ghcr.io/eficode-academy/simple-fortune-cookie/frontend:latest
+          ports:
+          - containerPort: 8080
+
