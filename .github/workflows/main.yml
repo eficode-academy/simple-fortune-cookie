@@ -1,0 +1,61 @@
+name: CI/CD
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: frontend/go.mod
+
+      - name: Run frontend tests
+        working-directory: frontend
+        run: go test ./... -v
+
+  test-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: backend/go.mod
+
+      - name: Run backend tests
+        working-directory: backend
+        run: go test ./... -v
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    needs: [test-frontend, test-backend]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build and push Backend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/simple-fortune-backend:latest
+
+      - name: Build and push Frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/simple-fortune-frontend:latest
+
+      - name: Deploy
+        run: |
+          docker pull ghcr.io/${{ github.repository_owner }}/simple-fortune-backend:latest
+          docker pull ghcr.io/${{ github.repository_owner }}/simple-fortune-frontend:latest
+          echo "Deployed from GHCR"
